@@ -8,7 +8,11 @@
 
 #import "ELLIEModel.h"
 
+NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
+
 @implementation ELLIEModel
+
+@synthesize smellieRunSettings;
 
 - (void) setUpImage
 {
@@ -36,6 +40,11 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     
 	[super dealloc];
+}
+
+-(void)validationSmellieSettings
+{
+    
 }
 
 @end

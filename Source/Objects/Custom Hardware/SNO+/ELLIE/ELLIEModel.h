@@ -9,12 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <ELLIEController.h>
 
-@interface ELLIEModel :  OrcaObject
+@interface ELLIEModel :  OrcaObject{
+    NSMutableDictionary* smellieRunSettings;
+}
+
+@property (nonatomic,retain) NSMutableDictionary* smellieRunSettings;
 
 -(void) setUpImage;
 -(void) makeMainController;
 -(void) wakeUp;
 -(void) sleep;
--(void)dealloc;
+-(void) dealloc;
+
+-(void) validationSmellieSettings;
 
 @end
+
+extern NSString* ELLIEAllLasersChanged;
