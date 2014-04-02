@@ -3111,6 +3111,11 @@
 		CED29CFE1482B02200BD3AB2 /* SIS3302Generic.nib in Resources */ = {isa = PBXBuildFile; fileRef = CED29CFB1482B02200BD3AB2 /* SIS3302Generic.nib */; };
 		CED38D1E165CDB6600358681 /* ANSIEscapeHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = CED38D1C165CDB6600358681 /* ANSIEscapeHelper.h */; };
 		CED38D1F165CDB6600358681 /* ANSIEscapeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CED38D1D165CDB6600358681 /* ANSIEscapeHelper.m */; };
+		DB704A0F18EBA4D100839B42 /* ELLIEController.h in Headers */ = {isa = PBXBuildFile; fileRef = DB704A0D18EBA4D100839B42 /* ELLIEController.h */; };
+		DB704A1018EBA4D100839B42 /* ELLIEController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB704A0E18EBA4D100839B42 /* ELLIEController.m */; };
+		DB704A1318EBA4E100839B42 /* ELLIEModel.h in Headers */ = {isa = PBXBuildFile; fileRef = DB704A1118EBA4E100839B42 /* ELLIEModel.h */; };
+		DB704A1418EBA4E100839B42 /* ELLIEModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB704A1218EBA4E100839B42 /* ELLIEModel.m */; };
+		DB704A1618EBA61E00839B42 /* ellie.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB704A1518EBA61E00839B42 /* ellie.xib */; };
 		DBEC755518EB9E9B0077D493 /* ellie.gif in Resources */ = {isa = PBXBuildFile; fileRef = DBEC755418EB9E9B0077D493 /* ellie.gif */; };
 		EF37879212DFFF81003C814E /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF37879112DFFF81003C814E /* YAJL.framework */; };
 		EF3787A012DFFF90003C814E /* YAJL.framework in Frameworks_Copy */ = {isa = PBXBuildFile; fileRef = EF37879112DFFF81003C814E /* YAJL.framework */; };
@@ -6379,6 +6384,11 @@
 		CED29CFB1482B02200BD3AB2 /* SIS3302Generic.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = SIS3302Generic.nib; sourceTree = "<group>"; };
 		CED38D1C165CDB6600358681 /* ANSIEscapeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSIEscapeHelper.h; sourceTree = "<group>"; };
 		CED38D1D165CDB6600358681 /* ANSIEscapeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSIEscapeHelper.m; sourceTree = "<group>"; };
+		DB704A0D18EBA4D100839B42 /* ELLIEController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELLIEController.h; sourceTree = "<group>"; };
+		DB704A0E18EBA4D100839B42 /* ELLIEController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELLIEController.m; sourceTree = "<group>"; };
+		DB704A1118EBA4E100839B42 /* ELLIEModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELLIEModel.h; sourceTree = "<group>"; };
+		DB704A1218EBA4E100839B42 /* ELLIEModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELLIEModel.m; sourceTree = "<group>"; };
+		DB704A1518EBA61E00839B42 /* ellie.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ellie.xib; sourceTree = "<group>"; };
 		DBEC755418EB9E9B0077D493 /* ellie.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ellie.gif; sourceTree = "<group>"; };
 		EF37879112DFFF81003C814E /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = Frameworks/YAJL.framework; sourceTree = "<group>"; };
 		EF69C430116E5DC3008ABADC /* ORSNOCrateReadout.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ORSNOCrateReadout.cc; sourceTree = "<group>"; };
@@ -13091,6 +13101,11 @@
 			isa = PBXGroup;
 			children = (
 				DBEC755418EB9E9B0077D493 /* ellie.gif */,
+				DB704A0D18EBA4D100839B42 /* ELLIEController.h */,
+				DB704A0E18EBA4D100839B42 /* ELLIEController.m */,
+				DB704A1118EBA4E100839B42 /* ELLIEModel.h */,
+				DB704A1218EBA4E100839B42 /* ELLIEModel.m */,
+				DB704A1518EBA61E00839B42 /* ellie.xib */,
 			);
 			path = ELLIE;
 			sourceTree = "<group>";
@@ -14699,6 +14714,8 @@
 				844CBDCB1866010F0012AA3B /* ORRaidMonitorModel.h in Headers */,
 				844CBDCD1866010F0012AA3B /* ORRaidMonitorController.h in Headers */,
 				84E00577186637F9002E38F7 /* ORFileGetterOp.h in Headers */,
+				DB704A0F18EBA4D100839B42 /* ELLIEController.h in Headers */,
+				DB704A1318EBA4E100839B42 /* ELLIEModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15635,6 +15652,7 @@
 				844CBDD01866010F0012AA3B /* RaidMonitor.nib in Resources */,
 				844CBDD11866010F0012AA3B /* scpExpectGetScript in Resources */,
 				DBEC755518EB9E9B0077D493 /* ellie.gif in Resources */,
+				DB704A1618EBA61E00839B42 /* ellie.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16686,6 +16704,8 @@
 				844CBDCC1866010F0012AA3B /* ORRaidMonitorModel.m in Sources */,
 				844CBDCE1866010F0012AA3B /* ORRaidMonitorController.m in Sources */,
 				84E00578186637F9002E38F7 /* ORFileGetterOp.m in Sources */,
+				DB704A1018EBA4D100839B42 /* ELLIEController.m in Sources */,
+				DB704A1418EBA4E100839B42 /* ELLIEModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
