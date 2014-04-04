@@ -9,6 +9,7 @@
 #import "ELLIEModel.h"
 
 NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
+NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
 @implementation ELLIEModel
 
@@ -42,7 +43,7 @@ NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 	[super dealloc];
 }
 
--(void)validationSmellieSettings
+-(void)loadSmellieSettings
 {
     
 }

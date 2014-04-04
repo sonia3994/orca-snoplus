@@ -15,12 +15,28 @@
     //Storage of run information
     NSMutableDictionary* smellieRunSettingsFromGUI;
     
-    //check buttons for lasers
+    //check box buttons for lasers
     IBOutlet NSButton* smellie375nmLaserButton;    //check box for 375nm Laser
     IBOutlet NSButton* smellie405nmLaserButton;    //check box for 405nm Laser
     IBOutlet NSButton* smellie440nmLaserButton;    //check box for 440nm Laser
     IBOutlet NSButton* smellie500nmLaserButton;    //check box for 500nm Laser
-    IBOutlet NSButton* smellieAllLasersButton;     //check box for all Lasers set 
+    IBOutlet NSButton* smellieAllLasersButton;     //check box for all Lasers set
+    
+    //check box buttons for fibres (fibre id is in variable name)
+    IBOutlet NSButton* smellieFibreButtonFS007;
+    IBOutlet NSButton* smellieFibreButtonFS107;
+    IBOutlet NSButton* smellieFibreButtonFS207;
+    IBOutlet NSButton* smellieFibreButtonFS025;
+    IBOutlet NSButton* smellieFibreButtonFS125;
+    IBOutlet NSButton* smellieFibreButtonFS225;
+    IBOutlet NSButton* smellieFibreButtonFS037;
+    IBOutlet NSButton* smellieFibreButtonFS137;
+    IBOutlet NSButton* smellieFibreButtonFS237;
+    IBOutlet NSButton* smellieFibreButtonFS055;
+    IBOutlet NSButton* smellieFibreButtonFS155;
+    IBOutlet NSButton* smellieFibreButtonFS255;
+    IBOutlet NSButton* smellieAllFibresButton;
+    
     
     //More Run Information
     IBOutlet NSTextField* smellieOperatorName;      //Operator Name Field
@@ -51,10 +67,18 @@
 
 //SMELLIE functions ----------------------------
 
-
 //Button clicked to validate the new run type settings for smellie 
--(IBAction)validationSmellieRunAction:(id)sender;
 -(IBAction)setAllLasersAction:(id)sender;
+-(IBAction)setAllFibresAction:(id)sender;
+-(IBAction)validateLaserMaxIntensity:(id)sender;
+-(IBAction)validateLaserMinIntensity:(id)sender;
+-(IBAction)validateIntensitySteps:(id)sender;
+-(IBAction)validateSmellieTriggerFrequency:(id)sender;
+-(IBAction)validateNumTriggersPerStep:(id)sender;
+-(IBAction)validationSmellieRunAction:(id)sender;
+
+
+
 
 
 

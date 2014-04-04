@@ -21,8 +21,9 @@
 -(void) sleep;
 -(void) dealloc;
 
--(void) validationSmellieSettings;
+-(void) loadSmellieSettings;
 
 @end
 
 extern NSString* ELLIEAllLasersChanged;
+extern NSString* ELLIEAllFibresChanged;
