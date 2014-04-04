@@ -11,9 +11,11 @@
 
 @interface ELLIEModel :  OrcaObject{
     NSMutableDictionary* smellieRunSettings;
+    NSTask* loadSmellieSettingsTask;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunSettings;
+@property (nonatomic,retain) NSTask* loadSmellieSettingsTask;
 
 -(void) setUpImage;
 -(void) makeMainController;

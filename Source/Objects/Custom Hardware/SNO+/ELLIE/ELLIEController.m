@@ -199,7 +199,8 @@
 
 -(IBAction)validationSmellieRunAction:(id)sender;
 {
-    
+    //REMOVE LATER
+    [model loadSmellieSettings];
     [smellieMakeNewRunButton setEnabled:NO];
     
     //Error messages
@@ -262,8 +263,6 @@
         [smellieRunErrorTextField setStringValue:@"No Error"];
         [smellieMakeNewRunButton setEnabled:YES]; //Enable the user from this button
         
-
-    
         //fill the SMELLIE run information from the interface into an Array 
         [smellieRunSettingsFromGUI setObject:[smellieOperatorName stringValue] forKey:@"operator_name"];
         [smellieRunSettingsFromGUI setObject:[smellieRunName stringValue] forKey:@"run_name"];
@@ -292,9 +291,8 @@
         [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS155 state] forKey:@"FS155"];
         [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS255 state] forKey:@"FS255"];
         
-        
 
-        [model loadSmellieSettings]; //load settings to the SMELLIE DAQ (SNODROP)
+        //[model loadSmellieSettings]; //load settings to the SMELLIE DAQ (SNODROP)
     }
     else{
         NSLog(@"SMELLIE_BUILD_RUN: Unknown invalid Entry or no entries sent\n");

@@ -78,19 +78,6 @@
 -(IBAction)validationSmellieRunAction:(id)sender;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //TELLIE functions -----------------------------
 
 @end
