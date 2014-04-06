@@ -15,7 +15,8 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 @implementation ELLIEModel
 
 @synthesize smellieRunSettings;
-@synthesize loadSmellieSettingsTask;
+@synthesize exampleTask;
+
 
 - (void) setUpImage
 {
@@ -46,112 +47,12 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 	[super dealloc];
 }
 
--(void)loadSmellieSettings
+-(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs
 {
-    NSLog(@"load smellie settings\n");
-    
-    /*ORTaskSequence* aSequence = [ORTaskSequence taskSequenceWithDelegate:self];
-    //[NSArray arrayWithObjects:@"-c",@"1",@"-t",@"1",@"-q",IPNumber,nil]
-    [aSequence addTask:@"/Users/jonesc/"
-             arguments:[NSArray arrayWithObjects:@"python",@"testScript.py",nil]];
-    [aSequence addTaskObj:self.orcaDBPingTask];
-    [aSequence setVerbose:YES];
-    [aSequence setTextToDelegate:YES];
-    [aSequence launch];*/
-    
-    if(!self.loadSmellieSettingsTask){
-        NSLog(@"starting task");
-        ORTaskSequence* aSequence = [ORTaskSequence taskSequenceWithDelegate:self];
-        self.loadSmellieSettingsTask = [[[NSTask alloc]init]autorelease];
-        //Not sure if the arguements here are correct!
-        [self.loadSmellieSettingsTask setLaunchPath:@"/Users/jonesc"];
-        [self.loadSmellieSettingsTask setArguments:[NSArray arrayWithObjects:@"python",@"testScript.py", nil]];
-        //Need to check the above arguments with the couchdb load button 
-        [aSequence addTaskObj:self.loadSmellieSettingsTask];
-        [aSequence setVerbose:YES];
-        [aSequence setTextToDelegate:YES];
-        [aSequence launch];
-    }
-    else{
-        NSLog(@"ending task");
-        [self.loadSmellieSettingsTask terminate];
-    }
-    
-    NSLog(@"sucess!");
-    
-    /*
-     if(!self.orcaDBPingTask){
-     ORTaskSequence* aSequence = [ORTaskSequence taskSequenceWithDelegate:self];
-     self.orcaDBPingTask = [[[NSTask alloc] init] autorelease];
-     
-     [self.orcaDBPingTask setLaunchPath:@"/sbin/ping"];
-     [self.orcaDBPingTask setArguments: [NSArray arrayWithObjects:@"-c",@"2",@"-t",@"5",@"-q",self.orcaDBIPAddress,nil]];
-     
-     [aSequence addTaskObj:self.orcaDBPingTask];
-     [aSequence setVerbose:YES];
-     [aSequence setTextToDelegate:YES];
-     [aSequence launch];
-     }
-     else {
-     [self.orcaDBPingTask terminate];
-     }
-     */
-    
-    /*[self setGoScriptFailed:NO];
-	NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-	ORTaskSequence* aSequence = [ORTaskSequence taskSequenceWithDelegate:self];
-    NSString* pwd = [passWord length]?passWord:@"\n";
-	[aSequence addTask:[resourcePath stringByAppendingPathComponent:@"loginScript"]
-			 arguments:[NSArray arrayWithObjects:userName,pwd,IPNumber,@"~/ORCA/goScript",nil]];
-    
-	[aSequence setVerbose:verbose];
-	[aSequence setTextToDelegate:YES];*/
-    
-   
-    /*pingTask = [[NSTask alloc] init];
-    
-    [pingTask setLaunchPath:@"/sbin/ping"];
-    
-    [pingTask setArguments: [NSArray arrayWithObjects:@"-c",@"1",@"-t",@"1",@"-q",IPNumber,nil]];
-    
-    [aSequence addTaskObj:pingTask];
-    [aSequence setVerbose:aFlag];
-    [aSequence setTextToDelegate:YES];
-    [aSequence launch];*/
-    
-    //NSLog(@"Output: %@ ",output);
-    
-    /*NSString *path = @"python /Users/jonesc/testScript.py";
-    //NSArray *args = [NSArray arrayWithObjects:..., nil];
     NSTask *task;
     task = [[NSTask alloc] init];
-    [task setLaunchPath: path];
-    
-    NSPipe *pipe;
-    pipe = [NSPipe pipe];
-    [task setStandardOutput: pipe];
-    [task setStandardInput:[NSPipe pipe]];
-    NSFileHandle *file;
-    file = [pipe fileHandleForReading];
-    
-    
-    [task launch];
-    
-    NSData *data;
-    data = [file readDataToEndOfFile];
-    
-    NSString *stringReadOut;
-    stringReadOut = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-
-    NSLog(@"This is the readout: %@",stringReadOut);
-    
-    [stringReadOut release];
-    [task release];*/
-    
-    /*NSTask *task;
-    task = [[NSTask alloc] init];
-    [task setLaunchPath: @"/usr/bin/ssh"]; // Tell the task to execute the ssh command
-    [task setArguments: [NSArray arrayWithObjects: @"<user>:<hostname>", @"<command>"]]; // Set the arguments for ssh to contain only your command. If other configuration is necessary, see the ssh(1) man page.
+    [task setLaunchPath: @"/usr/bin/python"]; // Tell the task to execute the ssh command
+    [task setArguments: [NSArray arrayWithObjects: pythonScriptFilePath, commandLineArgs,nil]];
     
     NSPipe *pipe;
     pipe = [NSPipe pipe];
@@ -164,9 +65,69 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     NSData *data;
     data = [file readDataToEndOfFile];
     
-    NSString *string;
-    string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]; // This string now contains the entire output of the ssh command.*/
+    NSString *responseFromCmdLine;
+    responseFromCmdLine = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]; // This string now contains the entire output of the ssh command.
     
+    [task release];
+    return responseFromCmdLine;
+}
+
+
+-(void)startSmellieRun:(NSDictionary*)smellieSettings
+{
+    //TODO: Post to external DB and read from external DB
+    
+    //Deconstruct runFile into indiviual subruns ------------------
+
+    //Extract the number of intensity steps
+    NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];
+    int numIntSteps = [numIntStepsObj intValue];
+    [numIntStepsObj release];
+    
+    //Extract the lasers to be fired (nm)
+    //NSMutableArray * laserArray = [[NSMutableArray alloc] init];
+ 
+    ///Loop through each Laser
+    for(int laserLoopInt = 0;laserLoopInt < 4;laserLoopInt++){
+        
+        //Loop through each Fibre
+        for(int fibreLoopInt = 0; fibreLoopInt < 16;fibreLoopInt++){
+            
+            //Loop through each intensity of a SMELLIE run 
+            for(int intensityLoopInt =0;intensityLoopInt < numIntSteps; intensityLoopInt++){
+            
+                
+                
+            }//end of looping through each intensity setting on the smellie laser
+            
+        }//end of looping through each Fibre
+        
+    }//end of looping through each laser
+    
+}
+
+
+-(void)exampleFunctionForPython
+{
+    NSLog(@"load smellie settings\n");
+    
+    if(!self.exampleTask){
+        NSLog(@"starting task\n");
+        ORTaskSequence* aSequence = [ORTaskSequence taskSequenceWithDelegate:self];
+        self.exampleTask = [[[NSTask alloc]init]autorelease];
+        [self.exampleTask setLaunchPath:@"/usr/bin/python"];
+        [self.exampleTask setArguments:[NSArray arrayWithObjects:@"/Users/jonesc/testScript.py", nil]];
+        [aSequence addTaskObj:self.exampleTask];
+        [aSequence setVerbose:YES];
+        [aSequence setTextToDelegate:YES];
+        [aSequence launch];
+    }
+    else{
+        NSLog(@"ending task\n");
+        [self.exampleTask terminate];
+    }
+    
+    NSLog(@"sucess!\n");
     
 }
 

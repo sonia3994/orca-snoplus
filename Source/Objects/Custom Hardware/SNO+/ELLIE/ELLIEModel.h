@@ -11,11 +11,11 @@
 
 @interface ELLIEModel :  OrcaObject{
     NSMutableDictionary* smellieRunSettings;
-    NSTask* loadSmellieSettingsTask;
+    NSTask* exampleTask;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunSettings;
-@property (nonatomic,retain) NSTask* loadSmellieSettingsTask;
+@property (nonatomic,retain) NSTask* exampleTask;
 
 -(void) setUpImage;
 -(void) makeMainController;
@@ -23,7 +23,16 @@
 -(void) sleep;
 -(void) dealloc;
 
--(void) loadSmellieSettings;
+
+/*This function calls a python script: 
+    pythonScriptFilePath - this is the python script file path
+    withCmdLineArgs - these are the arguments for the python script*/
+-(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs;
+
+//starts a SMELLIE run with given parameters and submits the smellie run file to the database
+-(void)startSmellieRun:(NSDictionary*)smellieSettings;
+
+-(void) exampleFunctionForPython;
 
 @end
 

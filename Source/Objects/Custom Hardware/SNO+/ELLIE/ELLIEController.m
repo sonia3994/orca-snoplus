@@ -199,8 +199,8 @@
 
 -(IBAction)validationSmellieRunAction:(id)sender;
 {
-    //REMOVE LATER
-    [model loadSmellieSettings];
+    
+    //NSLog(@" output: %@",[model callPythonScript:@"/Users/jonesc/testScript.py" withCmdLineArgs:nil]);
     [smellieMakeNewRunButton setEnabled:NO];
     
     //Error messages
@@ -291,7 +291,6 @@
         [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS155 state] forKey:@"FS155"];
         [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS255 state] forKey:@"FS255"];
         
-
         //[model loadSmellieSettings]; //load settings to the SMELLIE DAQ (SNODROP)
     }
     else{
