@@ -11,7 +11,7 @@
 
 @implementation ELLIEController
 
-@synthesize smellieRunSettingsFromGUI;
+//@synthesize smellieRunSettingsFromGUI;
 
 //smellie maxiumum trigger frequency
 
@@ -46,6 +46,10 @@
 					 selector : @selector(setAllLasersAction:)
 						 name : ELLIEAllLasersChanged
 					   object : model];
+    [notifyCenter addObserver : self
+					 selector : @selector(setAllLasersAction:)
+						 name : ELLIEAllLasersChanged
+					   object : model];
     
     [notifyCenter addObserver : self
 					 selector : @selector(setAllFibresAction:)
@@ -56,6 +60,7 @@
 
 //SMELLIE functions -------------------------
 
+//enables all lasers if the "all lasers" box is enabled 
 -(IBAction)setAllLasersAction:(id)sender;
 {
     if([smellieAllLasersButton state] == 1){
@@ -68,6 +73,7 @@
     
 }
 
+//enables all fibres if the "all fibres" box is enabled 
 -(IBAction)setAllFibresAction:(id)sender;
 {
     if([smellieAllFibresButton state] == 1){
@@ -84,6 +90,26 @@
         [smellieFibreButtonFS155 setState:1];
         [smellieFibreButtonFS255 setState:1];
     }
+}
+
+//removes the tick in case for "all lasers" if any of the lasers and not pressed
+-(IBAction)allLaserValidator:(id)sender
+{
+    if( ([smellie375nmLaserButton state] != 1) || ([smellie405nmLaserButton state] != 1) || ([smellie440nmLaserButton state] != 1) || ([smellie500nmLaserButton state] != 1))
+    {
+        [smellieAllLasersButton setState:0];
+    }
+    
+}
+
+//removes the tick in case for "all fibres" if any of the lasers and not pressed
+-(IBAction)allFibreValidator:(id)sender
+{
+    if( ([smellieFibreButtonFS007 state] != 1) || ([smellieFibreButtonFS107 state] != 1) || ([smellieFibreButtonFS025 state] != 1) || ([smellieFibreButtonFS125 state] != 1) || ([smellieFibreButtonFS225 state] != 1) || ([smellieFibreButtonFS037 state] != 1) || ([smellieFibreButtonFS137 state] != 1) || ([smellieFibreButtonFS237 state] != 1) || ([smellieFibreButtonFS055 state] != 1) || ([smellieFibreButtonFS155 state] != 1) || ([smellieFibreButtonFS255 state] != 1))
+    {
+        [smellieAllFibresButton setState:0];
+    }
+    
 }
 
 //Force the string value to be less than 100 and a valid value
@@ -263,35 +289,78 @@
         [smellieRunErrorTextField setStringValue:@"No Error"];
         [smellieMakeNewRunButton setEnabled:YES]; //Enable the user from this button
         
-        //fill the SMELLIE run information from the interface into an Array 
-        [smellieRunSettingsFromGUI setObject:[smellieOperatorName stringValue] forKey:@"operator_name"];
-        [smellieRunSettingsFromGUI setObject:[smellieRunName stringValue] forKey:@"run_name"];
-        [smellieRunSettingsFromGUI setObject:[smellieOperationMode stringValue] forKey:@"operator_name"];
-        [smellieRunSettingsFromGUI setObject:[smellieMaxIntensity integerValue] forKey:@"max_laser_intensity"];
-        [smellieRunSettingsFromGUI setObject:[smellieMinIntensity integerValue] forKey:@"min_laser_intensity"];
-        [smellieRunSettingsFromGUI setObject:[smellieNumIntensitySteps integerValue] forKey:@"num_intensity_steps"];
-        [smellieRunSettingsFromGUI setObject:[smellieTriggerFrequency integerValue] forKey:@"trigger_frequency"];
-        [smellieRunSettingsFromGUI setObject:[smellieNumTriggersPerLoop integerValue] forKey:@"triggers_per_loop"];
-        [smellieRunSettingsFromGUI setObject:[smellie375nmLaserButton state] forKey:@"375nm_laser_on"];
-        [smellieRunSettingsFromGUI setObject:[smellie405nmLaserButton state] forKey:@"405nm_laser_on"];
-        [smellieRunSettingsFromGUI setObject:[smellie440nmLaserButton state] forKey:@"440nm_laser_on"];
-        [smellieRunSettingsFromGUI setObject:[smellie500nmLaserButton state] forKey:@"500nm_laser_on"];
+        NSAutoreleasePool* smellieSettingsPool = [[NSAutoreleasePool alloc] init];
+        
+        NSMutableDictionary * smellieRunSettingsFromGUI = [NSMutableDictionary dictionaryWithCapacity:100];
+        
+        //Build Objects to store values 
+        NSString * smellieOperatorNameString = [NSString stringWithString:[smellieOperatorName stringValue]];
+        NSString * smellieRunNameString = [NSString stringWithString:[smellieOperatorName stringValue]];
+        NSString * smellieOperatorModeString = [NSString stringWithString:[smellieOperationMode stringValue]];
+
+        NSNumber * smellieMaxIntensityNum = [NSNumber numberWithInt:[smellieMaxIntensity intValue]];
+        NSNumber * smellieMinIntensityNum = [NSNumber numberWithInt:[smellieMinIntensity intValue]];
+        NSNumber * smellieNumIntensityStepsNum = [NSNumber numberWithInt:[smellieNumIntensitySteps intValue]];
+        NSNumber * smellieTriggerFrequencyNum = [NSNumber numberWithInt:[smellieTriggerFrequency intValue]];
+        NSNumber * smellieNumTriggersPerLoopNum = [NSNumber numberWithInt:[smellieNumTriggersPerLoop intValue]];
+
+        NSNumber * smellie405nmLaserButtonNum = [NSNumber numberWithInteger:[smellie405nmLaserButton state]];
+        NSNumber * smellie375nmLaserButtonNum = [NSNumber numberWithInteger:[smellie375nmLaserButton state]];
+        NSNumber * smellie440nmLaserButtonNum = [NSNumber numberWithInteger:[smellie440nmLaserButton state]];
+        NSNumber * smellie500nmLaserButtonNum = [NSNumber numberWithInteger:[smellie500nmLaserButton state]];
+        
+        NSNumber * smellieFibreButtonFS007Num = [NSNumber numberWithInteger:[smellieFibreButtonFS007 state]];
+        NSNumber * smellieFibreButtonFS107Num = [NSNumber numberWithInteger:[smellieFibreButtonFS107 state]];
+        NSNumber * smellieFibreButtonFS207Num = [NSNumber numberWithInteger:[smellieFibreButtonFS207 state]];
+        NSNumber * smellieFibreButtonFS025Num = [NSNumber numberWithInteger:[smellieFibreButtonFS025 state]];
+        NSNumber * smellieFibreButtonFS125Num = [NSNumber numberWithInteger:[smellieFibreButtonFS125 state]];
+        NSNumber * smellieFibreButtonFS225Num = [NSNumber numberWithInteger:[smellieFibreButtonFS225 state]];
+        NSNumber * smellieFibreButtonFS037Num = [NSNumber numberWithInteger:[smellieFibreButtonFS037 state]];
+        NSNumber * smellieFibreButtonFS137Num = [NSNumber numberWithInteger:[smellieFibreButtonFS137 state]];
+        NSNumber * smellieFibreButtonFS237Num = [NSNumber numberWithInteger:[smellieFibreButtonFS237 state]];
+        NSNumber * smellieFibreButtonFS055Num = [NSNumber numberWithInteger:[smellieFibreButtonFS055 state]];
+        NSNumber * smellieFibreButtonFS155Num = [NSNumber numberWithInteger:[smellieFibreButtonFS155 state]];
+        NSNumber * smellieFibreButtonFS255Num = [NSNumber numberWithInteger:[smellieFibreButtonFS255 state]];
+        
+        
+        [smellieRunSettingsFromGUI setObject:smellieOperatorNameString forKey:@"operator_name"];
+        [smellieRunSettingsFromGUI setObject:smellieRunNameString forKey:@"run_name"];
+        [smellieRunSettingsFromGUI setObject:smellieOperatorModeString forKey:@"operator_name"];
+        [smellieRunSettingsFromGUI setObject:smellieMaxIntensityNum forKey:@"max_laser_intensity"];
+        [smellieRunSettingsFromGUI setObject:smellieMinIntensityNum forKey:@"min_laser_intensity"];
+        [smellieRunSettingsFromGUI setObject:smellieNumIntensityStepsNum forKey:@"num_intensity_steps"];
+        [smellieRunSettingsFromGUI setObject:smellieTriggerFrequencyNum forKey:@"trigger_frequency"];
+        [smellieRunSettingsFromGUI setObject:smellieNumTriggersPerLoopNum forKey:@"triggers_per_loop"];
+        [smellieRunSettingsFromGUI setObject:smellie375nmLaserButtonNum forKey:@"375nm_laser_on"];
+        [smellieRunSettingsFromGUI setObject:smellie405nmLaserButtonNum forKey:@"405nm_laser_on"];
+        [smellieRunSettingsFromGUI setObject:smellie440nmLaserButtonNum forKey:@"440nm_laser_on"];
+        [smellieRunSettingsFromGUI setObject:smellie500nmLaserButtonNum forKey:@"500nm_laser_on"];
         
         //Fill the SMELLIE Fibre Array information
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS007 state] forKey:@"FS007"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS107 state] forKey:@"FS107"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS207 state] forKey:@"FS207"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS025 state] forKey:@"FS025"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS125 state] forKey:@"FS125"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS225 state] forKey:@"FS225"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS037 state] forKey:@"FS037"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS137 state] forKey:@"FS137"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS237 state] forKey:@"FS237"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS055 state] forKey:@"FS055"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS155 state] forKey:@"FS155"];
-        [smellieRunSettingsFromGUI setObject:[smellieFibreButtonFS255 state] forKey:@"FS255"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS007Num forKey:@"FS007"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS107Num forKey:@"FS107"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS207Num forKey:@"FS207"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS025Num forKey:@"FS025"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS125Num forKey:@"FS125"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS225Num forKey:@"FS225"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS037Num forKey:@"FS037"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS137Num forKey:@"FS137"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS237Num forKey:@"FS237"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS055Num forKey:@"FS055"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS155Num forKey:@"FS155"];
+        [smellieRunSettingsFromGUI setObject:smellieFibreButtonFS255Num forKey:@"FS255"];
         
-        //[model loadSmellieSettings]; //load settings to the SMELLIE DAQ (SNODROP)
+        NSLog(@" operator_name (string) %@\n",[smellieRunSettingsFromGUI objectForKey:@"operator_name"]);
+        NSLog(@" max intensity (string) %@\n",[smellieRunSettingsFromGUI objectForKey:@"max_laser_intensity"]);
+        NSLog(@" laser state (string) %@\n",[smellieRunSettingsFromGUI objectForKey:@"405nm_laser_on"]);
+        /*NSLog(@" smellie_laser_settings(string) %@\n",[[smellieRunSettingsFromGUI objectForKey:@"375nm_laser_on"] stringValue]);
+        NSLog(@" smellie_laser_settings %i\n",[[smellieRunSettingsFromGUI objectForKey:@"375nm_laser_on"] intValue]);
+        NSLog(@" smellie_laser_settingsv2 %i\n",[smellie375nmLaserButton state]);*/
+        
+        //TODO: Remove this in the end 
+        [model startSmellieRun:smellieRunSettingsFromGUI]; //load settings to the SMELLIE DAQ (SNODROP)
+
+        [smellieSettingsPool release];
     }
     else{
         NSLog(@"SMELLIE_BUILD_RUN: Unknown invalid Entry or no entries sent\n");

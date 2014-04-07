@@ -13,7 +13,7 @@
     //SMELLIE interface --------------------------------------
     
     //Storage of run information
-    NSMutableDictionary* smellieRunSettingsFromGUI;
+    //NSMutableDictionary* smellieRunSettingsFromGUI;
     
     //check box buttons for lasers
     IBOutlet NSButton* smellie375nmLaserButton;    //check box for 375nm Laser
@@ -58,7 +58,7 @@
     
 }
 
-@property (nonatomic,retain) NSMutableDictionary* smellieRunSettingsFromGUI;
+//@property (nonatomic,retain) NSMutableDictionary* smellieRunSettingsFromGUI;
 
 -(id)init;
 -(void)dealloc;
@@ -76,6 +76,7 @@
 -(IBAction)validateSmellieTriggerFrequency:(id)sender;
 -(IBAction)validateNumTriggersPerStep:(id)sender;
 -(IBAction)validationSmellieRunAction:(id)sender;
+-(IBAction)allLaserValidator:(id)sender;
 
 
 //TELLIE functions -----------------------------
