@@ -36,7 +36,7 @@ NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
 @interface SNOPModel (private)
--(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName;// runFiletoPush:(NSMutableDictionary*)customRunFile;
+-(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName runFiletoPush:(NSMutableDictionary*)customRunFile;
 - (NSString*) stringDateFromDate:(NSDate*)aDate;
 @end
 
@@ -118,7 +118,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 }
 
 //Push the information from the GUI into a couchDB database
--(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName //runFiletoPush:(NSMutableDictionary*)customRunFile
+-(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName runFiletoPush:(NSMutableDictionary*)customRunFile
 {
     NSAutoreleasePool* runDocPool = [[NSAutoreleasePool alloc] init];
     NSMutableDictionary* runDocDict = [NSMutableDictionary dictionaryWithCapacity:100];
@@ -161,9 +161,9 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     [runDocPool release];
 }
 
--(void) testDBpush
+-(void) smellieDBpush:(NSMutableDictionary*)dbTestDic
 {
-    [self _pushEllieCustomRunToDB:@"orca"];
+    [self _pushEllieCustomRunToDB:@"smellie" runFiletoPush:dbTestDic];
 }
 
 //Pull the information from the database and perform a new run

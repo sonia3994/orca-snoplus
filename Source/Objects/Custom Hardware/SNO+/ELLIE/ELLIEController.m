@@ -226,7 +226,7 @@
 -(IBAction)validationSmellieRunAction:(id)sender;
 {
     
-    [model testDBpush];
+    //;
     
     //NSLog(@" output: %@",[model callPythonScript:@"/Users/jonesc/testScript.py" withCmdLineArgs:nil]);
     [smellieMakeNewRunButton setEnabled:NO];
@@ -362,6 +362,8 @@
         //TODO: Remove this in the end 
         //[model startSmellieRun:smellieRunSettingsFromGUI]; //load settings to the SMELLIE DAQ (SNODROP)
 
+        [model smellieDBpush:smellieRunSettingsFromGUI];
+        
         [smellieSettingsPool release];
     }
     else{

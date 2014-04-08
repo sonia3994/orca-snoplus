@@ -24,7 +24,7 @@
 -(void) wakeUp;
 -(void) sleep;
 -(void) dealloc;
--(void) testDBpush;
+-(void) smellieDBpush:(NSMutableDictionary*)dbTestDic;
 -(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
 
 /*This function calls a python script: 
