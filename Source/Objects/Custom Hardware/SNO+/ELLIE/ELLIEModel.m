@@ -138,7 +138,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     //self.runDocument = runDocDict;
     [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] addDocument:runDocDict tag:kSmellieRunDocumentAdded];
     
-    [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] updateDocument:runDocDict documentId:[runDocDict objectForKey:@"_id"] tag:kSmellieRunDocumentUpdated];
+    //[[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] updateDocument:runDocDict documentId:[runDocDict objectForKey:@"_id"] tag:kSmellieRunDocumentUpdated];
     
     //wait for main thread to receive acknowledgement from couchdb
     /*NSDate* timeout = [NSDate dateWithTimeIntervalSinceNow:2.0];
