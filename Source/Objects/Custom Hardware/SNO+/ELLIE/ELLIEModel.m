@@ -129,11 +129,13 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     //Initialise the SNOPModel
     SNOPModel* aSnotModel = [objs objectAtIndex:0];
     
-    NSString* docType = [NSString stringWithString:aCouchDBName];
-    [docType stringByAppendingString:@"_run"];
+    NSString* docType = [NSMutableString stringWithFormat:@"%@%@",aCouchDBName,@"_run"];
+    
+    NSLog(@"document_type: %@",docType);
     
     [runDocDict setObject:docType forKey:@"doc_type"];
     [runDocDict setObject:[self stringDateFromDate:nil] forKey:@"time_stamp"];
+    [runDocDict setObject:customRunFile forKey:@"run_info"];
             
     //self.runDocument = runDocDict;
     [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] addDocument:runDocDict tag:kSmellieRunDocumentAdded];

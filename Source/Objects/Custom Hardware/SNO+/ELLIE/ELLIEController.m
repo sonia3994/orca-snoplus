@@ -297,7 +297,7 @@
         
         //Build Objects to store values 
         NSString * smellieOperatorNameString = [NSString stringWithString:[smellieOperatorName stringValue]];
-        NSString * smellieRunNameString = [NSString stringWithString:[smellieOperatorName stringValue]];
+        NSString * smellieRunNameString = [NSString stringWithString:[smellieRunName stringValue]];
         NSString * smellieOperatorModeString = [NSString stringWithString:[smellieOperationMode stringValue]];
 
         NSNumber * smellieMaxIntensityNum = [NSNumber numberWithInt:[smellieMaxIntensity intValue]];
@@ -327,7 +327,7 @@
         
         [smellieRunSettingsFromGUI setObject:smellieOperatorNameString forKey:@"operator_name"];
         [smellieRunSettingsFromGUI setObject:smellieRunNameString forKey:@"run_name"];
-        [smellieRunSettingsFromGUI setObject:smellieOperatorModeString forKey:@"operator_name"];
+        [smellieRunSettingsFromGUI setObject:smellieOperatorModeString forKey:@"operation_mode"];
         [smellieRunSettingsFromGUI setObject:smellieMaxIntensityNum forKey:@"max_laser_intensity"];
         [smellieRunSettingsFromGUI setObject:smellieMinIntensityNum forKey:@"min_laser_intensity"];
         [smellieRunSettingsFromGUI setObject:smellieNumIntensityStepsNum forKey:@"num_intensity_steps"];
