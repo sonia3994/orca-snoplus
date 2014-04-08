@@ -6,11 +6,39 @@
 //
 //
 
+/*TODO:
+        - Check the standard run name doesn't already exsists in the DB
+        - read from and write to the local couch DB for both smellie and tellie
+        - fix the intensity steps in SMELLIE such that negative values cannot be considered
+        - add the TELLIE GUI Information
+        - add the sockets for TELLIE to communicate with itself
+        - add the AMELLIE GUI
+        - make sure old files cannot be overridden 
+        - add the configuration files GUI for all the ELLIE systems (LOW PRIORITY)
+*/
+
 #import "ELLIEModel.h"
 #import "ORTaskSequence.h"
+#import "ORCouchDB.h"
+#import "SNOPModel.h"
+#import "ORRunModel.h"
+
+//tags to define that an ELLIE run file has been updated
+#define kSmellieRunDocumentAdded   @"kSmellieRunDocumentAdded"
+#define kSmellieRunDocumentUpdated   @"kSmellieRunDocumentUpdated"
+#define kTellieRunDocumentAdded   @"kTellieRunDocumentAdded"
+#define kTellieRunDocumentUpdated   @"kTellieRunDocumentUpdated"
+#define kAmellieRunDocumentAdded   @"kAmellieRunDocumentAdded"
+#define kAmellieRunDocumentUpdated   @"kAmellieRunDocumentUpdated"
+
 
 NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
+
+@interface SNOPModel (private)
+-(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName;// runFiletoPush:(NSMutableDictionary*)customRunFile;
+- (NSString*) stringDateFromDate:(NSDate*)aDate;
+@end
 
 @implementation ELLIEModel
 
@@ -72,6 +100,77 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     return responseFromCmdLine;
 }
 
+//used to create the timestamp in the couchDB files 
+- (NSString*) stringDateFromDate:(NSDate*)aDate
+{
+    NSDateFormatter* snotDateFormatter = [[NSDateFormatter alloc] init];
+    [snotDateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SS'Z'"];
+    snotDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDate* strDate;
+    if (!aDate)
+        strDate = [NSDate date];
+    else
+        strDate = aDate;
+    NSString* result = [snotDateFormatter stringFromDate:strDate];
+    [snotDateFormatter release];
+    strDate = nil;
+    return [[result retain] autorelease];
+}
+
+//Push the information from the GUI into a couchDB database
+-(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName //runFiletoPush:(NSMutableDictionary*)customRunFile
+{
+    NSAutoreleasePool* runDocPool = [[NSAutoreleasePool alloc] init];
+    NSMutableDictionary* runDocDict = [NSMutableDictionary dictionaryWithCapacity:100];
+    
+    //Collect a series of objects from the SNOPModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    
+    //Initialise the SNOPModel
+    SNOPModel* aSnotModel = [objs objectAtIndex:0];
+    
+    NSString* docType = [NSString stringWithString:aCouchDBName];
+    [docType stringByAppendingString:@"_run"];
+    [runDocDict setObject:docType forKey:@"doc_type"];
+    [runDocDict setObject:[self stringDateFromDate:nil] forKey:@"time_stamp"];
+            
+    //self.runDocument = runDocDict;
+    [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:@"smellie"] addDocument:runDocDict tag:kSmellieRunDocumentAdded];
+    
+    //wait for main thread to receive acknowledgement from couchdb
+    /*NSDate* timeout = [NSDate dateWithTimeIntervalSinceNow:2.0];
+    while ([timeout timeIntervalSinceNow] > 0 && ![self.runDocument objectForKey:@"_id"]) {
+        [NSThread sleepForTimeInterval:0.1];
+    }
+    
+    //if failed emit alarm and give up
+    
+    runDocDict = [[[self runDocument] mutableCopy] autorelease];
+    if (rc) {
+        NSDate* runStart = [[[rc startTime] copy] autorelease];
+        [runStartString setString:[self stringDateFromDate:runStart]];
+    }
+    [runDocDict setObject:@"in progress" forKey:@"run_status"];
+    
+    //self.runDocument = runDocDict;
+    [[self orcaDbRef:self] updateDocument:runDocDict documentId:[runDocDict objectForKey:@"_id"] tag:kOrcaRunDocumentUpdated];*/
+    
+    [runDocPool release];
+}
+
+-(void) testDBpush
+{
+    [self _pushEllieCustomRunToDB:@"smellie"];
+}
+
+//Pull the information from the database and perform a new run
+-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
+{
+    //TODO:Need to add the information in here 
+    NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
+    return customRunFile;
+}
+
 
 -(void)startSmellieRun:(NSMutableDictionary*)smellieSettings
 {
@@ -79,7 +178,8 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     
     //Deconstruct runFile into indiviual subruns ------------------
     
-    NSLog(@" output from connection %@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaControlSmellie.py" withCmdLineArgs:nil]);
+    //Put this back in!
+    //NSLog(@" output from connection %@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaControlSmellie.py" withCmdLineArgs:nil]);
     
     //Extract the number of intensity steps
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];

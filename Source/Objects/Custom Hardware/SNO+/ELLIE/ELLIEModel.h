@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <ELLIEController.h>
 
+@class ORCouchDB;
+
 @interface ELLIEModel :  OrcaObject{
     NSMutableDictionary* smellieRunSettings;
     NSTask* exampleTask;
@@ -22,7 +24,8 @@
 -(void) wakeUp;
 -(void) sleep;
 -(void) dealloc;
-
+-(void) testDBpush;
+-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
 
 /*This function calls a python script: 
     pythonScriptFilePath - this is the python script file path

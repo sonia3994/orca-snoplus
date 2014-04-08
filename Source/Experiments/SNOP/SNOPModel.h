@@ -31,6 +31,7 @@
 @required
 - (ORCouchDB*) orcaDbRef:(id)aCouchDelegate;
 - (ORCouchDB*) debugDbRef:(id)aCouchDelegate;
+- (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
 @end
 
 #define kUseTubeView	0
@@ -168,6 +169,8 @@
 #pragma mark ¥¥¥SnotDbDelegate
 - (ORCouchDB*) orcaDbRef:(id)aCouchDelegate;
 - (ORCouchDB*) debugDbRef:(id)aCouchDelegate;
+- (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
+
 
 @end
 

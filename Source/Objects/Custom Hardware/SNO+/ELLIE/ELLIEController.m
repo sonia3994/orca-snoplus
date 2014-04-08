@@ -226,6 +226,8 @@
 -(IBAction)validationSmellieRunAction:(id)sender;
 {
     
+    [model testDBpush];
+    
     //NSLog(@" output: %@",[model callPythonScript:@"/Users/jonesc/testScript.py" withCmdLineArgs:nil]);
     [smellieMakeNewRunButton setEnabled:NO];
     
@@ -358,7 +360,7 @@
         NSLog(@" smellie_laser_settingsv2 %i\n",[smellie375nmLaserButton state]);*/
         
         //TODO: Remove this in the end 
-        [model startSmellieRun:smellieRunSettingsFromGUI]; //load settings to the SMELLIE DAQ (SNODROP)
+        //[model startSmellieRun:smellieRunSettingsFromGUI]; //load settings to the SMELLIE DAQ (SNODROP)
 
         [smellieSettingsPool release];
     }

@@ -764,6 +764,22 @@ configDocument  = _configDocument;
     return [[result retain] autorelease];
 }
 
+- (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
+ {
+ 
+     ORCouchDB* result = [ORCouchDB couchHost:self.orcaDBIPAddress
+                                         port:self.orcaDBPort
+                                     username:self.orcaDBUserName
+                                          pwd:self.orcaDBPassword
+                                     database:entryDB
+                                     delegate:self];
+ 
+     if (aCouchDelegate)
+         [result setDelegate:aCouchDelegate];
+ 
+     return [[result retain] autorelease];
+ }
+
 - (ORCouchDB*) debugDbRef:(id)aCouchDelegate
 {
     return nil;
