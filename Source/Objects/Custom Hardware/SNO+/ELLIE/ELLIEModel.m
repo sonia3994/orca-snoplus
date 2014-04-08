@@ -131,11 +131,14 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     
     NSString* docType = [NSString stringWithString:aCouchDBName];
     [docType stringByAppendingString:@"_run"];
+    
     [runDocDict setObject:docType forKey:@"doc_type"];
     [runDocDict setObject:[self stringDateFromDate:nil] forKey:@"time_stamp"];
             
     //self.runDocument = runDocDict;
-    [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:@"smellie"] addDocument:runDocDict tag:kSmellieRunDocumentAdded];
+    [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] addDocument:runDocDict tag:kSmellieRunDocumentAdded];
+    
+    [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] updateDocument:runDocDict documentId:[runDocDict objectForKey:@"_id"] tag:kSmellieRunDocumentUpdated];
     
     //wait for main thread to receive acknowledgement from couchdb
     /*NSDate* timeout = [NSDate dateWithTimeIntervalSinceNow:2.0];
@@ -160,7 +163,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
 -(void) testDBpush
 {
-    [self _pushEllieCustomRunToDB:@"smellie"];
+    [self _pushEllieCustomRunToDB:@"orca"];
 }
 
 //Pull the information from the database and perform a new run
