@@ -75,6 +75,22 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 	[super dealloc];
 }
 
+- (ORCouchDB*) debugDBRef:(NSString*)aCouchDb
+{
+    //Collect a series of objects from the SNOPModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    
+    //Initialise the SNOPModel
+    SNOPModel* aSnotModel = [objs objectAtIndex:0];
+    
+	return [ORCouchDB couchHost:[aSnotModel orcaDBIPAddress]
+                           port:[aSnotModel orcaDBPort]
+                       username:[aSnotModel orcaDBUserName]
+                            pwd:[aSnotModel orcaDBPassword]
+                       database:aCouchDb
+                       delegate:self];
+}
+
 -(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs
 {
     NSTask *task;
@@ -140,26 +156,6 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     //self.runDocument = runDocDict;
     [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] addDocument:runDocDict tag:kSmellieRunDocumentAdded];
     
-    //[[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] updateDocument:runDocDict documentId:[runDocDict objectForKey:@"_id"] tag:kSmellieRunDocumentUpdated];
-    
-    //wait for main thread to receive acknowledgement from couchdb
-    /*NSDate* timeout = [NSDate dateWithTimeIntervalSinceNow:2.0];
-    while ([timeout timeIntervalSinceNow] > 0 && ![self.runDocument objectForKey:@"_id"]) {
-        [NSThread sleepForTimeInterval:0.1];
-    }
-    
-    //if failed emit alarm and give up
-    
-    runDocDict = [[[self runDocument] mutableCopy] autorelease];
-    if (rc) {
-        NSDate* runStart = [[[rc startTime] copy] autorelease];
-        [runStartString setString:[self stringDateFromDate:runStart]];
-    }
-    [runDocDict setObject:@"in progress" forKey:@"run_status"];
-    
-    //self.runDocument = runDocDict;
-    [[self orcaDbRef:self] updateDocument:runDocDict documentId:[runDocDict objectForKey:@"_id"] tag:kOrcaRunDocumentUpdated];*/
-    
     [runDocPool release];
 }
 
@@ -169,11 +165,32 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 }
 
 //Pull the information from the database and perform a new run
--(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
+-(NSMutableDictionary*) pullEllieCustomRunFromDB:(id)aResult couchDBName:(NSString*)aCouchDBName
 {
     //TODO:Need to add the information in here 
     NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
-    return customRunFile;
+    
+    //[[self debugDBRef] getDocumentId:requestString tag:tagString];
+    
+    [self debugDBRef:aCouchDBName];
+    
+    //if ([[aResult objectForKey:@"rows"] count] && [[[aResult objectForKey:@"rows"] objectAtIndex:0] objectForKey:@"key"]){
+        
+        //NSLog(@"got ECAL doc: %@\n", aTag);
+        //[self parseEcalDocument:aResult];
+        
+        /*for (slot=0; slot<16; slot++) {
+            NSString* requestString = [NSString stringWithFormat:@"_design/penn_daq_views/_view/get_fec_by_generated?descending=true&startkey=[%d,%d,{}]&endkey=[%d,%d,\"\"]&limit=1",[self crateNumber], slot, [self crateNumber], slot];
+            NSString* tagString = [NSString stringWithFormat:@"%@.%d.%d", kDebugDbEcalDocGot, [self crateNumber], slot];
+            //NSLog(@"%@ slot %hd request: %@ tag: %@\n", [[self xl3Link] crateName], slot, requestString, tagString);
+            [[self debugDBRef] getDocumentId:requestString tag:tagString];
+        }*/
+    //}
+    //else {
+        //no doc found
+    //}
+
+    return [[customRunFile retain] autorelease];
 }
 
 

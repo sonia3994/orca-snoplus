@@ -25,7 +25,7 @@
 -(void) sleep;
 -(void) dealloc;
 -(void) smellieDBpush:(NSMutableDictionary*)dbTestDic;
--(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
+-(NSMutableDictionary*) pullEllieCustomRunFromDB:(id)aResult couchDBName:(NSString*)aCouchDBName;
 
 /*This function calls a python script: 
     pythonScriptFilePath - this is the python script file path
