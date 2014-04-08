@@ -51,13 +51,10 @@ runStopImg = _runStopImg;
 -(void) awakeFromNib
 {
 	detectorSize		= NSMakeSize(620,595);
-	//detailsSize		= NSMakeSize(450,589);
-    detailsSize		= NSMakeSize(620,595);
-	//focalPlaneSize		= NSMakeSize(450,589);
-	focalPlaneSize		= NSMakeSize(620,595);
-    //couchDBSize		= NSMakeSize(450,480);
-	couchDBSize		= NSMakeSize(620,595);
-    hvMasterSize		= NSMakeSize(620,595);
+	detailsSize		= NSMakeSize(450,589);
+	focalPlaneSize		= NSMakeSize(450,589);
+	couchDBSize		= NSMakeSize(450,480);
+	hvMasterSize		= NSMakeSize(620,595);
 	runsSize		= NSMakeSize(620,595);
 	
 	blankView = [[NSView alloc] init];
