@@ -14,16 +14,19 @@
 @interface ELLIEModel :  OrcaObject{
     NSMutableDictionary* smellieRunSettings;
     NSTask* exampleTask;
+    NSMutableDictionary* smellieRunHeaderDocList;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunSettings;
 @property (nonatomic,retain) NSTask* exampleTask;
+@property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
 
 -(void) setUpImage;
 -(void) makeMainController;
 -(void) wakeUp;
 -(void) sleep;
 -(void) dealloc;
+-(void) registerNotificationObservers;
 - (ORCouchDB*) generalDBRef:(NSString*)aCouchDb;
 
 //This is called by ORCouchDB.h class as a returning delegate
@@ -48,3 +51,4 @@
 
 extern NSString* ELLIEAllLasersChanged;
 extern NSString* ELLIEAllFibresChanged;
+extern NSString* smellieRunDocsPresent;

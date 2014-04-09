@@ -103,6 +103,13 @@ runStopImg = _runStopImg;
                      selector : @selector(hvStatusChanged:)
                          name : ORXL3ModelHVNominalVoltageChanged
                         object: nil];
+    
+    [notifyCenter addObserver : self
+                     selector : @selector(loadSmellieRunDocs:)
+                         name : smellieRunDocsPresent
+                        object: nil];
+
+    
 }
 
 - (void) updateWindow
@@ -434,10 +441,38 @@ runStopImg = _runStopImg;
     //Initialise the MTCModal
     ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
     
+    //NSMutableDictionary *state = [[NSMutableDictionary alloc] initWithDictionary:[anELLIEModel pullEllieCustomRunFromDB:@"smellie"]];
+    
     [anELLIEModel pullEllieCustomRunFromDB:@"smellie"];
     
-    [smellieStandardRunList addItemWithObjectValue:@"hello"];
+    //while(pullEllieCustomRunFromDB
+    //NSLog(@"smellieDocs : %@",[anELLIEModel smellieRunHeaderDocList]);
+    //NSLog(@"ellieModelfromSNOP: %@\n",state);
     
+    //[anELLIEModel release];
+    //[objs release];
+    
+    //[smellieStandardRunList addItemWithObjectValue:@"hello"];
+    
+}
+
+-(void) loadSmellieRunDocs
+{
+    //if (!aNote) {
+        //Collect a series of objects from the ORMTCModel
+        NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
+    
+        //Initialise the MTCModal
+        ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
+    
+        NSLog(@"ellieModelfromSNOP: %@\n",[anELLIEModel smellieRunHeaderDocList]);
+    
+        //[anELLIEModel release];
+        //[objs release];
+    //}
+    //else{
+    //    NSLog(@"note present");
+    //}
 }
 
 

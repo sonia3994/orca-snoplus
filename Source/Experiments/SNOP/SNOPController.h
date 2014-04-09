@@ -80,6 +80,7 @@
 
 //smellie functions -------------------
 - (void) getSmellieRunList;
+- (void) loadSmellieRunDocs;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

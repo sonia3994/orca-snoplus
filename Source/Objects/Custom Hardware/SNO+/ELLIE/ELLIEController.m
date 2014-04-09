@@ -82,10 +82,6 @@
 					 selector : @selector(setAllLasersAction:)
 						 name : ELLIEAllLasersChanged
 					   object : model];
-    [notifyCenter addObserver : self
-					 selector : @selector(setAllLasersAction:)
-						 name : ELLIEAllLasersChanged
-					   object : model];
     
     [notifyCenter addObserver : self
 					 selector : @selector(setAllFibresAction:)

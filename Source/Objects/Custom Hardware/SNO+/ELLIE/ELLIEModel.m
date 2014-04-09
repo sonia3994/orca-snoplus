@@ -22,6 +22,7 @@
 #import "ORCouchDB.h"
 #import "SNOPModel.h"
 #import "ORRunModel.h"
+#import "SNOPController.h"
 
 //tags to define that an ELLIE run file has been updated
 #define kSmellieRunDocumentAdded   @"kSmellieRunDocumentAdded"
@@ -37,6 +38,8 @@
 
 NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
+NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
+
 
 @interface ELLIEModel (private)
 -(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName runFiletoPush:(NSMutableDictionary*)customRunFile;
@@ -47,6 +50,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
 @synthesize smellieRunSettings;
 @synthesize exampleTask;
+@synthesize smellieRunHeaderDocList;
 
 
 - (void) setUpImage
@@ -76,6 +80,18 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     
 	[super dealloc];
+}
+
+- (void) registerNotificationObservers
+{
+    //[super registerNotificationObservers];
+    
+    NSNotificationCenter* notifyCenter = [NSNotificationCenter defaultCenter];
+    
+    //we don't want this notification
+	[notifyCenter removeObserver:self name:NSWindowDidResignKeyNotification object:nil];
+    
+    
 }
 
 - (ORCouchDB*) generalDBRef:(NSString*)aCouchDb
@@ -169,14 +185,33 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
 -(void) parseSmellieRunHeaderDoc:(id)aResult
 {
-    int numberOfRows = [[aResult objectForKey:@"rows"] count];
+    unsigned int i,cnt = [[aResult objectForKey:@"rows"] count];
     
-    for(int i=0;i<numberOfRows;i++){
-        NSDictionary* smellieRunHeaderDoc = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
-        NSLog(@"smellieRunHeaderDoc: %@",smellieRunHeaderDoc);
-        [smellieRunHeaderDoc release];
+    NSLog(@"count %u",cnt);
+    
+    for(i=0;i<cnt;i++){
+        //smellieRunHeaderDocList
+        NSMutableDictionary* smellieRunHeaderDocIterator = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
+        NSString *keyForSmellieDocs = [NSString stringWithFormat:@"%u",i];
+        [smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
+        //[smellieRunHeaderDoc release];
     }
-        
+    
+    //Collect a series of objects from the SNOPModel
+    //NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPController")];
+    
+    //Initialise the SNOPModel
+    //SNOPController* aSnotController = [objs objectAtIndex:0];
+    
+    //[[aSnotController smellieRunDocs] initWithDictionary:smellieRunHeaderDocList];
+    
+    //smellieRunHeaderDocList = [aSnotModel ]
+    
+    //[smellieRunHeaderDocList retain];
+    
+    NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:smellieRunDocsPresent object:self];
 }
 
 - (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp
@@ -221,7 +256,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 //-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
 -(void) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
 {
-    NSLog(@"attempting here!\n");
+    //NSLog(@"attempting here!\n");
     //TODO:Need to add the information in here 
     //NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
     
@@ -229,7 +264,9 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     
     [[self generalDBRef:aCouchDBName] getDocumentId:requestString tag:kSmellieRunHeaderRetrieved];
     
-    NSLog(@"request string: %@\n",requestString);
+    //NSLog(@"request string: %@\n",requestString);
+    
+    //customRunFile =
     
     //[[self debugDBRef] getDocumentId:requestString tag:tagString];
     
@@ -250,6 +287,9 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     //else {
         //no doc found
     //}
+    
+    //customRunFile = [self smellieRunHeaderDocList];
+    //NSLog(@"stuff %@\n",customRunFile);
 
     //return [[customRunFile retain] autorelease];
 }
