@@ -87,7 +87,10 @@
     NSDictionary* _runDocument;
     NSDictionary* _configDocument;
     NSMutableDictionary* _runTypeDocumentPhysics;
+    NSMutableDictionary* smellieRunHeaderDocList;
 }
+
+@property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
 
 @property (nonatomic,copy) NSString* orcaDBUserName;
 @property (nonatomic,copy) NSString* orcaDBPassword;
@@ -171,6 +174,8 @@
 - (ORCouchDB*) debugDbRef:(id)aCouchDelegate;
 - (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
 
+//smellie functions -------
+- (void) getSmellieRunListInfo;
 
 @end
 

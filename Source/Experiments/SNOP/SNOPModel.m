@@ -36,6 +36,7 @@
 #import "ORFec32Model.h"
 #import "OROrderedObjManager.h"
 #import "ORSNOConstants.h"
+#import "ELLIEModel.h"
 
 NSString* ORSNOPModelViewTypeChanged	= @"ORSNOPModelViewTypeChanged";
 static NSString* SNOPDbConnector	= @"SNOPDbConnector";
@@ -79,6 +80,8 @@ epedDataId = _epedDataId,
 rhdrDataId = _rhdrDataId,
 runDocument = _runDocument,
 configDocument  = _configDocument;
+
+@synthesize smellieRunHeaderDocList;
 
 #pragma mark ¥¥¥Initialization
 
@@ -507,6 +510,16 @@ configDocument  = _configDocument;
             self.runDocument = runDoc;
             //[aResult prettyPrint:@"CouchDB Ack Doc:"];
         }
+        
+        //This is called when smellie run header is queried from CouchDB
+        else if ([aTag isEqualToString:@"kSmellieRunHeaderRetrieved"])
+        {
+            NSLog(@"here\n");
+            NSLog(@"Object: %@\n",aResult);
+            NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
+            [self parseSmellieRunHeaderDoc:aResult];
+        }
+        
         else if ([aTag isEqualToString:kOrcaRunDocumentUpdated]) {
             //there was error
             //[aResult prettyPrint:@"couchdb update doc:"];
@@ -802,6 +815,40 @@ configDocument  = _configDocument;
     NSLog(@"aaa 0x%08x\n", pt_step);
     
     //unsigned int* pt_step_crate = pt_step[0];
+    
+}
+
+- (void) getSmellieRunListInfo
+{
+    //Collect a series of objects from the ORMTCModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
+    
+    //Initialise the MTCModal
+    ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
+    
+    //NSMutableDictionary *state = [[NSMutableDictionary alloc] initWithDictionary:[anELLIEModel pullEllieCustomRunFromDB:@"smellie"]];
+    
+    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieRunHeaders"];
+    
+    [[anELLIEModel generalDBRef:@"smellie"] getDocumentId:requestString tag:@"kSmellieRunHeaderRetrieved"];
+    
+}
+
+-(void) parseSmellieRunHeaderDoc:(id)aResult
+{
+    unsigned int i,cnt = [[aResult objectForKey:@"rows"] count];
+    
+    NSLog(@"count %u",cnt);
+    
+    for(i=0;i<cnt;i++){
+        //smellieRunHeaderDocList
+        NSMutableDictionary* smellieRunHeaderDocIterator = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
+        NSString *keyForSmellieDocs = [NSString stringWithFormat:@"%u",i];
+        [smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
+        //[smellieRunHeaderDoc release];
+    }
+
+    NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
     
 }
 

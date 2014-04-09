@@ -31,10 +31,7 @@
 #define kTellieRunDocumentUpdated   @"kTellieRunDocumentUpdated"
 #define kAmellieRunDocumentAdded   @"kAmellieRunDocumentAdded"
 #define kAmellieRunDocumentUpdated   @"kAmellieRunDocumentUpdated"
-
 #define kSmellieRunHeaderRetrieved   @"kSmellieRunHeaderRetrieved"
-
-
 
 NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
@@ -211,7 +208,6 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     
     NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:smellieRunDocsPresent object:self];
 }
 
 - (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp

@@ -27,6 +27,7 @@
 #import "ORDetectorSegment.h"
 #import "ORXL3Model.h"
 #import "ELLIEModel.h"
+#import "ORCouchDB.h"
 
 NSString* ORSNOPRequestHVStatus = @"ORSNOPRequestHVStatus";
 
@@ -65,8 +66,7 @@ runStopImg = _runStopImg;
     [tabView setFocusRingType:NSFocusRingTypeNone];
 	[self tabView:tabView didSelectTabViewItem:[tabView selectedTabViewItem]];
     
-    //fill information for smellie section of interface
-    [self getSmellieRunList];
+    [model getSmellieRunListInfo];
     
 	[super awakeFromNib];
 }
@@ -104,10 +104,10 @@ runStopImg = _runStopImg;
                          name : ORXL3ModelHVNominalVoltageChanged
                         object: nil];
     
-    [notifyCenter addObserver : self
+    /*[notifyCenter addObserver : self
                      selector : @selector(loadSmellieRunDocs:)
                          name : smellieRunDocsPresent
-                        object: nil];
+                        object: nil];*/
 
     
 }
@@ -433,7 +433,7 @@ runStopImg = _runStopImg;
 }
 
 //smellie functions ----------------------------------------------
-- (void) getSmellieRunList
+/*- (void) getSmellieRunList
 {
     //Collect a series of objects from the ORMTCModel
     NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
@@ -443,16 +443,10 @@ runStopImg = _runStopImg;
     
     //NSMutableDictionary *state = [[NSMutableDictionary alloc] initWithDictionary:[anELLIEModel pullEllieCustomRunFromDB:@"smellie"]];
     
-    [anELLIEModel pullEllieCustomRunFromDB:@"smellie"];
+    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieRunHeaders"];
     
-    //while(pullEllieCustomRunFromDB
-    //NSLog(@"smellieDocs : %@",[anELLIEModel smellieRunHeaderDocList]);
-    //NSLog(@"ellieModelfromSNOP: %@\n",state);
-    
-    //[anELLIEModel release];
-    //[objs release];
-    
-    //[smellieStandardRunList addItemWithObjectValue:@"hello"];
+
+    [[anELLIEModel generalDBRef:@"smellie"] getDocumentId:requestString tag:@"kSmellieRunHeaderRetrieved"];
     
 }
 
@@ -473,7 +467,7 @@ runStopImg = _runStopImg;
     //else{
     //    NSLog(@"note present");
     //}
-}
+}*/
 
 
 
