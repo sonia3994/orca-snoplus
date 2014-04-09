@@ -49,6 +49,12 @@
     [smellieAllLasersButton setEnabled:YES];
     [smellieMakeNewRunButton setEnabled:NO];
     
+    //NSMutableDictionary *smellieRunInfo = [[NSMutableDictionary alloc] init];
+    
+    //NSLog(@"Value of smellie %@",[smellieRunInfo objectForKey:@"run_name"]);
+    
+    //[smellieRunName release];
+    
     return self;
 }
 
@@ -256,7 +262,7 @@
 -(IBAction)validationSmellieRunAction:(id)sender;
 {
     
-    //;
+    [model pullEllieCustomRunFromDB:@"smellie"];
     
     //NSLog(@" output: %@",[model callPythonScript:@"/Users/jonesc/testScript.py" withCmdLineArgs:nil]);
     [smellieMakeNewRunButton setEnabled:NO];

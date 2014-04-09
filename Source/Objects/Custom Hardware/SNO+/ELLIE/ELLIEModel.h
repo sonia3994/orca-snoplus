@@ -24,8 +24,9 @@
 -(void) wakeUp;
 -(void) sleep;
 -(void) dealloc;
--(void) smellieDBpush:(NSMutableDictionary*)dbTestDic;
--(NSMutableDictionary*) pullEllieCustomRunFromDB:(id)aResult couchDBName:(NSString*)aCouchDBName;
+
+//-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
+-(void) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
 
 /*This function calls a python script: 
     pythonScriptFilePath - this is the python script file path
@@ -34,7 +35,7 @@
 
 //starts a SMELLIE run with given parameters and submits the smellie run file to the database
 -(void)startSmellieRun:(NSMutableDictionary*)smellieSettings;
-
+-(void) smellieDBpush:(NSMutableDictionary*)dbDic;
 -(void) exampleFunctionForPython;
 
 @end

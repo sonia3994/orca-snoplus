@@ -35,9 +35,10 @@
 NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
-@interface SNOPModel (private)
+@interface ELLIEModel (private)
 -(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName runFiletoPush:(NSMutableDictionary*)customRunFile;
-- (NSString*) stringDateFromDate:(NSDate*)aDate;
+-(NSString*) stringDateFromDate:(NSDate*)aDate;
+-(ORCouchDB*) _generalDBRef:(NSString*)aCouchDb;
 @end
 
 @implementation ELLIEModel
@@ -75,7 +76,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 	[super dealloc];
 }
 
-- (ORCouchDB*) debugDBRef:(NSString*)aCouchDb
+- (ORCouchDB*) _generalDBRef:(NSString*)aCouchDb
 {
     //Collect a series of objects from the SNOPModel
     NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
@@ -159,20 +160,28 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     [runDocPool release];
 }
 
--(void) smellieDBpush:(NSMutableDictionary*)dbTestDic
+-(void) smellieDBpush:(NSMutableDictionary*)dbDic
 {
-    [self _pushEllieCustomRunToDB:@"smellie" runFiletoPush:dbTestDic];
+    [self _pushEllieCustomRunToDB:@"smellie" runFiletoPush:dbDic];
 }
 
 //Pull the information from the database and perform a new run
--(NSMutableDictionary*) pullEllieCustomRunFromDB:(id)aResult couchDBName:(NSString*)aCouchDBName
+//-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
+-(void) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
 {
+    NSLog(@"attempting here!\n");
     //TODO:Need to add the information in here 
-    NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
+    //NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
+    
+    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/pullEllieRunHeaders"];
+    
+    [[self _generalDBRef:aCouchDBName] getDocumentId:requestString tag:@"smellie_queried"];
+    
+    NSLog(@"request string: %@\n",requestString);
     
     //[[self debugDBRef] getDocumentId:requestString tag:tagString];
     
-    [self debugDBRef:aCouchDBName];
+    //[self debugDBRef:aCouchDBName];
     
     //if ([[aResult objectForKey:@"rows"] count] && [[[aResult objectForKey:@"rows"] objectAtIndex:0] objectForKey:@"key"]){
         
@@ -190,7 +199,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
         //no doc found
     //}
 
-    return [[customRunFile retain] autorelease];
+    //return [[customRunFile retain] autorelease];
 }
 
 
