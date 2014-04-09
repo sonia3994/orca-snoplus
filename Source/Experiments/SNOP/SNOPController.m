@@ -26,6 +26,7 @@
 #import "ORAxis.h"
 #import "ORDetectorSegment.h"
 #import "ORXL3Model.h"
+#import "ELLIEModel.h"
 
 NSString* ORSNOPRequestHVStatus = @"ORSNOPRequestHVStatus";
 
@@ -63,6 +64,9 @@ runStopImg = _runStopImg;
 	blankView = [[NSView alloc] init];
     [tabView setFocusRingType:NSFocusRingTypeNone];
 	[self tabView:tabView didSelectTabViewItem:[tabView selectedTabViewItem]];
+    
+    //fill information for smellie section of interface
+    [self getSmellieRunList];
     
 	[super awakeFromNib];
 }
@@ -420,6 +424,22 @@ runStopImg = _runStopImg;
     
     return nil;
 }
+
+//smellie functions ----------------------------------------------
+- (void) getSmellieRunList
+{
+    //Collect a series of objects from the ORMTCModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
+    
+    //Initialise the MTCModal
+    ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
+    
+    [anELLIEModel pullEllieCustomRunFromDB:@"smellie"];
+    
+    [smellieStandardRunList addItemWithObjectValue:@"hello"];
+    
+}
+
 
 
 @end

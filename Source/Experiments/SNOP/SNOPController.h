@@ -27,6 +27,10 @@
 @interface SNOPController : ORExperimentController {
 	IBOutlet NSTextField* detectorTitle;
 	IBOutlet NSPopUpButton*	viewTypePU;
+    
+    
+    //smellie section functions
+    IBOutlet NSComboBox* smellieStandardRunList;
 
 	NSView *blankView;
 	NSSize detectorSize;
@@ -73,6 +77,9 @@
 - (IBAction) hvMasterTriggersOFF:(id)sender;
 - (IBAction) hvMasterTriggersON:(id)sender;
 - (IBAction) hvMasterStatus:(id)sender;
+
+//smellie functions -------------------
+- (void) getSmellieRunList;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

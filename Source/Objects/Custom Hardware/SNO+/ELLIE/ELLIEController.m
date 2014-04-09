@@ -261,9 +261,6 @@
 
 -(IBAction)validationSmellieRunAction:(id)sender;
 {
-    
-    [model pullEllieCustomRunFromDB:@"smellie"];
-    
     //NSLog(@" output: %@",[model callPythonScript:@"/Users/jonesc/testScript.py" withCmdLineArgs:nil]);
     [smellieMakeNewRunButton setEnabled:NO];
     

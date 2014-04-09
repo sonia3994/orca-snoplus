@@ -31,6 +31,9 @@
 #define kAmellieRunDocumentAdded   @"kAmellieRunDocumentAdded"
 #define kAmellieRunDocumentUpdated   @"kAmellieRunDocumentUpdated"
 
+#define kSmellieRunHeaderRetrieved   @"kSmellieRunHeaderRetrieved"
+
+
 
 NSString* ELLIEAllLasersChanged = @"ELLIEAllLasersChanged";
 NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
@@ -173,36 +176,36 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 - (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp
 {
 	@synchronized(self){
-        NSLog(@"popped in here\n");
 		if([aResult isKindOfClass:[NSDictionary class]]){
 			NSString* message = [aResult objectForKey:@"Message"];
 			if(message){
 				[aResult prettyPrint:@"CouchDB Message:"];
 			}
-			else {
+            
+            //Look through all of the possible tags for ellie couchDB results 
+            
+            //This is called when smellie run header is queried from CouchDB
+            if ([aTag isEqualToString:kSmellieRunHeaderRetrieved])
+            {
                 NSLog(@"here\n");
                 NSLog(@"Object: %@\n",aResult);
                 NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
                 [self parseSmellieRunHeaderDoc:aResult];
-                //if ([[aResult objectForKey:@"run_name"] count]){
-                    //NSLog(@"got ECAL doc: %@\n", aTag);
-                    //[self parseEcalDocument:aResult];
-                //}
-                //else {
-                    //no ecal doc found
-                //}
+            }
+            
+            //If no tag is found for the query result
+			else {
+                NSLog(@"No Tag assigned to that query/couchDB View \n");
+                NSLog(@"Object: %@\n",aResult);
             }
 		}
+        
 		else if([aResult isKindOfClass:[NSArray class]]){
-            /*
-             if([aTag isEqualToString:kListDB]){
-             [aResult prettyPrint:@"CouchDB List:"];
-             else [aResult prettyPrint:@"CouchDB"];
-             */
             [aResult prettyPrint:@"CouchDB"];
 		}
+        
 		else {
-			NSLog(@"hello not working");
+			//no docs found 
 		}
 	}
 }
@@ -218,7 +221,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     
     NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieRunHeaders"];
     
-    [[self generalDBRef:aCouchDBName] getDocumentId:requestString tag:@"smellie_queried"];
+    [[self generalDBRef:aCouchDBName] getDocumentId:requestString tag:kSmellieRunHeaderRetrieved];
     
     NSLog(@"request string: %@\n",requestString);
     
