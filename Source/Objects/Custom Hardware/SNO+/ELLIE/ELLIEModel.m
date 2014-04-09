@@ -38,7 +38,6 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 @interface ELLIEModel (private)
 -(void) _pushEllieCustomRunToDB:(NSString*)aCouchDBName runFiletoPush:(NSMutableDictionary*)customRunFile;
 -(NSString*) stringDateFromDate:(NSDate*)aDate;
--(ORCouchDB*) _generalDBRef:(NSString*)aCouchDb;
 @end
 
 @implementation ELLIEModel
@@ -76,7 +75,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 	[super dealloc];
 }
 
-- (ORCouchDB*) _generalDBRef:(NSString*)aCouchDb
+- (ORCouchDB*) generalDBRef:(NSString*)aCouchDb
 {
     //Collect a series of objects from the SNOPModel
     NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
@@ -165,6 +164,43 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     [self _pushEllieCustomRunToDB:@"smellie" runFiletoPush:dbDic];
 }
 
+
+- (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp
+{
+	@synchronized(self){
+        NSLog(@"popped in here\n");
+		if([aResult isKindOfClass:[NSDictionary class]]){
+			NSString* message = [aResult objectForKey:@"Message"];
+			if(message){
+				[aResult prettyPrint:@"CouchDB Message:"];
+			}
+			else {
+                NSLog(@"here\n");
+                NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
+                //if ([[aResult objectForKey:@"run_name"] count]){
+                    //NSLog(@"got ECAL doc: %@\n", aTag);
+                    //[self parseEcalDocument:aResult];
+                //}
+                //else {
+                    //no ecal doc found
+                //}
+            }
+		}
+		else if([aResult isKindOfClass:[NSArray class]]){
+            /*
+             if([aTag isEqualToString:kListDB]){
+             [aResult prettyPrint:@"CouchDB List:"];
+             else [aResult prettyPrint:@"CouchDB"];
+             */
+            [aResult prettyPrint:@"CouchDB"];
+		}
+		else {
+			NSLog(@"hello working");
+		}
+	}
+}
+
+
 //Pull the information from the database and perform a new run
 //-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
 -(void) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
@@ -173,9 +209,9 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     //TODO:Need to add the information in here 
     //NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
     
-    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/pullEllieRunHeaders"];
+    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieRunHeaders"];
     
-    [[self _generalDBRef:aCouchDBName] getDocumentId:requestString tag:@"smellie_queried"];
+    [[self generalDBRef:aCouchDBName] getDocumentId:requestString tag:@"smellie_queried"];
     
     NSLog(@"request string: %@\n",requestString);
     
