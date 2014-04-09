@@ -169,8 +169,14 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 
 -(void) parseSmellieRunHeaderDoc:(id)aResult
 {
-    NSDictionary* smellieRunHeaderDoc = [[[aResult objectForKey:@"rows"] objectAtIndex:0] objectForKey:@"value"];
-    NSLog(@"smellieRunHeaderDoc: %@",smellieRunHeaderDoc);
+    int numberOfRows = [[aResult objectForKey:@"rows"] count];
+    
+    for(int i=0;i<numberOfRows;i++){
+        NSDictionary* smellieRunHeaderDoc = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
+        NSLog(@"smellieRunHeaderDoc: %@",smellieRunHeaderDoc);
+        [smellieRunHeaderDoc release];
+    }
+        
 }
 
 - (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp
