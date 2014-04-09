@@ -433,6 +433,14 @@ runStopImg = _runStopImg;
 }
 
 //smellie functions ----------------------------------------------
+-(void) loadSmellieSettings:(NSMutableDictionary*)smellieRunDoc
+{
+    NSLog(@"at controller: %@",smellieRunDoc);
+    [smellieStandardRunList addItemWithObjectValue:@"hello"];
+}
+
+
+
 /*- (void) getSmellieRunList
 {
     //Collect a series of objects from the ORMTCModel

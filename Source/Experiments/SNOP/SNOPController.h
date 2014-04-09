@@ -79,8 +79,7 @@
 - (IBAction) hvMasterStatus:(id)sender;
 
 //smellie functions -------------------
-//- (void) getSmellieRunList;
-//- (void) loadSmellieRunDocs;
+-(void) loadSmellieSettings:(NSMutableDictionary*)smellieRunDoc;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

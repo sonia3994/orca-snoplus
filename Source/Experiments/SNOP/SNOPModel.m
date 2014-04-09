@@ -516,7 +516,8 @@ configDocument  = _configDocument;
         {
             NSLog(@"here\n");
             NSLog(@"Object: %@\n",aResult);
-            NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
+            NSLog(@"result1: %@\n",[aResult objectForKey:@"rows"]);
+            NSLog(@"result2: %@\n",[[aResult objectForKey:@"rows"] objectAtIndexedSubscript:0]);
             [self parseSmellieRunHeaderDoc:aResult];
         }
         
@@ -841,14 +842,24 @@ configDocument  = _configDocument;
     NSLog(@"count %u",cnt);
     
     for(i=0;i<cnt;i++){
-        //smellieRunHeaderDocList
+        NSLog(@"hello");
         NSMutableDictionary* smellieRunHeaderDocIterator = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
+        NSLog(@"tst %@'",smellieRunHeaderDocIterator);
         NSString *keyForSmellieDocs = [NSString stringWithFormat:@"%u",i];
         [smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
         //[smellieRunHeaderDoc release];
     }
 
     NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
+    
+    //Notify the controller something has happened here
+    
+    //NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPController")];
+    
+    //Initialise the MTCModal
+    //SNOPController* aSNOPController = [objs objectAtIndex:0];
+    
+    //[aSNOPController loadSmellieSettings:smellieRunHeaderDocList];
     
 }
 

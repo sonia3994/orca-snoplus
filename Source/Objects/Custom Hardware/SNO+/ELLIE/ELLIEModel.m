@@ -104,7 +104,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
                        username:[aSnotModel orcaDBUserName]
                             pwd:[aSnotModel orcaDBPassword]
                        database:aCouchDb
-                       delegate:self];
+                       delegate:aSnotModel];
 }
 
 -(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs
