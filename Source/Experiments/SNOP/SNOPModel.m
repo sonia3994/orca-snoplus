@@ -121,6 +121,13 @@ configDocument  = _configDocument;
     //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(morcaUpdateDB) object:nil];
 }
 
+- (void) initSmellieRunDocsDic
+{
+    if(!self.smellieRunHeaderDocList) {
+        self.smellieRunHeaderDocList = [NSMutableDictionary dictionaryWithCapacity:100];
+    }
+}
+
 - (void) initOrcaDBConnectionHistory
 {
 	self.orcaDBIPNumberIndex = [[NSUserDefaults standardUserDefaults] integerForKey: [NSString stringWithFormat:@"orca.%@.orcaDBIPNumberIndex",[self className]]];
@@ -515,10 +522,10 @@ configDocument  = _configDocument;
         //This is called when smellie run header is queried from CouchDB
         else if ([aTag isEqualToString:@"kSmellieRunHeaderRetrieved"])
         {
-            NSLog(@"here\n");
-            NSLog(@"Object: %@\n",aResult);
-            NSLog(@"result1: %@\n",[aResult objectForKey:@"rows"]);
-            NSLog(@"result2: %@\n",[[aResult objectForKey:@"rows"] objectAtIndexedSubscript:0]);
+            //NSLog(@"here\n");
+            //NSLog(@"Object: %@\n",aResult);
+            //NSLog(@"result1: %@\n",[aResult objectForKey:@"rows"]);
+            //NSLog(@"result2: %@\n",[[aResult objectForKey:@"rows"] objectAtIndexedSubscript:0]);
             [self parseSmellieRunHeaderDoc:aResult];
         }
         
@@ -661,6 +668,7 @@ configDocument  = _configDocument;
     [[self undoManager] disableUndoRegistration];
 	[self initOrcaDBConnectionHistory];
 	[self initDebugDBConnectionHistory];
+    [self initSmellieRunDocsDic];
     
     [self setViewType:[decoder decodeIntForKey:@"viewType"]];
 
@@ -843,15 +851,17 @@ configDocument  = _configDocument;
     NSLog(@"count %u",cnt);
     
     for(i=0;i<cnt;i++){
-        NSLog(@"hello");
+        NSLog(@"hello in iteration\n");
         NSMutableDictionary* smellieRunHeaderDocIterator = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
-        NSLog(@"tst %@'",smellieRunHeaderDocIterator);
+        //NSLog(@"tst %@\n",smellieRunHeaderDocIterator);
         NSString *keyForSmellieDocs = [NSString stringWithFormat:@"%u",i];
-        [smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
-        //[smellieRunHeaderDoc release];
+        [self.smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
+        //[smellieRunHeaderDocList addObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
+        [smellieRunHeaderDocIterator release];
+        [keyForSmellieDocs release];
     }
 
-    NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
+    NSLog(@"ELLIE:smellieRunHeaderDocList: %@\n",smellieRunHeaderDocList);
     
     //Notify the controller something has happened here
     [[NSNotificationCenter defaultCenter] postNotificationName:smellieRunLoaded object:self];

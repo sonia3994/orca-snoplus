@@ -116,6 +116,7 @@
 @property (copy) NSDictionary* runDocument;
 @property (copy) NSDictionary* configDocument;
 
+- (void) initSmellieRunDocsDic;
 - (void) initOrcaDBConnectionHistory;
 - (void) clearOrcaDBConnectionHistory;
 - (id) orcaDBConnectionHistoryItem:(unsigned int)index;
