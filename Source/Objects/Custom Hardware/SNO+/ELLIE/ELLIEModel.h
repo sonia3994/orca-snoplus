@@ -32,6 +32,8 @@
 //-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
 -(void) pullEllieCustomRunFromDB:(NSString*)aCouchDBName;
 
+-(void) parseSmellieRunHeaderDoc:(id)aResult;
+
 /*This function calls a python script: 
     pythonScriptFilePath - this is the python script file path
     withCmdLineArgs - these are the arguments for the python script*/

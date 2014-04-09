@@ -164,6 +164,11 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
     [self _pushEllieCustomRunToDB:@"smellie" runFiletoPush:dbDic];
 }
 
+-(void) parseSmellieRunHeaderDoc:(id)aResult
+{
+    NSDictionary* smellieRunHeaderDoc = [[[aResult objectForKey:@"rows"] objectAtIndex:0] objectForKey:@"value"];
+    NSLog(@"smellieRunHeaderDoc: %@",smellieRunHeaderDoc);
+}
 
 - (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp
 {
@@ -176,7 +181,9 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
 			}
 			else {
                 NSLog(@"here\n");
+                NSLog(@"Object: %@\n",aResult);
                 NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
+                [self parseSmellieRunHeaderDoc:aResult];
                 //if ([[aResult objectForKey:@"run_name"] count]){
                     //NSLog(@"got ECAL doc: %@\n", aTag);
                     //[self parseEcalDocument:aResult];
@@ -195,7 +202,7 @@ NSString* ELLIEAllFibresChanged = @"ELLIEAllFibresChanged";
             [aResult prettyPrint:@"CouchDB"];
 		}
 		else {
-			NSLog(@"hello working");
+			NSLog(@"hello not working");
 		}
 	}
 }
