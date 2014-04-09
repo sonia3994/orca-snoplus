@@ -42,6 +42,7 @@ NSString* ORSNOPModelViewTypeChanged	= @"ORSNOPModelViewTypeChanged";
 static NSString* SNOPDbConnector	= @"SNOPDbConnector";
 NSString* ORSNOPModelOrcaDBIPAddressChanged = @"ORSNOPModelOrcaDBIPAddressChanged";
 NSString* ORSNOPModelDebugDBIPAddressChanged = @"ORSNOPModelDebugDBIPAddressChanged";
+NSString* smellieRunLoaded = @"smellieRunLoaded";
 
 
 #define kOrcaRunDocumentAdded   @"kOrcaRunDocumentAdded"
@@ -853,13 +854,7 @@ configDocument  = _configDocument;
     NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
     
     //Notify the controller something has happened here
-    
-    //NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPController")];
-    
-    //Initialise the MTCModal
-    //SNOPController* aSNOPController = [objs objectAtIndex:0];
-    
-    //[aSNOPController loadSmellieSettings:smellieRunHeaderDocList];
+    [[NSNotificationCenter defaultCenter] postNotificationName:smellieRunLoaded object:self];
     
 }
 

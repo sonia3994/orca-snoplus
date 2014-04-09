@@ -104,10 +104,10 @@ runStopImg = _runStopImg;
                          name : ORXL3ModelHVNominalVoltageChanged
                         object: nil];
     
-    /*[notifyCenter addObserver : self
-                     selector : @selector(loadSmellieRunDocs:)
-                         name : smellieRunDocsPresent
-                        object: nil];*/
+    [notifyCenter addObserver : self
+                     selector : @selector(loadSmellieSettings:)
+                         name : smellieRunLoaded
+                        object: model];
 
     
 }
@@ -119,6 +119,7 @@ runStopImg = _runStopImg;
     [self hvStatusChanged:nil];
     [self dbOrcaDBIPChanged:nil];
     [self dbDebugDBIPChanged:nil];
+    [self loadSmellieSettings:nil];
 }
 
 - (void) viewTypeChanged:(NSNotification*)aNote
@@ -433,9 +434,9 @@ runStopImg = _runStopImg;
 }
 
 //smellie functions ----------------------------------------------
--(void) loadSmellieSettings:(NSMutableDictionary*)smellieRunDoc
+-(void) loadSmellieSettings:(NSNotification*)aNote
 {
-    NSLog(@"at controller: %@",smellieRunDoc);
+    NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
     [smellieStandardRunList addItemWithObjectValue:@"hello"];
 }
 
