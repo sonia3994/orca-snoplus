@@ -77,6 +77,7 @@
 -(IBAction)validateNumTriggersPerStep:(id)sender;
 -(IBAction)validationSmellieRunAction:(id)sender;
 -(IBAction)allLaserValidator:(id)sender;
+-(IBAction)makeNewSmellieRun:(id)sender;
 
 
 //TELLIE functions -----------------------------
