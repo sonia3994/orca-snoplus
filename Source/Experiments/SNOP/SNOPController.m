@@ -436,8 +436,9 @@ runStopImg = _runStopImg;
 //smellie functions ----------------------------------------------
 -(void) loadSmellieSettings:(NSNotification*)aNote
 {
+    NSLog(@"in controller\n");
     //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
-    //NSLog(@"at controller: %@",tester);
+    NSLog(@"at controller: %@",[model description]);
     [smellieStandardRunList addItemWithObjectValue:@"hello"];
 }
 
