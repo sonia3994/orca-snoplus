@@ -430,13 +430,17 @@ runStopImg = _runStopImg;
 
 - (IBAction) callSmellieSettings:(id)sender
 {
-    NSLog(@"in controller called\n");
+    //NSLog(@"in controller called\n");
     
     NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:[model smellieTestFct]];
-    NSLog(@" tester2 %@ \n",[ [tmp objectForKey:@"0"] objectForKey:@"run_name"]);
+    //NSLog(@" tester2 %@ \n",[ [tmp objectForKey:@"0"] objectForKey:@"run_name"]);
     
+    for(id key in tmp){
+        id loopValue = [tmp objectForKey:key];
+        [smellieRunFileNameField addItemWithObjectValue:[NSString stringWithFormat:@"%@",[loopValue objectForKey:@"run_name"]]];
+    }
     //Need to count the number of entries in the DB
-    [smellieRunFileNameField addItemWithObjectValue:[NSString stringWithFormat:@"%@",[[tmp objectForKey:@"0"] objectForKey:@"run_name"]]];
+    //[smellieRunFileNameField addItemWithObjectValue:[NSString stringWithFormat:@"%@",[[tmp objectForKey:@"0"] objectForKey:@"run_name"]]];
     
     //NSLog(@" counter %@ \n",[tmp count]);
     
