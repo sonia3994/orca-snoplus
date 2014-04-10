@@ -90,6 +90,7 @@
     NSMutableDictionary* smellieRunHeaderDocList;
     
     bool _smellieDBReadInProgress;
+    bool _smellieDocUploaded;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
@@ -116,6 +117,7 @@
 @property (nonatomic,assign) unsigned long rhdrDataId;
 
 @property (nonatomic,assign) bool smellieDBReadInProgress;
+@property (nonatomic,assign) bool smellieDocUploaded;
 
 @property (copy) NSDictionary* runDocument;
 @property (copy) NSDictionary* configDocument;
@@ -181,6 +183,7 @@
 
 //smellie functions -------
 - (void) getSmellieRunListInfo;
+- (NSMutableDictionary*)smellieTestFct;
 
 @end
 
@@ -199,4 +202,3 @@
 extern NSString* ORSNOPModelViewTypeChanged;
 extern NSString* ORSNOPModelOrcaDBIPAddressChanged;
 extern NSString* ORSNOPModelDebugDBIPAddressChanged;
-extern NSString* smellieRunLoaded;

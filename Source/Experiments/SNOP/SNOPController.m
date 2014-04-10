@@ -66,6 +66,8 @@ runStopImg = _runStopImg;
     [tabView setFocusRingType:NSFocusRingTypeNone];
 	[self tabView:tabView didSelectTabViewItem:[tabView selectedTabViewItem]];
     
+    [model getSmellieRunListInfo];
+    
 	[super awakeFromNib];
 }
 
@@ -101,13 +103,6 @@ runStopImg = _runStopImg;
                      selector : @selector(hvStatusChanged:)
                          name : ORXL3ModelHVNominalVoltageChanged
                         object: nil];
-    
-    [notifyCenter addObserver : self
-                     selector : @selector(loadSmellieSettings:)
-                         name : smellieRunLoaded
-                        object: model];
-
-    
 }
 
 - (void) updateWindow
@@ -431,69 +426,14 @@ runStopImg = _runStopImg;
 }
 
 //smellie functions ----------------------------------------------
--(void) loadSmellieSettings:(NSNotification*)aNote
-{
-    NSLog(@"in controller\n");
-    //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
-    NSLog(@"at controller: %@",[model description]);
-    //[smellieStandardRunList addItemWithObjectValue:@"hello"];
-}
 
 - (IBAction) callSmellieSettings:(id)sender
 {
     NSLog(@"in controller called\n");
-    //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
-    
-    [model getSmellieRunListInfo];
-    
-    
-    NSLog(@"here now at the end of code");
-    //NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
-    //Need to give some time to query the smellie database
-    
-    //NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
-    //[smellieStandardRunList addItemWithObjectValue:@"hello"];
+
+    NSLog(@" tester %@ \n",[model smellieTestFct]);
 
 }
-
-
-
-/*- (void) getSmellieRunList
-{
-    //Collect a series of objects from the ORMTCModel
-    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
-    
-    //Initialise the MTCModal
-    ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
-    
-    //NSMutableDictionary *state = [[NSMutableDictionary alloc] initWithDictionary:[anELLIEModel pullEllieCustomRunFromDB:@"smellie"]];
-    
-    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieRunHeaders"];
-    
-
-    [[anELLIEModel generalDBRef:@"smellie"] getDocumentId:requestString tag:@"kSmellieRunHeaderRetrieved"];
-    
-}
-
--(void) loadSmellieRunDocs
-{
-    //if (!aNote) {
-        //Collect a series of objects from the ORMTCModel
-        NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
-    
-        //Initialise the MTCModal
-        ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
-    
-        NSLog(@"ellieModelfromSNOP: %@\n",[anELLIEModel smellieRunHeaderDocList]);
-    
-        //[anELLIEModel release];
-        //[objs release];
-    //}
-    //else{
-    //    NSLog(@"note present");
-    //}
-}*/
-
 
 
 @end

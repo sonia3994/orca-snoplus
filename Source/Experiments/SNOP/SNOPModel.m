@@ -42,8 +42,6 @@ NSString* ORSNOPModelViewTypeChanged	= @"ORSNOPModelViewTypeChanged";
 static NSString* SNOPDbConnector	= @"SNOPDbConnector";
 NSString* ORSNOPModelOrcaDBIPAddressChanged = @"ORSNOPModelOrcaDBIPAddressChanged";
 NSString* ORSNOPModelDebugDBIPAddressChanged = @"ORSNOPModelDebugDBIPAddressChanged";
-NSString* smellieRunLoaded = @"smellieRunLoaded";
-
 
 #define kOrcaRunDocumentAdded   @"kOrcaRunDocumentAdded"
 #define kOrcaRunDocumentUpdated @"kOrcaRunDocumentUpdated"
@@ -81,6 +79,7 @@ epedDataId = _epedDataId,
 rhdrDataId = _rhdrDataId,
 runDocument = _runDocument,
 smellieDBReadInProgress = _smellieDBReadInProgress,
+smellieDocUploaded = _smellieDocUploaded,
 configDocument  = _configDocument;
 
 @synthesize smellieRunHeaderDocList;
@@ -124,8 +123,10 @@ configDocument  = _configDocument;
 
 - (void) initSmellieRunDocsDic
 {
+    [self setSmellieDBReadInProgress:NO];
+    
     if(!self.smellieRunHeaderDocList) {
-        self.smellieRunHeaderDocList = [NSMutableDictionary dictionaryWithCapacity:100];
+        self.smellieRunHeaderDocList = [[NSMutableDictionary alloc] init];
     }
 }
 
@@ -864,26 +865,29 @@ configDocument  = _configDocument;
 {
     unsigned int i,cnt = [[aResult objectForKey:@"rows"] count];
     
-    NSLog(@"count %u",cnt);
+    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
     
     for(i=0;i<cnt;i++){
-        NSLog(@"hello in iteration\n");
         NSMutableDictionary* smellieRunHeaderDocIterator = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
-        //NSLog(@"tst %@\n",smellieRunHeaderDocIterator);
         NSString *keyForSmellieDocs = [NSString stringWithFormat:@"%u",i];
-        [self.smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
-        //[smellieRunHeaderDocList addObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
-        [smellieRunHeaderDocIterator release];
-        [keyForSmellieDocs release];
+        [tmp setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
     }
 
-    NSLog(@"ELLIE:smellieRunHeaderDocList: %@\n",smellieRunHeaderDocList);
+    [self setSmellieRunHeaderDocList:tmp];
+    [tmp release];
     
-    if([smellieRunHeaderDocList count] > cnt)
-    {
-        [self smellieDocumentsRecieved];
+    [self setSmellieDocUploaded:YES];
+}
+
+- (NSMutableDictionary*)smellieTestFct
+{
+    if([self smellieDocUploaded] == YES){
+        return smellieRunHeaderDocList;
     }
-    
+    else{
+        NSLog(@"Document no loaded yet");
+        return nil;
+    }
 }
 
 @end
