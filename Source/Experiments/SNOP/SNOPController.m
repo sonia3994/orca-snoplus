@@ -443,7 +443,7 @@ runStopImg = _runStopImg;
 
 - (IBAction) callSmellieSettings:(id)sender
 {
-    NSLog(@"in controller\n");
+    NSLog(@"in controller called\n");
     //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
     NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
     [smellieStandardRunList addItemWithObjectValue:@"hello"];
