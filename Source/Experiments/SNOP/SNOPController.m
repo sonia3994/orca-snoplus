@@ -66,8 +66,6 @@ runStopImg = _runStopImg;
     [tabView setFocusRingType:NSFocusRingTypeNone];
 	[self tabView:tabView didSelectTabViewItem:[tabView selectedTabViewItem]];
     
-    [model getSmellieRunListInfo];
-    
 	[super awakeFromNib];
 }
 
@@ -446,9 +444,10 @@ runStopImg = _runStopImg;
     NSLog(@"in controller called\n");
     //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
     
+    [model getSmellieRunListInfo];
     
-    NSLog(@"at controller: %@",[model description]);
-    //[model performSelector:@selector(getSmellieRunListInfo) withObject:nil afterDelay:10.0];
+    //NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
+    //Need to give some time to query the smellie database
     
     //NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
     //[smellieStandardRunList addItemWithObjectValue:@"hello"];
