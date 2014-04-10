@@ -80,6 +80,7 @@ debugDBPingTask = _debugDBPingTask,
 epedDataId = _epedDataId,
 rhdrDataId = _rhdrDataId,
 runDocument = _runDocument,
+smellieDBReadInProgress = _smellieDBReadInProgress,
 configDocument  = _configDocument;
 
 @synthesize smellieRunHeaderDocList;
@@ -842,6 +843,21 @@ configDocument  = _configDocument;
     
     [[anELLIEModel generalDBRef:@"smellie"] getDocumentId:requestString tag:@"kSmellieRunHeaderRetrieved"];
     
+    [self setSmellieDBReadInProgress:YES];
+    [self performSelector:@selector(smellieDocumentsRecieved) withObject:nil afterDelay:10.0];
+    
+}
+
+//complete this after the smellie documents have been recieved 
+-(void)smellieDocumentsRecieved
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(smellieDocumentsRecieved) object:nil];
+    if (![self smellieDBReadInProgress]) { //killed already
+        return;
+    }
+    
+    [self setSmellieDBReadInProgress:NO];
+    
 }
 
 -(void) parseSmellieRunHeaderDoc:(id)aResult
@@ -863,8 +879,10 @@ configDocument  = _configDocument;
 
     NSLog(@"ELLIE:smellieRunHeaderDocList: %@\n",smellieRunHeaderDocList);
     
-    //Notify the controller something has happened here
-    [[NSNotificationCenter defaultCenter] postNotificationName:smellieRunLoaded object:self];
+    if([smellieRunHeaderDocList count] > cnt)
+    {
+        [self smellieDocumentsRecieved];
+    }
     
 }
 

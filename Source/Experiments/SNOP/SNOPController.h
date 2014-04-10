@@ -81,7 +81,7 @@
 
 //smellie functions -------------------
 -(void) loadSmellieSettings:(NSNotification*)aNote;
--(void) showSmellieSettings;
+//-(void) showSmellieSettings;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

@@ -444,8 +444,10 @@ runStopImg = _runStopImg;
     NSLog(@"in controller called\n");
     //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
     
-    [model getSmellieRunListInfo];
+    [model smellieRunHeaderDocList];
     
+    
+    NSLog(@"here now at the end of code");
     //NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
     //Need to give some time to query the smellie database
     

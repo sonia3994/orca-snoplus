@@ -88,6 +88,8 @@
     NSDictionary* _configDocument;
     NSMutableDictionary* _runTypeDocumentPhysics;
     NSMutableDictionary* smellieRunHeaderDocList;
+    
+    bool _smellieDBReadInProgress;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
@@ -112,6 +114,8 @@
 
 @property (nonatomic,assign) unsigned long epedDataId;
 @property (nonatomic,assign) unsigned long rhdrDataId;
+
+@property (nonatomic,assign) bool smellieDBReadInProgress;
 
 @property (copy) NSDictionary* runDocument;
 @property (copy) NSDictionary* configDocument;
