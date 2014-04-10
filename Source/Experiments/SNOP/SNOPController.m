@@ -430,9 +430,11 @@ runStopImg = _runStopImg;
 - (IBAction) callSmellieSettings:(id)sender
 {
     NSLog(@"in controller called\n");
-
-    NSLog(@" tester %@ \n",[model smellieTestFct]);
-
+    
+    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:[model smellieTestFct]];
+    NSLog(@" tester %@ \n",tmp);
+    //[smellieRunFileName addItemWithObjectValue:[tmp objectForKey:@"run_name"]
+    
 }
 
 

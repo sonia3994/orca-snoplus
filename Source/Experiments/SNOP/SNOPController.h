@@ -44,6 +44,8 @@
     IBOutlet NSComboBox *debugDBIPAddressPU;
     IBOutlet NSMatrix* hvStatusMatrix;
     
+    IBOutlet NSComboBox *smellieRunFileNameField;
+    
     NSImage* _runStopImg;
 }
 
