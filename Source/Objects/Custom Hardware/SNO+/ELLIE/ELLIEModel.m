@@ -180,36 +180,6 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     [self _pushEllieCustomRunToDB:@"smellie" runFiletoPush:dbDic];
 }
 
--(void) parseSmellieRunHeaderDoc:(id)aResult
-{
-    unsigned int i,cnt = [[aResult objectForKey:@"rows"] count];
-    
-    NSLog(@"count %u",cnt);
-    
-    for(i=0;i<cnt;i++){
-        //smellieRunHeaderDocList
-        NSMutableDictionary* smellieRunHeaderDocIterator = [[[aResult objectForKey:@"rows"] objectAtIndex:i] objectForKey:@"value"];
-        NSString *keyForSmellieDocs = [NSString stringWithFormat:@"%u",i];
-        [smellieRunHeaderDocList setObject:smellieRunHeaderDocIterator forKey:keyForSmellieDocs];
-        //[smellieRunHeaderDoc release];
-    }
-    
-    //Collect a series of objects from the SNOPModel
-    //NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPController")];
-    
-    //Initialise the SNOPModel
-    //SNOPController* aSnotController = [objs objectAtIndex:0];
-    
-    //[[aSnotController smellieRunDocs] initWithDictionary:smellieRunHeaderDocList];
-    
-    //smellieRunHeaderDocList = [aSnotModel ]
-    
-    //[smellieRunHeaderDocList retain];
-    
-    NSLog(@"ELLIE:smellieRunHeaderDocList: %@",smellieRunHeaderDocList);
-    
-}
-
 - (void) couchDBResult:(id)aResult tag:(NSString*)aTag op:(id)anOp
 {
 	@synchronized(self){
@@ -227,7 +197,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
                 NSLog(@"here\n");
                 NSLog(@"Object: %@\n",aResult);
                 NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
-                [self parseSmellieRunHeaderDoc:aResult];
+                //[self parseSmellieRunHeaderDoc:aResult];
             }
             
             //If no tag is found for the query result
@@ -247,48 +217,6 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
 	}
 }
 
-
-//Pull the information from the database and perform a new run
-//-(NSMutableDictionary*) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
--(void) pullEllieCustomRunFromDB:(NSString*)aCouchDBName
-{
-    //NSLog(@"attempting here!\n");
-    //TODO:Need to add the information in here 
-    //NSMutableDictionary* customRunFile = [[NSMutableDictionary alloc] init];
-    
-    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieRunHeaders"];
-    
-    [[self generalDBRef:aCouchDBName] getDocumentId:requestString tag:kSmellieRunHeaderRetrieved];
-    
-    //NSLog(@"request string: %@\n",requestString);
-    
-    //customRunFile =
-    
-    //[[self debugDBRef] getDocumentId:requestString tag:tagString];
-    
-    //[self debugDBRef:aCouchDBName];
-    
-    //if ([[aResult objectForKey:@"rows"] count] && [[[aResult objectForKey:@"rows"] objectAtIndex:0] objectForKey:@"key"]){
-        
-        //NSLog(@"got ECAL doc: %@\n", aTag);
-        //[self parseEcalDocument:aResult];
-        
-        /*for (slot=0; slot<16; slot++) {
-            NSString* requestString = [NSString stringWithFormat:@"_design/penn_daq_views/_view/get_fec_by_generated?descending=true&startkey=[%d,%d,{}]&endkey=[%d,%d,\"\"]&limit=1",[self crateNumber], slot, [self crateNumber], slot];
-            NSString* tagString = [NSString stringWithFormat:@"%@.%d.%d", kDebugDbEcalDocGot, [self crateNumber], slot];
-            //NSLog(@"%@ slot %hd request: %@ tag: %@\n", [[self xl3Link] crateName], slot, requestString, tagString);
-            [[self debugDBRef] getDocumentId:requestString tag:tagString];
-        }*/
-    //}
-    //else {
-        //no doc found
-    //}
-    
-    //customRunFile = [self smellieRunHeaderDocList];
-    //NSLog(@"stuff %@\n",customRunFile);
-
-    //return [[customRunFile retain] autorelease];
-}
 
 
 -(void)startSmellieRun:(NSMutableDictionary*)smellieSettings
