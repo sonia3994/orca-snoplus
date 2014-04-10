@@ -119,7 +119,6 @@ runStopImg = _runStopImg;
     [self hvStatusChanged:nil];
     [self dbOrcaDBIPChanged:nil];
     [self dbDebugDBIPChanged:nil];
-    [self loadSmellieSettings:nil];
 }
 
 - (void) viewTypeChanged:(NSNotification*)aNote
@@ -439,7 +438,16 @@ runStopImg = _runStopImg;
     NSLog(@"in controller\n");
     //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
     NSLog(@"at controller: %@",[model description]);
+    //[smellieStandardRunList addItemWithObjectValue:@"hello"];
+}
+
+- (IBAction) callSmellieSettings:(id)sender
+{
+    NSLog(@"in controller\n");
+    //NSMutableDictionary *tester = [[NSMutableDictionary alloc] initWithDictionary:model.smellieRunHeaderDocList;
+    NSLog(@"at controller: %@",[model smellieRunHeaderDocList]);
     [smellieStandardRunList addItemWithObjectValue:@"hello"];
+
 }
 
 
