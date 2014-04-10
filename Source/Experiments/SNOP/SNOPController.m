@@ -66,6 +66,7 @@ runStopImg = _runStopImg;
     [tabView setFocusRingType:NSFocusRingTypeNone];
 	[self tabView:tabView didSelectTabViewItem:[tabView selectedTabViewItem]];
     
+    //pull the information from the SMELLIE DB
     [model getSmellieRunListInfo];
     
 	[super awakeFromNib];
@@ -432,8 +433,12 @@ runStopImg = _runStopImg;
     NSLog(@"in controller called\n");
     
     NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:[model smellieTestFct]];
-    NSLog(@" tester %@ \n",tmp);
-    //[smellieRunFileName addItemWithObjectValue:[tmp objectForKey:@"run_name"]
+    NSLog(@" tester2 %@ \n",[ [tmp objectForKey:@"0"] objectForKey:@"run_name"]);
+    
+    //Need to count the number of entries in the DB
+    [smellieRunFileNameField addItemWithObjectValue:[NSString stringWithFormat:@"%@",[[tmp objectForKey:@"0"] objectForKey:@"run_name"]]];
+    
+    //NSLog(@" counter %@ \n",[tmp count]);
     
 }
 
