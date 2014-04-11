@@ -34,8 +34,9 @@ NSString* ORSNOPRequestHVStatus = @"ORSNOPRequestHVStatus";
 @implementation SNOPController
 
 @synthesize
-runStopImg = _runStopImg;
-@synthesize smellieRunFile;
+runStopImg = _runStopImg,
+smellieRunFileList,
+smellieRunFile;
 
 #pragma mark ¥¥¥Initialization
 -(id)init
@@ -444,7 +445,7 @@ runStopImg = _runStopImg;
     [smellieRunFileNameField setEnabled:YES];
     [smellieLoadRunFile setEnabled:YES];
 
-    [smellieRunFile setDictionary:tmp];
+    self.smellieRunFileList = tmp;
     [tmp release];
 
 }
@@ -455,9 +456,25 @@ runStopImg = _runStopImg;
     {
         NSLog(@"Check the box returns: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
         
-        //write to a class variable that contains the current smellie run information
+        for(id key in self.smellieRunFileList){
+            id loopValue = [self.smellieRunFileList objectForKey:key];
+            NSLog(@"loopValue: %@\n",[loopValue objectForKey:@"run_name"]);
+            NSLog(@"smllieRunFieldName: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
+            
+            NSString *string1 = [loopValue objectForKey:@"run_name"];
+            NSString *string2 = [smellieRunFileNameField objectValueOfSelectedItem];
+            
+            if( [string1 isEqualToString:string2]){
+                self.smellieRunFile = loopValue;
+                NSLog(@"present\n");
+                NSLog(@"values %@\n",[smellieRunFile objectForKey:@"operator_name"]);
+                [loadedSmellieRunNameLabel setStringValue:[smellieRunFile objectForKey:@"run_name"]];
+                [loadedSmellieTriggerFrequencyLabel setStringValue:[smellieRunFile objectForKey:@"trigger_frequency"]];
+            }
+        }
+        
         //load information into labels
-        NSLog(@"set dic %@\n",smellieRunFile);
+        //NSLog(@"set dic %@\n",smellieRunFileList);
         
     }
     else{

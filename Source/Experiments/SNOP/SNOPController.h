@@ -61,12 +61,14 @@
     IBOutlet NSButton *smellieChangeConfiguration;
     
     NSImage* _runStopImg;
-    NSMutableDictionary *smellieRunFile;
+    NSMutableDictionary *smellieRunFileList;
+    NSDictionary *smellieRunFile;
     
 }
 
 @property (nonatomic,retain) NSImage* runStopImg;
-@property (nonatomic,retain) NSMutableDictionary *smellieRunFile;
+@property (nonatomic,retain) NSMutableDictionary *smellieRunFileList;
+@property (nonatomic,retain) NSDictionary *smellieRunFile;
 
 #pragma mark ¥¥¥Initialization
 - (void) registerNotificationObservers;
