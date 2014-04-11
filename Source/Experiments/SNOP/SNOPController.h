@@ -101,9 +101,12 @@
 - (IBAction) hvMasterStatus:(id)sender;
 
 //smellie functions -------------------
-- (IBAction)loadSmellieRunAction:(id)sender;
-- (IBAction)callSmellieSettings:(id)sender;
+- (IBAction) loadSmellieRunAction:(id)sender;
+- (IBAction) callSmellieSettings:(id)sender;
 - (IBAction) checkSmellieInterlockAction:(id)sender;
+- (IBAction) startSmellieRun:(id)sender;
+- (IBAction) stopSmellieRunAction:(id)sender;
+- (IBAction) emergencySmellieStopAction:(id)sender;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;
