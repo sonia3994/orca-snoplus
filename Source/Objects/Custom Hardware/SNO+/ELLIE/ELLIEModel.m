@@ -219,11 +219,11 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
 
 
 
--(void)startSmellieRun:(NSMutableDictionary*)smellieSettings
+-(void)startSmellieRun:(NSDictionary*)smellieSettings
 {
-    //TODO: Post to external DB and read from external DB
-    
     //Deconstruct runFile into indiviual subruns ------------------
+    
+    NSLog(@"Starting SMELLIE Run\n");
     
     //Put this back in!
     //NSLog(@" output from connection %@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaControlSmellie.py" withCmdLineArgs:nil]);
@@ -232,9 +232,6 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];
     int numIntSteps = [numIntStepsObj intValue];
     [numIntStepsObj release];
-    
-    //Objects to add
-    //NSNumber * firstLaser = [NSNumber numberWithInteger:[smellieSettings objectForKey:@"405nm_laser_on"]];
     
     //Extract the lasers to be fired into an array
     NSMutableArray * laserArray = [[NSMutableArray alloc] init];
@@ -290,10 +287,27 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
         
     }//end of looping through each laser
     
+    NSLog(@"End of start SMELLIE Run\n");
+    
     [fibreArray release];
     [laserArray release];
     
 }
+
+-(void)stopSmellieRun
+{
+    //Collect a series of objects from the ELLIEModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPController")];
+    
+    //get the ELLIE Model object
+    SNOPController* theSNOPController = [objs objectAtIndex:0];
+    
+    //stop the smellieThread from running
+    [NSThread detachNewThreadSelector:@selector(startSmellieRun:)
+                             toTarget:self
+                           withObject:[[[theSNOPController smellieRunFile] copy] autorelease]];
+}
+
 
 
 -(void)exampleFunctionForPython

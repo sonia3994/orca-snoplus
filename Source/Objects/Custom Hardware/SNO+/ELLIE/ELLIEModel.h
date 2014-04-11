@@ -38,7 +38,8 @@
 -(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs;
 
 //starts a SMELLIE run with given parameters and submits the smellie run file to the database
--(void)startSmellieRun:(NSMutableDictionary*)smellieSettings;
+-(void) startSmellieRun:(NSDictionary*)smellieSettings;
+-(void)stopSmellieRun;
 -(void) smellieDBpush:(NSMutableDictionary*)dbDic;
 -(void) exampleFunctionForPython;
 
