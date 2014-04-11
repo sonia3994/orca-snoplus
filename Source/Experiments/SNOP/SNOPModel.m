@@ -1187,6 +1187,16 @@ configDocument  = _configDocument;
         
     }//end of looping through all the Fec32 Cards
     
+    //fetching the svn version used for this DAQ build 
+    NSFileManager* fm = [NSFileManager defaultManager];
+    NSString* svnVersionPath = [[NSBundle mainBundle] pathForResource:@"svnversion"ofType:nil];
+    NSMutableString* svnVersion = [NSMutableString stringWithString:@""];
+    if([fm fileExistsAtPath:svnVersionPath])svnVersion = [NSMutableString stringWithContentsOfFile:svnVersionPath encoding:NSASCIIStringEncoding error:nil];
+    if([svnVersion hasSuffix:@"\n"]){
+        [svnVersion replaceCharactersInRange:NSMakeRange([svnVersion length]-1, 1) withString:@""];
+    }
+    
+    
     //Fill the configuration document with information
     [configDocDict setObject:@"configuration" forKey:@"doc_type"];
     [configDocDict setObject:[self stringDateFromDate:nil] forKey:@"time_stamp"];
@@ -1194,6 +1204,8 @@ configDocument  = _configDocument;
     
      NSNumber * runNumberForConfig = [NSNumber numberWithUnsignedLong:[rc runNumber]];
     [configDocDict setObject:runNumberForConfig forKey:@"run_number"];
+    
+    [configDocDict setObject:svnVersion forKey:@"daq_version_build"];
     
     [configDocDict setObject:mtcArray forKey:@"mtc_info"];
     
