@@ -28,10 +28,6 @@
 	IBOutlet NSTextField* detectorTitle;
 	IBOutlet NSPopUpButton*	viewTypePU;
     
-    
-    //smellie section functions
-    IBOutlet NSComboBox* smellieStandardRunList;
-
 	NSView *blankView;
 	NSSize detectorSize;
 	NSSize detailsSize;
