@@ -584,6 +584,7 @@ smellieRunFile;
     [smellieRunFileNameField setEnabled:YES];
     [smellieStartRun setEnabled:NO];
     [smellieStopRun setEnabled:NO];
+    [smellieCheckInterlock setEnabled:NO];
     //turn the interlock off
     //(if a smellie run is currently operating) start a maintainence run
     //reset the smellie laser system
