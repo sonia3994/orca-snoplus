@@ -44,7 +44,12 @@
     IBOutlet NSComboBox *debugDBIPAddressPU;
     IBOutlet NSMatrix* hvStatusMatrix;
     
+    //smellie buttons ---------
     IBOutlet NSComboBox *smellieRunFileNameField;
+    IBOutlet NSTextField *loadedSmellieRunNameLabel;
+    IBOutlet NSTextField *loadedSmellieTriggerFrequencyLabel;
+    IBOutlet NSTextField *loadedSmellieApproxTimeLabel;
+    IBOutlet NSTextField *loadedSmellieLasersLabel;
     
     NSImage* _runStopImg;
 }
