@@ -498,26 +498,26 @@ smellieRunFile;
                 [loadedSmellieFibresLabel setStringValue:[NSString stringWithFormat:@"%i",fibreCounter]];
                 
                 //Concatenate the laser string
-                NSString * smellieLaserString = [[NSString alloc] init];
+                NSMutableString * smellieLaserString = [[NSMutableString alloc] init];
                 
                 //see if the 375nm laser is on 
                 if([[self.smellieRunFile objectForKey:@"375nm_laser_on"] intValue] == 1){
-                    [smellieLaserString stringByAppendingString:@" 375nm "];
+                    [smellieLaserString appendString:@" 375nm "];
                 }
                 
                 //see if the 405nm laser is on
                 if([[self.smellieRunFile objectForKey:@"405nm_laser_on"] intValue] == 1){
-                    [smellieLaserString stringByAppendingString:@" 405nm "];
+                    [smellieLaserString appendString:@" 405nm "];
                 }
                 
                 //see if the 440nm laser is on
                 if([[self.smellieRunFile objectForKey:@"440nm_laser_on"] intValue] == 1){
-                    [smellieLaserString stringByAppendingString:@" 440nm "];
+                    [smellieLaserString appendString:@" 440nm "];
                 }
                 
                 //see if the 500nm laser is on
                 if([[self.smellieRunFile objectForKey:@"500nm_laser_on"] intValue] == 1){
-                    [smellieLaserString stringByAppendingString:@" 500nm "];
+                    [smellieLaserString appendString:@" 500nm "];
                 }
                 
                 //Calculate the approximate time of the run
@@ -534,7 +534,9 @@ smellieRunFile;
                 //return total approx time in minutes
                 totalTime = totalTime/60.0; 
                 
-                [loadedSmellieApproxTimeLabel setStringValue:[NSString stringWithFormat:@"%f",totalTime]];
+                [loadedSmellieApproxTimeLabel setStringValue:[NSString stringWithFormat:@"%0.1f",totalTime]];
+                NSLog(@"smellie laser string %@\n",smellieLaserString);
+                [loadedSmellieLasersLabel setStringValue:smellieLaserString];
                 
                 NSLog(@"fibreCount %i\n",fibreCounter);
                 NSLog(@"laserCount %i\n",laserCounter);
