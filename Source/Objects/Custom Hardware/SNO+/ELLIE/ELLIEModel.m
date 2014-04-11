@@ -296,16 +296,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
 
 -(void)stopSmellieRun
 {
-    //Collect a series of objects from the ELLIEModel
-    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPController")];
-    
-    //get the ELLIE Model object
-    SNOPController* theSNOPController = [objs objectAtIndex:0];
-    
-    //stop the smellieThread from running
-    [NSThread detachNewThreadSelector:@selector(startSmellieRun:)
-                             toTarget:self
-                           withObject:[[[theSNOPController smellieRunFile] copy] autorelease]];
+    NSLog(@"Stopping SMELLIE Run\n");
 }
 
 

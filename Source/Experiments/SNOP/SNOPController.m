@@ -571,18 +571,8 @@ smellieRunFile;
     //get the ELLIE Model object
     ELLIEModel* theELLIEModel = [objs objectAtIndex:0];
     
-    //starting a new thread 
-    //[NSThread detachNewThreadSelector:@selector(_runDocumentWorker) toTarget:self withObject:nil];
-    
-    [NSThread detachNewThreadSelector:@selector(startSmellieRun:) toTarget:theELLIEModel withObject:smellieRunFile];
-    
-    //stopping a running thread 
-    /*[NSThread detachNewThreadSelector:@selector(_runEndDocumentWorker:)
-                             toTarget:self
-                           withObject:[[self.runDocument copy] autorelease]];*/
-    
     //Method for completing this without a new thread 
-    //[theELLIEModel startSmellieRun:smellieRunFile];
+    [theELLIEModel startSmellieRun:smellieRunFile];
 }
 
 - (IBAction) stopSmellieRunAction:(id)sender
