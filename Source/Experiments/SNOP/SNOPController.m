@@ -456,7 +456,9 @@ smellieRunFile;
     {
         NSLog(@"Check the box returns: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
         
+        //Loop through all the smellie files in the run list 
         for(id key in self.smellieRunFileList){
+            
             id loopValue = [self.smellieRunFileList objectForKey:key];
             NSLog(@"loopValue: %@\n",[loopValue objectForKey:@"run_name"]);
             NSLog(@"smllieRunFieldName: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
@@ -466,10 +468,36 @@ smellieRunFile;
             
             if( [string1 isEqualToString:string2]){
                 self.smellieRunFile = loopValue;
-                NSLog(@"present\n");
+                
                 NSLog(@"values %@\n",[smellieRunFile objectForKey:@"operator_name"]);
                 [loadedSmellieRunNameLabel setStringValue:[smellieRunFile objectForKey:@"run_name"]];
                 [loadedSmellieTriggerFrequencyLabel setStringValue:[smellieRunFile objectForKey:@"trigger_frequency"]];
+                
+                //counters of fibres and Lasers
+                int fibreCounter=  0;
+                int laserCounter = 0;
+                
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS007"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS107"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS207"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS025"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS125"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS225"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS037"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS137"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS237"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS055"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS155"] intValue];
+                fibreCounter = fibreCounter + [[self.smellieRunFile objectForKey:@"FS255"] intValue];
+                
+                laserCounter = laserCounter + [[self.smellieRunFile objectForKey:@"375nm_laser_on"] intValue];
+                laserCounter = laserCounter + [[self.smellieRunFile objectForKey:@"405nm_laser_on"] intValue];
+                laserCounter = laserCounter + [[self.smellieRunFile objectForKey:@"440nm_laser_on"] intValue];
+                laserCounter = laserCounter + [[self.smellieRunFile objectForKey:@"500nm_laser_on"] intValue];
+                
+                NSLog(@"fibreCount %i\n",fibreCounter);
+                NSLog(@"laserCount %i\n",laserCounter);
+                    
             }
         }
         
