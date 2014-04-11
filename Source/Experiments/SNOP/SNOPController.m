@@ -434,7 +434,12 @@ smellieRunFile;
 //this fetches the smellie run file information 
 - (IBAction) callSmellieSettings:(id)sender
 {
+    //remove any old smellie file values 
+    self.smellieRunFileList = nil;
     NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:[model smellieTestFct]];
+    
+    //remove all the old items 
+    [smellieRunFileNameField removeAllItems];
     
     //Fill lthe combo box with information 
     for(id key in tmp){
@@ -460,8 +465,6 @@ smellieRunFile;
         for(id key in self.smellieRunFileList){
             
             id loopValue = [self.smellieRunFileList objectForKey:key];
-            NSLog(@"loopValue: %@\n",[loopValue objectForKey:@"run_name"]);
-            NSLog(@"smllieRunFieldName: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
             
             NSString *string1 = [loopValue objectForKey:@"run_name"];
             NSString *string2 = [smellieRunFileNameField objectValueOfSelectedItem];
@@ -469,9 +472,11 @@ smellieRunFile;
             if( [string1 isEqualToString:string2]){
                 self.smellieRunFile = loopValue;
                 
-                NSLog(@"values %@\n",[smellieRunFile objectForKey:@"operator_name"]);
                 [loadedSmellieRunNameLabel setStringValue:[smellieRunFile objectForKey:@"run_name"]];
                 [loadedSmellieTriggerFrequencyLabel setStringValue:[smellieRunFile objectForKey:@"trigger_frequency"]];
+                [loadedSmellieOperationModeLabel setStringValue:[smellieRunFile objectForKey:@"operation_mode"]];
+                [loadedSmellieMaxIntensityLaser setStringValue:[smellieRunFile objectForKey:@"max_laser_intensity"]];
+                [loadedSmellieMinIntensityLaser setStringValue:[smellieRunFile objectForKey:@"min_laser_intensity"]];
                 
                 //counters of fibres and Lasers
                 int fibreCounter=  0;
@@ -552,16 +557,16 @@ smellieRunFile;
 - (IBAction) checkSmellieInterlockAction:(id)sender
 {
     //Check interlock with them model here
-    [smellieStartRun setEnabled:YES];
-    [smellieStopRun setEnabled:YES];
+    [smellieStartRunButton setEnabled:YES];
+    [smellieStopRunButton setEnabled:YES];
     [smellieEmergencyStop setEnabled:YES];
 }
 
-- (IBAction) startSmellieRun:(id)sender
+- (IBAction) startSmellieRunAction:(id)sender
 {
     [smellieLoadRunFile setEnabled:NO];
     [smellieRunFileNameField setEnabled:NO];
-    [smellieStopRun setEnabled:YES];
+    [smellieStopRunButton setEnabled:YES];
     //start different sub runs as the laser runs through
     //communicate with smellie model
     
@@ -579,8 +584,18 @@ smellieRunFile;
 {
     [smellieLoadRunFile setEnabled:YES];
     [smellieRunFileNameField setEnabled:YES];
-    [smellieStartRun setEnabled:NO];
-    [smellieStopRun setEnabled:NO];
+    [smellieStartRunButton setEnabled:NO];
+    [smellieStopRunButton setEnabled:NO];
+    
+    //Collect a series of objects from the ELLIEModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
+    
+    //get the ELLIE Model object
+    ELLIEModel* theELLIEModel = [objs objectAtIndex:0];
+    
+    //Method for completing this without a new thread
+    [theELLIEModel stopSmellieRun];
+    
     //wait for the current loop to finish
     //move straight to a maintainence run
     //communicate with smellie model
@@ -591,8 +606,8 @@ smellieRunFile;
 {
     [smellieLoadRunFile setEnabled:YES];
     [smellieRunFileNameField setEnabled:YES];
-    [smellieStartRun setEnabled:NO];
-    [smellieStopRun setEnabled:NO];
+    [smellieStartRunButton setEnabled:NO];
+    [smellieStopRunButton setEnabled:NO];
     [smellieCheckInterlock setEnabled:NO];
     //turn the interlock off
     //(if a smellie run is currently operating) start a maintainence run

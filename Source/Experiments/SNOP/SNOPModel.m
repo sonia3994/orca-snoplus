@@ -885,7 +885,7 @@ configDocument  = _configDocument;
         return smellieRunHeaderDocList;
     }
     else{
-        NSLog(@"Document no loaded yet");
+        NSLog(@"Document no loaded yet\n");
         return nil;
     }
 }

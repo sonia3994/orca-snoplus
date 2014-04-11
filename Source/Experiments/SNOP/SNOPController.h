@@ -47,11 +47,14 @@
     IBOutlet NSTextField *loadedSmellieApproxTimeLabel;
     IBOutlet NSTextField *loadedSmellieLasersLabel;
     IBOutlet NSTextField *loadedSmellieFibresLabel;
+    IBOutlet NSTextField *loadedSmellieOperationModeLabel;
+    IBOutlet NSTextField *loadedSmellieMaxIntensityLaser;
+    IBOutlet NSTextField *loadedSmellieMinIntensityLaser;
     
     IBOutlet NSButton *smellieLoadRunFile;
     IBOutlet NSButton *smellieCheckInterlock;
-    IBOutlet NSButton *smellieStartRun;
-    IBOutlet NSButton *smellieStopRun;
+    IBOutlet NSButton *smellieStartRunButton;
+    IBOutlet NSButton *smellieStopRunButton;
     IBOutlet NSButton *smellieEmergencyStop;
     IBOutlet NSButton *smellieBuildCustomRun;
     IBOutlet NSButton *smellieChangeConfiguration;
@@ -100,7 +103,7 @@
 - (IBAction) loadSmellieRunAction:(id)sender;
 - (IBAction) callSmellieSettings:(id)sender;
 - (IBAction) checkSmellieInterlockAction:(id)sender;
-- (IBAction) startSmellieRun:(id)sender;
+- (IBAction) startSmellieRunAction:(id)sender;
 - (IBAction) stopSmellieRunAction:(id)sender;
 - (IBAction) emergencySmellieStopAction:(id)sender;
 

@@ -39,9 +39,8 @@
 
 //starts a SMELLIE run with given parameters and submits the smellie run file to the database
 -(void) startSmellieRun:(NSDictionary*)smellieSettings;
--(void)stopSmellieRun;
+-(void) stopSmellieRun;
 -(void) smellieDBpush:(NSMutableDictionary*)dbDic;
--(void) exampleFunctionForPython;
 
 @end
 

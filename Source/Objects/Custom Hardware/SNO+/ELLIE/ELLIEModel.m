@@ -226,7 +226,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     NSLog(@"Starting SMELLIE Run\n");
     
     //Put this back in!
-    //NSLog(@" output from connection %@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaControlSmellie.py" withCmdLineArgs:nil]);
+    //NSLog(@" output from connection %@\n",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaControlSmellie.py" withCmdLineArgs:nil]);
     
     //Extract the number of intensity steps
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];
@@ -276,6 +276,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
             //Loop through each intensity of a SMELLIE run 
             for(int intensityLoopInt =0;intensityLoopInt < numIntSteps; intensityLoopInt++){
             
+                //TODO: Listen for the stop smellie run notification 
                 //Call the smellie system here 
                 //NSLog(@" Laser:%@ ", [laserArray objectAtIndex:laserLoopInt]);
                 //NSLog(@" Fibre:%@ ",[fibreArray objectAtIndex:fibreLoopInt]);
@@ -296,33 +297,9 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
 
 -(void)stopSmellieRun
 {
+    //TODO: Send stop smellie run notification 
     NSLog(@"Stopping SMELLIE Run\n");
 }
 
-
-
--(void)exampleFunctionForPython
-{
-    NSLog(@"load smellie settings\n");
-    
-    if(!self.exampleTask){
-        NSLog(@"starting task\n");
-        ORTaskSequence* aSequence = [ORTaskSequence taskSequenceWithDelegate:self];
-        self.exampleTask = [[[NSTask alloc]init]autorelease];
-        [self.exampleTask setLaunchPath:@"/usr/bin/python"];
-        [self.exampleTask setArguments:[NSArray arrayWithObjects:@"/Users/jonesc/testScript.py", nil]];
-        [aSequence addTaskObj:self.exampleTask];
-        [aSequence setVerbose:YES];
-        [aSequence setTextToDelegate:YES];
-        [aSequence launch];
-    }
-    else{
-        NSLog(@"ending task\n");
-        [self.exampleTask terminate];
-    }
-    
-    NSLog(@"sucess!\n");
-    
-}
 
 @end
