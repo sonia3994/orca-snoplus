@@ -561,6 +561,7 @@ smellieRunFile;
 {
     [smellieLoadRunFile setEnabled:NO];
     [smellieRunFileNameField setEnabled:NO];
+    [smellieStopRun setEnabled:YES];
     //start different sub runs as the laser runs through
     //communicate with smellie model 
 }
