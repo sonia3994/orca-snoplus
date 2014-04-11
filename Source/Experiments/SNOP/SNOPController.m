@@ -459,8 +459,6 @@ smellieRunFile;
 {
     if([smellieRunFileNameField objectValueOfSelectedItem]!= nil)
     {
-        NSLog(@"Check the box returns: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
-        
         //Loop through all the smellie files in the run list 
         for(id key in self.smellieRunFileList){
             
@@ -544,6 +542,7 @@ smellieRunFile;
                 
                 //unlock the control buttons
                 [smellieCheckInterlock setEnabled:YES];
+                [smellieLaserString release];
                 
             }
         }

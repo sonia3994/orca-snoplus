@@ -129,7 +129,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     responseFromCmdLine = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]; // This string now contains the entire output of the ssh command.
     
     [task release];
-    return responseFromCmdLine;
+    return [responseFromCmdLine autorelease];
 }
 
 //used to create the timestamp in the couchDB files 
@@ -231,7 +231,6 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     //Extract the number of intensity steps
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];
     int numIntSteps = [numIntStepsObj intValue];
-    [numIntStepsObj release];
     
     //Extract the lasers to be fired into an array
     NSMutableArray * laserArray = [[NSMutableArray alloc] init];

@@ -263,8 +263,8 @@
     //Error messages
     NSString* smellieRunErrorString = [[NSString alloc] initWithString:@"Unable to Validate. Check all fields are entered and see Status and Error Log" ];
     
-    NSNumber* validationErrorFlag = [[NSNumber alloc] init];
-    validationErrorFlag = [NSNumber numberWithInt:1];
+    NSNumber* validationErrorFlag = [NSNumber numberWithInt:1];
+    //validationErrorFlag = [NSNumber numberWithInt:1];
     
     //check the Operator has entered their name 
     if([[smellieOperatorName stringValue] length] == 0){
@@ -353,8 +353,7 @@
         NSLog(@"SMELLIE_BUILD_RUN: Unknown invalid Entry or no entries sent\n");
     }
     
-    [validationErrorFlag release];
-    //[smellieRunErrorString release];
+    [smellieRunErrorString release];
     
     //Example functions of how this values can be pulled 
     //state 1 is ON, state 0 is OFF for these buttons

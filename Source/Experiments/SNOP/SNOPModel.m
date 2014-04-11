@@ -126,7 +126,7 @@ configDocument  = _configDocument;
     [self setSmellieDBReadInProgress:NO];
     
     if(!self.smellieRunHeaderDocList) {
-        self.smellieRunHeaderDocList = [[NSMutableDictionary alloc] init];
+        self.smellieRunHeaderDocList = nil;//[[NSMutableDictionary alloc] init];
     }
 }
 
