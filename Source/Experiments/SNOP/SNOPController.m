@@ -444,6 +444,7 @@ runStopImg = _runStopImg;
     [smellieRunFileNameField setEnabled:YES];
     [smellieLoadRunFile setEnabled:YES];
 
+    [smellieRunFile setDictionary:tmp];
     [tmp release];
 
 }
@@ -452,10 +453,11 @@ runStopImg = _runStopImg;
 {
     if([smellieRunFileNameField objectValueOfSelectedItem]!= nil)
     {
-       NSLog(@"Check the box returns expected %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
+        NSLog(@"Check the box returns: %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
         
         //write to a class variable that contains the current smellie run information
-       //load information into labels
+        //load information into labels
+        NSLog(@"set dic %@\n",smellieRunFile);
         
     }
     else{
