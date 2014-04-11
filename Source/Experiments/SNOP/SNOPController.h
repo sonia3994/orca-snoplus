@@ -50,11 +50,23 @@
     IBOutlet NSTextField *loadedSmellieTriggerFrequencyLabel;
     IBOutlet NSTextField *loadedSmellieApproxTimeLabel;
     IBOutlet NSTextField *loadedSmellieLasersLabel;
+    IBOutlet NSTextField *loadedSmellieFibresLabel;
+    
+    IBOutlet NSButton *smellieLoadRunFile;
+    IBOutlet NSButton *smellieCheckInterlock;
+    IBOutlet NSButton *smellieStartRun;
+    IBOutlet NSButton *smellieStopRun;
+    IBOutlet NSButton *smellieEmergencyStop;
+    IBOutlet NSButton *smellieBuildCustomRun;
+    IBOutlet NSButton *smellieChangeConfiguration;
     
     NSImage* _runStopImg;
+    NSMutableDictionary *smellieRunFile;
+    
 }
 
 @property (nonatomic,retain) NSImage* runStopImg;
+@property (nonatomic,retain) NSMutableDictionary *smellieRunFile;
 
 #pragma mark ¥¥¥Initialization
 - (void) registerNotificationObservers;
@@ -67,7 +79,7 @@
 
 #pragma mark ¥¥¥Actions
 - (IBAction) viewTypeAction:(id)sender;
-- (IBAction) callSmellieSettings:(id)sender;
+
 
 - (IBAction) orcaDBIPAddressAction:(id)sender;
 - (IBAction) orcaDBClearHistoryAction:(id)sender;
@@ -87,7 +99,8 @@
 - (IBAction) hvMasterStatus:(id)sender;
 
 //smellie functions -------------------
-
+- (IBAction)loadSmellieRunAction:(id)sender;
+- (IBAction)callSmellieSettings:(id)sender;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

@@ -83,6 +83,7 @@
 							<int key="NSvFlags">274</int>
 							<string key="NSFrame">{{5, 10}, {624, 598}}</string>
 							<reference key="NSSuperview" ref="491439111"/>
+							<reference key="NSNextKeyView" ref="811234258"/>
 							<object class="NSMutableArray" key="NSTabViewItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSTabViewItem" id="59696232">
@@ -1629,6 +1630,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 												<int key="NSvFlags">12</int>
 												<string key="NSFrame">{{53, 7}, {546, 348}}</string>
 												<reference key="NSSuperview" ref="811234258"/>
+												<reference key="NSNextKeyView" ref="1063456030"/>
 												<object class="NSMutableArray" key="NSTabViewItems">
 													<bool key="EncodedWithXMLCoder">YES</bool>
 													<object class="NSTabViewItem" id="921074279">
@@ -6802,14 +6804,14 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{17, 277}, {279, 22}}</string>
 																	<reference key="NSSuperview" ref="1063456030"/>
-																	<reference key="NSNextKeyView" ref="1057791905"/>
+																	<reference key="NSNextKeyView" ref="14932405"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSComboBoxCell" key="NSCell" id="784939139">
-																		<int key="NSCellFlags">342884416</int>
+																		<int key="NSCellFlags">879755328</int>
 																		<int key="NSCellFlags2">272761856</int>
 																		<string key="NSContents"/>
 																		<reference key="NSSupport" ref="26"/>
-																		<string key="NSPlaceholderString">Run to Load</string>
+																		<string key="NSPlaceholderString">Please Choose a Run File</string>
 																		<reference key="NSControlView" ref="810549704"/>
 																		<bool key="NSDrawsBackground">YES</bool>
 																		<reference key="NSBackgroundColor" ref="609885"/>
@@ -6911,7 +6913,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<object class="NSTextField" id="483179034">
 																					<reference key="NSNextResponder" ref="1036104495"/>
 																					<int key="NSvFlags">268</int>
-																					<string key="NSFrame">{{10, 87}, {54, 22}}</string>
+																					<string key="NSFrame">{{10, 84}, {54, 22}}</string>
 																					<reference key="NSSuperview" ref="1036104495"/>
 																					<reference key="NSNextKeyView" ref="651772927"/>
 																					<bool key="NSEnabled">YES</bool>
@@ -6994,8 +6996,9 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																					<object class="NSTextFieldCell" key="NSCell" id="172281251">
 																						<int key="NSCellFlags">68157504</int>
 																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents">Label</string>
+																						<string key="NSContents"/>
 																						<reference key="NSSupport" ref="12138123"/>
+																						<string key="NSPlaceholderString">Run Not Loaded</string>
 																						<reference key="NSControlView" ref="254161905"/>
 																						<reference key="NSBackgroundColor" ref="709140192"/>
 																						<reference key="NSTextColor" ref="760789883"/>
@@ -7013,8 +7016,9 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																					<object class="NSTextFieldCell" key="NSCell" id="775995661">
 																						<int key="NSCellFlags">68157504</int>
 																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents">Label</string>
+																						<string key="NSContents"/>
 																						<reference key="NSSupport" ref="12138123"/>
+																						<string key="NSPlaceholderString">Run Not Loaded</string>
 																						<reference key="NSControlView" ref="255427728"/>
 																						<reference key="NSBackgroundColor" ref="709140192"/>
 																						<reference key="NSTextColor" ref="760789883"/>
@@ -7032,8 +7036,9 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																					<object class="NSTextFieldCell" key="NSCell" id="1008127248">
 																						<int key="NSCellFlags">68157504</int>
 																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents">Label</string>
+																						<string key="NSContents"/>
 																						<reference key="NSSupport" ref="12138123"/>
+																						<string key="NSPlaceholderString">Run Not Loaded</string>
 																						<reference key="NSControlView" ref="174457722"/>
 																						<reference key="NSBackgroundColor" ref="709140192"/>
 																						<reference key="NSTextColor" ref="760789883"/>
@@ -7044,15 +7049,16 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<object class="NSTextField" id="651772927">
 																					<reference key="NSNextResponder" ref="1036104495"/>
 																					<int key="NSvFlags">268</int>
-																					<string key="NSFrame">{{91, 87}, {173, 22}}</string>
+																					<string key="NSFrame">{{91, 84}, {173, 22}}</string>
 																					<reference key="NSSuperview" ref="1036104495"/>
 																					<reference key="NSNextKeyView" ref="79824814"/>
 																					<bool key="NSEnabled">YES</bool>
 																					<object class="NSTextFieldCell" key="NSCell" id="956810849">
 																						<int key="NSCellFlags">68157504</int>
 																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents">Label</string>
+																						<string key="NSContents"/>
 																						<reference key="NSSupport" ref="12138123"/>
+																						<string key="NSPlaceholderString">Run Not Loaded</string>
 																						<reference key="NSControlView" ref="651772927"/>
 																						<reference key="NSBackgroundColor" ref="709140192"/>
 																						<reference key="NSTextColor" ref="760789883"/>
@@ -7070,8 +7076,9 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																					<object class="NSTextFieldCell" key="NSCell" id="13592568">
 																						<int key="NSCellFlags">68157504</int>
 																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents">Label</string>
+																						<string key="NSContents"/>
 																						<reference key="NSSupport" ref="12138123"/>
+																						<string key="NSPlaceholderString">Run Not Loaded</string>
 																						<reference key="NSControlView" ref="505987637"/>
 																						<reference key="NSBackgroundColor" ref="709140192"/>
 																						<reference key="NSTextColor" ref="760789883"/>
@@ -7144,7 +7151,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																					<int key="NSvFlags">268</int>
 																					<string key="NSFrame">{{13, 12}, {165, 32}}</string>
 																					<reference key="NSSuperview" ref="429732284"/>
-																					<reference key="NSNextKeyView" ref="311338732"/>
+																					<reference key="NSNextKeyView" ref="1057791905"/>
 																					<bool key="NSEnabled">YES</bool>
 																					<object class="NSButtonCell" key="NSCell" id="926981748">
 																						<int key="NSCellFlags">603979776</int>
@@ -7194,10 +7201,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{311, 134}, {146, 32}}</string>
 																	<reference key="NSSuperview" ref="1063456030"/>
-																	<reference key="NSNextKeyView" ref="124681982"/>
+																	<reference key="NSNextKeyView" ref="311338732"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="803650798">
-																		<int key="NSCellFlags">67108864</int>
+																		<int key="NSCellFlags">603979776</int>
 																		<int key="NSCellFlags2">134217728</int>
 																		<string key="NSContents">Load Run FIle</string>
 																		<reference key="NSSupport" ref="12138123"/>
@@ -7216,11 +7223,12 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{311, 271}, {198, 32}}</string>
 																	<reference key="NSSuperview" ref="1063456030"/>
+																	<reference key="NSNextKeyView" ref="124681982"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="330945348">
 																		<int key="NSCellFlags">67108864</int>
 																		<int key="NSCellFlags2">134217728</int>
-																		<string key="NSContents">Download Run Files</string>
+																		<string key="NSContents">Fetch Run Files</string>
 																		<reference key="NSSupport" ref="12138123"/>
 																		<reference key="NSControlView" ref="14932405"/>
 																		<int key="NSButtonFlags">-2038284288</int>
@@ -7303,7 +7311,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{311, 4}, {146, 32}}</string>
 																	<reference key="NSSuperview" ref="1063456030"/>
-																	<reference key="NSNextKeyView" ref="474184058"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="461151889">
 																		<int key="NSCellFlags">603979776</int>
@@ -7323,7 +7330,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<object class="NSTextField" id="239279395">
 																	<reference key="NSNextResponder" ref="1063456030"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{457, 111}, {54, 17}}</string>
+																	<string key="NSFrame">{{457, 143}, {54, 17}}</string>
 																	<reference key="NSSuperview" ref="1063456030"/>
 																	<reference key="NSNextKeyView" ref="1008049274"/>
 																	<bool key="NSEnabled">YES</bool>
@@ -7342,7 +7349,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 															</object>
 															<string key="NSFrame">{{10, 25}, {526, 310}}</string>
 															<reference key="NSSuperview" ref="170326259"/>
-															<reference key="NSNextKeyView"/>
+															<reference key="NSNextKeyView" ref="810549704"/>
 														</object>
 														<string key="NSLabel">SMELLIE</string>
 														<reference key="NSColor" ref="709140192"/>
@@ -11022,6 +11029,110 @@ VDggdHJpZ2dlci7igKh3YXRlciBjaXJjdWxhdGlvbjogT04sIGNvbXAgY29pbHMgT04sIC4uLg</byte
 						<reference key="destination" ref="810549704"/>
 					</object>
 					<int key="connectionID">3585</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieBuildCustomRun</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="784530598"/>
+					</object>
+					<int key="connectionID">3586</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieChangeConfiguration</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="797728426"/>
+					</object>
+					<int key="connectionID">3587</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieLoadRunFile</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="1057791905"/>
+					</object>
+					<int key="connectionID">3588</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieCheckInterlock</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="311338732"/>
+					</object>
+					<int key="connectionID">3589</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieStartRun</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="1008049274"/>
+					</object>
+					<int key="connectionID">3590</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieStopRun</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="1070637211"/>
+					</object>
+					<int key="connectionID">3591</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">smellieEmergencyStop</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="171621879"/>
+					</object>
+					<int key="connectionID">3592</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">loadSmellieRunAction:</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="1057791905"/>
+					</object>
+					<int key="connectionID">3593</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loadedSmellieRunNameLabel</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="254161905"/>
+					</object>
+					<int key="connectionID">3595</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loadedSmellieTriggerFrequencyLabel</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="255427728"/>
+					</object>
+					<int key="connectionID">3596</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loadedSmellieApproxTimeLabel</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="174457722"/>
+					</object>
+					<int key="connectionID">3597</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loadedSmellieLasersLabel</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="651772927"/>
+					</object>
+					<int key="connectionID">3598</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loadedSmellieFibresLabel</string>
+						<reference key="source" ref="1011014513"/>
+						<reference key="destination" ref="505987637"/>
+					</object>
+					<int key="connectionID">3599</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -18206,7 +18317,7 @@ VDggdHJpZ2dlci7igKh3YXRlciBjaXJjdWxhdGlvbjogT04sIGNvbXAgY29pbHMgT04sIC4uLg</byte
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">3585</int>
+			<int key="maxID">3599</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

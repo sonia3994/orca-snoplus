@@ -35,6 +35,7 @@ NSString* ORSNOPRequestHVStatus = @"ORSNOPRequestHVStatus";
 
 @synthesize
 runStopImg = _runStopImg;
+@synthesize smellieRunFile;
 
 #pragma mark ¥¥¥Initialization
 -(id)init
@@ -68,6 +69,7 @@ runStopImg = _runStopImg;
     
     //pull the information from the SMELLIE DB
     [model getSmellieRunListInfo];
+    
     
 	[super awakeFromNib];
 }
@@ -428,19 +430,41 @@ runStopImg = _runStopImg;
 
 //smellie functions ----------------------------------------------
 
+//this fetches the smellie run file information 
 - (IBAction) callSmellieSettings:(id)sender
 {
     NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:[model smellieTestFct]];
     
+    //Fill lthe combo box with information 
     for(id key in tmp){
         id loopValue = [tmp objectForKey:key];
         [smellieRunFileNameField addItemWithObjectValue:[NSString stringWithFormat:@"%@",[loopValue objectForKey:@"run_name"]]];
     }
-    
-    
+
+    [smellieRunFileNameField setEnabled:YES];
+    [smellieLoadRunFile setEnabled:YES];
+
+    [tmp release];
+
+}
+
+-(IBAction)loadSmellieRunAction:(id)sender
+{
+    if([smellieRunFileNameField objectValueOfSelectedItem]!= nil)
+    {
+       NSLog(@"Check the box returns expected %@\n",[smellieRunFileNameField objectValueOfSelectedItem]);
+        
+        //write to a class variable that contains the current smellie run information
+       //load information into labels
+        
+    }
+    else{
+        NSLog(@"Main SNO+ Control:Please choose a Smellie Run File from selection\n");
+    }
 
     
 }
+
 
 
 @end
