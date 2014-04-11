@@ -103,6 +103,7 @@
 //smellie functions -------------------
 - (IBAction)loadSmellieRunAction:(id)sender;
 - (IBAction)callSmellieSettings:(id)sender;
+- (IBAction) checkSmellieInterlockAction:(id)sender;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

@@ -535,26 +535,59 @@ smellieRunFile;
                 totalTime = totalTime/60.0; 
                 
                 [loadedSmellieApproxTimeLabel setStringValue:[NSString stringWithFormat:@"%0.1f",totalTime]];
-                NSLog(@"smellie laser string %@\n",smellieLaserString);
                 [loadedSmellieLasersLabel setStringValue:smellieLaserString];
                 
-                NSLog(@"fibreCount %i\n",fibreCounter);
-                NSLog(@"laserCount %i\n",laserCounter);
-                    
+                //unlock the control buttons
+                [smellieCheckInterlock setEnabled:YES];
+                
             }
         }
-        
-        //load information into labels
-        //NSLog(@"set dic %@\n",smellieRunFileList);
-        
     }
     else{
+        [smellieCheckInterlock setEnabled:NO];
         NSLog(@"Main SNO+ Control:Please choose a Smellie Run File from selection\n");
     }
-
-    
 }
 
+- (IBAction) checkSmellieInterlockAction:(id)sender
+{
+    //Check interlock with them model here
+    [smellieStartRun setEnabled:YES];
+    [smellieStopRun setEnabled:YES];
+    [smellieEmergencyStop setEnabled:YES];
+}
+
+- (IBAction) startSmellieRun:(id)sender
+{
+    [smellieLoadRunFile setEnabled:NO];
+    [smellieRunFileNameField setEnabled:NO];
+    //start different sub runs as the laser runs through
+    //communicate with smellie model 
+}
+
+- (IBAction) stopSmellieRunAction:(id)sender
+{
+    [smellieLoadRunFile setEnabled:YES];
+    [smellieRunFileNameField setEnabled:YES];
+    [smellieStartRun setEnabled:NO];
+    [smellieStopRun setEnabled:NO];
+    //wait for the current loop to finish
+    //move straight to a maintainence run
+    //communicate with smellie model
+    //TODO:Make a note in the datastream that this happened
+}
+
+- (IBAction) emergencySmellieStopAction:(id)sender
+{
+    [smellieLoadRunFile setEnabled:YES];
+    [smellieRunFileNameField setEnabled:YES];
+    [smellieStartRun setEnabled:NO];
+    [smellieStopRun setEnabled:NO];
+    //turn the interlock off
+    //(if a smellie run is currently operating) start a maintainence run
+    //reset the smellie laser system
+    //TODO:Make a note in the datastream that this happened 
+}
 
 
 @end
