@@ -495,6 +495,47 @@ smellieRunFile;
                 laserCounter = laserCounter + [[self.smellieRunFile objectForKey:@"440nm_laser_on"] intValue];
                 laserCounter = laserCounter + [[self.smellieRunFile objectForKey:@"500nm_laser_on"] intValue];
                 
+                [loadedSmellieFibresLabel setStringValue:[NSString stringWithFormat:@"%i",fibreCounter]];
+                
+                //Concatenate the laser string
+                NSString * smellieLaserString = [[NSString alloc] init];
+                
+                //see if the 375nm laser is on 
+                if([[self.smellieRunFile objectForKey:@"375nm_laser_on"] intValue] == 1){
+                    [smellieLaserString stringByAppendingString:@" 375nm "];
+                }
+                
+                //see if the 405nm laser is on
+                if([[self.smellieRunFile objectForKey:@"405nm_laser_on"] intValue] == 1){
+                    [smellieLaserString stringByAppendingString:@" 405nm "];
+                }
+                
+                //see if the 440nm laser is on
+                if([[self.smellieRunFile objectForKey:@"440nm_laser_on"] intValue] == 1){
+                    [smellieLaserString stringByAppendingString:@" 440nm "];
+                }
+                
+                //see if the 500nm laser is on
+                if([[self.smellieRunFile objectForKey:@"500nm_laser_on"] intValue] == 1){
+                    [smellieLaserString stringByAppendingString:@" 500nm "];
+                }
+                
+                //Calculate the approximate time of the run
+                float triggerFrequency = [[smellieRunFile objectForKey:@"trigger_frequency"] floatValue];
+                float numberTriggersPerLoop = [[smellieRunFile objectForKey:@"triggers_per_loop"] floatValue];
+                float timePerLaserPerFibrePerIntensity = (1.0/triggerFrequency)*numberTriggersPerLoop;
+                float numberOfIntensities = [[smellieRunFile objectForKey:@"num_intensity_steps"] floatValue];
+                float timePerLaserPerFibre = timePerLaserPerFibrePerIntensity*numberOfIntensities;
+                float timePerLaser = timePerLaserPerFibre*(1.0*fibreCounter);
+                
+                //final approx time plus the laser switchover time
+                float totalTime = timePerLaser*(1.0*laserCounter) + (30*laserCounter);
+                
+                //return total approx time in minutes
+                totalTime = totalTime/60.0; 
+                
+                [loadedSmellieApproxTimeLabel setStringValue:[NSString stringWithFormat:@"%f",totalTime]];
+                
                 NSLog(@"fibreCount %i\n",fibreCounter);
                 NSLog(@"laserCount %i\n",laserCounter);
                     
