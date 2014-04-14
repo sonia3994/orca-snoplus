@@ -566,6 +566,7 @@ smellieRunFile;
     [smellieLoadRunFile setEnabled:NO];
     [smellieRunFileNameField setEnabled:NO];
     [smellieStopRunButton setEnabled:YES];
+    
     //start different sub runs as the laser runs through
     //communicate with smellie model
     
@@ -576,15 +577,21 @@ smellieRunFile;
     ELLIEModel* theELLIEModel = [objs objectAtIndex:0];
     
     //Method for completing this without a new thread 
-    [theELLIEModel startSmellieRun:smellieRunFile];
+    //[theELLIEModel startSmellieRun:smellieRunFile];
+    [NSThread detachNewThreadSelector:@selector(startSmellieRun:) toTarget:theELLIEModel withObject:smellieRunFile];
+    
+    //[theELLIEModel release];
+    
 }
 
 - (IBAction) stopSmellieRunAction:(id)sender
 {
     [smellieLoadRunFile setEnabled:YES];
     [smellieRunFileNameField setEnabled:YES];
-    [smellieStartRunButton setEnabled:NO];
-    [smellieStopRunButton setEnabled:NO];
+    [smellieStartRunButton setEnabled:YES];
+   
+  
+    
     
     //Collect a series of objects from the ELLIEModel
     NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
@@ -592,8 +599,17 @@ smellieRunFile;
     //get the ELLIE Model object
     ELLIEModel* theELLIEModel = [objs objectAtIndex:0];
     
+    /*[NSThread detachNewThreadSelector:@selector(startSmellieRun:)
+                             toTarget:theELLIEModel
+                           withObject:[smellieRunFile autorelease]];*/
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startSmellieRun:) object:smellieRunFile];
+    
     //Method for completing this without a new thread
     [theELLIEModel stopSmellieRun];
+    [smellieStopRunButton setEnabled:NO];
+    
+    //[theELLIEModel release];
     
     //wait for the current loop to finish
     //move straight to a maintainence run

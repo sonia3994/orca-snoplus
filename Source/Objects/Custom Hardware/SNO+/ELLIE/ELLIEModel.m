@@ -15,6 +15,7 @@
         - add the AMELLIE GUI
         - make sure old files cannot be overridden 
         - add the configuration files GUI for all the ELLIE systems (LOW PRIORITY)
+        - add the Emergency stop button 
 */
 
 #import "ELLIEModel.h"
@@ -217,7 +218,13 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
 	}
 }
 
-
+-(void)startSmellieRunInBackground:(NSDictionary*)smellieSettings
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    [self performSelectorOnMainThread:@selector(startSmellieRun:) withObject:smellieSettings waitUntilDone:NO];
+    [pool release];
+    
+}
 
 -(void)startSmellieRun:(NSDictionary*)smellieSettings
 {
@@ -226,7 +233,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     NSLog(@"Starting SMELLIE Run\n");
     
     //Put this back in!
-    //NSLog(@" output from connection %@\n",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaControlSmellie.py" withCmdLineArgs:nil]);
+    NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
     
     //Extract the number of intensity steps
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];
@@ -254,7 +261,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     [fibreArray addObject:[smellieSettings objectForKey:@"FS155"] ];
     [fibreArray addObject:[smellieSettings objectForKey:@"FS255"] ];
  
-    //NSLog(@" Laser %@", [[laserArray objectAtIndex:0] stringValue]);
+    //NSLog(@"End of start SMELLIE Run\n");
     
     ///Loop through each Laser
     for(int laserLoopInt = 0;laserLoopInt < [laserArray count];laserLoopInt++){
@@ -287,8 +294,24 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
         
     }//end of looping through each laser
     
-    NSLog(@"End of start SMELLIE Run\n");
+    //actually start a rin with arguments
     
+    /*NSMutableArray * smellieSubRun = [[NSMutableArray alloc] init];
+    [smellieSubRun addObject:@"2"]; //laser channel
+    [smellieSubRun addObject:@"0"]; //fibre channel
+    [smellieSubRun addObject:@"100"]; //laser intensity
+    [smellieSubRun addObject:@"100"]; //number of pulses
+    [smellieSubRun addObject:@"100"]; //pulse frequency
+    
+    NSLog(@"smellieSubRunParams: %@",smellieSubRun);*/
+    
+    //NSString *arg1 = [NSString stringWithFormat:@"%@%@%@%@%@", @"2", @"0",@"100",@"100",@"100"];
+    
+    //NSArray *args = [NSArray arrayWithObjects:arg1,nil];
+    
+    //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaSmellieRun.py" withCmdLineArgs:nil]);
+    
+    //[smellieSubRun release];
     [fibreArray release];
     [laserArray release];
     
@@ -296,6 +319,11 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
 
 -(void)stopSmellieRun
 {
+    //Even though this is stopping in Orca it can still contine on SNODROP!
+    //Need a stop run command here
+    //TODO: add a try and except statement here
+    
+    
     //TODO: Send stop smellie run notification 
     NSLog(@"Stopping SMELLIE Run\n");
 }
