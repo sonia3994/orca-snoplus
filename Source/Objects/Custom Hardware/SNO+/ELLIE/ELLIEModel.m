@@ -233,6 +233,8 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     NSLog(@"Starting SMELLIE Run\n");
     
     //Put this back in!
+    //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
+    
     NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
     
     //Extract the number of intensity steps
