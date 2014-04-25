@@ -16,6 +16,7 @@
         - make sure old files cannot be overridden 
         - add the configuration files GUI for all the ELLIE systems (LOW PRIORITY)
         - add the Emergency stop button 
+        - make the SMELLIE Control functions private (eventually)
 */
 
 #import "ELLIEModel.h"
@@ -108,12 +109,18 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
                        delegate:aSnotModel];
 }
 
+//This calls a python script but can only take two command line arguments 
 -(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs
 {
+    if([commandLineArgs count] != 3){
+        NSLog(@"Three command line arguments are required!");
+        return nil;
+    }
+    
     NSTask *task;
     task = [[NSTask alloc] init];
     [task setLaunchPath: @"/usr/bin/python"]; // Tell the task to execute the ssh command
-    [task setArguments: [NSArray arrayWithObjects: pythonScriptFilePath, commandLineArgs,nil]];
+    [task setArguments: [NSArray arrayWithObjects: pythonScriptFilePath, [commandLineArgs objectAtIndex:0],[commandLineArgs objectAtIndex:1],[commandLineArgs objectAtIndex:2],nil]];
     
     NSPipe *pipe;
     pipe = [NSPipe pipe];
@@ -132,6 +139,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     [task release];
     return [responseFromCmdLine autorelease];
 }
+
 
 //used to create the timestamp in the couchDB files 
 - (NSString*) stringDateFromDate:(NSDate*)aDate
@@ -226,16 +234,65 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     
 }
 
+//SMELLIE Control Functions
+-(void)setSmellieSafeStates
+{
+    NSArray * setSafeStates = @[@"30",@"0",@"0"]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:setSafeStates];
+}
+
+-(void)setLaserSwitch:(NSString*)laserSwitchChannel
+{
+    NSArray * setLaserSwitchFlagAndArgument = @[@"2050",laserSwitchChannel,@"0"]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:setLaserSwitchFlagAndArgument];
+}
+
+-(void)setFibreSwitch:(NSString*)fibreSwitchChannel
+{
+    NSArray * setFibreSwitchFlagAndArgument = @[@"2050",fibreSwitchChannel,@"0"]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:setFibreSwitchFlagAndArgument];
+}
+
+-(void)setLaserIntensity:(NSString*)laserIntensity
+{
+    NSArray * setLaserIntensityFlagAndArgument = @[@"50",laserIntensity,@"0"]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:setLaserIntensityFlagAndArgument];
+}
+
+-(void)setLaserSoftLockOn
+{
+    NSArray * softLockOnFlag = @[@"60",@"0",@"0"]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:softLockOnFlag];
+}
+
+-(void)setLaserSoftLockOff
+{
+    NSArray * softLockOffFlag = @[@"70",@"0",@"0"]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:softLockOffFlag];
+}
+
+-(void)setSmellieMasterMode:(NSString*)triggerFrequency withNumOfPulses:(NSString*)numOfPulses
+{
+    NSString * argumentString = [NSString stringWithFormat:@"%@s%@",triggerFrequency,numOfPulses];
+    NSArray * smellieMasterModeFlag = @[@"80",argumentString]; //30 is the flag for setting smellie to its safe states
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:smellieMasterModeFlag];
+}
+
+
 -(void)startSmellieRun:(NSDictionary*)smellieSettings
 {
     //Deconstruct runFile into indiviual subruns ------------------
     
     NSLog(@"Starting SMELLIE Run\n");
     
+    //[self setLaserIntensity:@"10"];
+    
     //Put this back in!
     //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
     
-    NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
+    //NSArray * argsArray = @[@"60",@"0"];
+    
+    //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:argsArray]);
     
     //Extract the number of intensity steps
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];

@@ -43,6 +43,15 @@
 -(void) smellieDBpush:(NSMutableDictionary*)dbDic;
 -(void)startSmellieRunInBackground:(NSDictionary*)smellieSettings;
 
+//SMELLIE Control Functions
+-(void)setSmellieSafeStates;
+-(void)setLaserSwitch:(NSString*)laserSwitchChannel;
+-(void)setFibreSwitch:(NSString*)fibreSwitchChannel;
+-(void)setLaserIntensity:(NSString*)laserIntensity;
+-(void)setLaserSoftLockOn;
+-(void)setLaserSoftLockOff;
+-(void)setSmellieMasterMode:(NSString*)triggerFrequency withNumOfPulses:(NSString*)numOfPulses;
+
 @end
 
 extern NSString* ELLIEAllLasersChanged;
