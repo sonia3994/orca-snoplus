@@ -285,7 +285,7 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     
     NSLog(@"Starting SMELLIE Run\n");
     
-    //[self setLaserIntensity:@"10"];
+    [self setLaserIntensity:@"10"];
     
     //Put this back in!
     //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
