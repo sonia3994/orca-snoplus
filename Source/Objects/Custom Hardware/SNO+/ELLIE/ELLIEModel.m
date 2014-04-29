@@ -128,7 +128,15 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     NSFileHandle *file;
     file = [pipe fileHandleForReading]; // This file handle is a reference to the output of the ssh command
     
-    [task launch];
+    @try{
+        [task launch];
+    }
+    @catch (NSException *e) {
+        NSLog(@"SMELLIE Connection Error: %@",e);
+    }
+    @finally {
+        //do something here
+    }
     
     NSData *data;
     data = [file readDataToEndOfFile];
@@ -278,6 +286,25 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:smellieMasterModeFlag];
 }
 
+-(void)sendCustomSmellieCmd:(NSString*)customCmd withArgument1:(NSString*)customArgument1 withArgument2:(NSString*)customArgument2
+{
+    //Make sure all the arguments default to a safe value if not specified
+    if([customCmd isEqualToString:nil]){
+        customCmd = @"0";
+    }
+    
+    if([customArgument1 isEqualToString:nil]){
+        customArgument1 = @"0";
+    }
+    
+    if([customArgument2 isEqualToString:nil]){
+        customArgument2 = @"0";
+    }
+        
+    NSArray * smellieCustomCmd = @[customCmd,customArgument1,customArgument2];
+    [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:smellieCustomCmd];
+    
+}
 
 -(void)startSmellieRun:(NSDictionary*)smellieSettings
 {
@@ -285,14 +312,8 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     
     NSLog(@"Starting SMELLIE Run\n");
     
-    [self setLaserIntensity:@"10"];
-    
-    //Put this back in!
-    //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/orcaStartUpSmellie.py" withCmdLineArgs:nil]);
-    
-    //NSArray * argsArray = @[@"60",@"0"];
-    
-    //NSLog(@"%@",[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/smellie/smellieConnection.py" withCmdLineArgs:argsArray]);
+    NSLog(@"Setting SMELLIE into Safe States before starting a Run\n");
+    [self setSmellieSafeStates];
     
     //Extract the number of intensity steps
     NSNumber * numIntStepsObj = [smellieSettings objectForKey:@"num_intensity_steps"];
@@ -320,8 +341,6 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
     [fibreArray addObject:[smellieSettings objectForKey:@"FS155"] ];
     [fibreArray addObject:[smellieSettings objectForKey:@"FS255"] ];
  
-    //NSLog(@"End of start SMELLIE Run\n");
-    
     ///Loop through each Laser
     for(int laserLoopInt = 0;laserLoopInt < [laserArray count];laserLoopInt++){
         
@@ -329,6 +348,25 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
         if([[laserArray objectAtIndex:laserLoopInt] intValue] != 1){
             continue;
         }
+        
+        //TODO:Read in the configuration Map
+        
+        if([[[laserArray objectAtIndex:laserLoopInt] key] isEqualToString:@"375nm_laser_on"]){
+            [self setLaserSwitch:@"1"]; //whichever channel the 375 is connected to 
+        }
+        else if ([[[laserArray objectAtIndex:laserLoopInt] key] isEqualToString:@"405nm_laser_on"]){
+            [self setLaserSwitch:@"2"]; //whichever channel the 405 is connected to 
+        }
+        else if ([[[laserArray objectAtIndex:laserLoopInt] key] isEqualToString:@"440nm_laser_on"]){
+            [self setLaserSwitch:@"3"]; //whichever channel the 440 is connected to
+        }
+        else if ([[[laserArray objectAtIndex:laserLoopInt] key] isEqualToString:@"500nm_laser_on"]){
+            [self setLaserSwitch:@"4"]; //whichever channel the 500 is connected to
+        }
+        else{
+            NSLog(@"SMELLIE RUN:No laser selected for this iteration");
+        }
+       
         
         //Loop through each Fibre
         for(int fibreLoopInt = 0; fibreLoopInt < [fibreArray count];fibreLoopInt++){
@@ -338,14 +376,17 @@ NSString* smellieRunDocsPresent = @"smellieRunDocsPresent";
                 continue;
             }
             
+            //For the moment always go through switch 5
+            [self setFibreSwitch:@"5"];
+            
             //Loop through each intensity of a SMELLIE run 
             for(int intensityLoopInt =0;intensityLoopInt < numIntSteps; intensityLoopInt++){
             
                 //TODO: Listen for the stop smellie run notification 
                 //Call the smellie system here 
-                //NSLog(@" Laser:%@ ", [laserArray objectAtIndex:laserLoopInt]);
-                //NSLog(@" Fibre:%@ ",[fibreArray objectAtIndex:fibreLoopInt]);
-                //NSLog(@" Intensity:%i \n'",intensityLoopInt);
+                NSLog(@" Laser:%@ ", [laserArray objectAtIndex:laserLoopInt]);
+                NSLog(@" Fibre:%@ ",[fibreArray objectAtIndex:fibreLoopInt]);
+                NSLog(@" Intensity:%i \n'",intensityLoopInt);
                 
             }//end of looping through each intensity setting on the smellie laser
             

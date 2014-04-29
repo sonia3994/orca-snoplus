@@ -19,6 +19,10 @@
     IBOutlet NSButton* smellie375nmLaserButton;    //check box for 375nm Laser
     IBOutlet NSButton* smellie405nmLaserButton;    //check box for 405nm Laser
     IBOutlet NSButton* smellie440nmLaserButton;    //check box for 440nm Laser
+    IBOutlet NSTextField *smellieDirectArg1;
+    IBOutlet NSButton *smellieDirectExecuteCmd;
+    IBOutlet NSTextFieldCell *smellieDirectArg2;
+    IBOutlet NSTextField *smellieDirectCmd;
     IBOutlet NSButton* smellie500nmLaserButton;    //check box for 500nm Laser
     IBOutlet NSButton* smellieAllLasersButton;     //check box for all Lasers set
     
@@ -78,7 +82,7 @@
 -(IBAction)validationSmellieRunAction:(id)sender;
 -(IBAction)allLaserValidator:(id)sender;
 -(IBAction)makeNewSmellieRun:(id)sender;
-
+-(IBAction)executeSmellieCmdDirectAction:(id)sender;
 
 //TELLIE functions -----------------------------
 

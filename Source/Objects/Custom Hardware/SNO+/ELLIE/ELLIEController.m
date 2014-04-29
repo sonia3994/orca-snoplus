@@ -466,6 +466,15 @@
     
 }
 
+//Custom Command for Smellie
+-(IBAction)executeSmellieCmdDirectAction:(id)sender
+{
+    NSString * cmd = [NSString stringWithString:[smellieDirectCmd stringValue]];
+    NSString * arg1 = [NSString stringWithString:[smellieDirectArg1 stringValue]];
+    NSString * arg2 = [NSString stringWithString:[smellieDirectArg2 stringValue]];
+    [model sendCustomSmellieCmd:cmd withArgument1:arg1 withArgument2:arg2];
+}
+
 //TELLIE functions -------------------------
 
 
