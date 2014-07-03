@@ -85,6 +85,7 @@
     
     NSDictionary* _runDocument;
     NSDictionary* _configDocument;
+    NSDictionary* _mtcConfigDoc;
     NSMutableDictionary* _runTypeDocumentPhysics;
 }
 
@@ -111,6 +112,7 @@
 
 @property (copy) NSDictionary* runDocument;
 @property (copy) NSDictionary* configDocument;
+@property (copy) NSDictionary* mtcConfigDoc;
 
 - (void) initOrcaDBConnectionHistory;
 - (void) clearOrcaDBConnectionHistory;
