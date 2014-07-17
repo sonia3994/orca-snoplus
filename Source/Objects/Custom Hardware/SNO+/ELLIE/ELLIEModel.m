@@ -36,6 +36,7 @@
 #define kAmellieRunDocumentAdded   @"kAmellieRunDocumentAdded"
 #define kAmellieRunDocumentUpdated   @"kAmellieRunDocumentUpdated"
 #define kSmellieRunHeaderRetrieved   @"kSmellieRunHeaderRetrieved"
+#define kSmellieConfigHeaderRetrieved @"kSmellieConfigHeaderRetrieved"
 
 //sub run information tags
 #define kSmellieSubRunDocumentAdded @"kSmellieSubRunDocumentAdded"
@@ -59,10 +60,12 @@ NSString* ORELLIERunFinished = @"ORELLIERunFinished";
 @synthesize smellieRunSettings;
 @synthesize exampleTask;
 @synthesize smellieRunHeaderDocList;
-@synthesize smellieSubRunInfo;
+@synthesize smellieSubRunInfo,
+smellieDBReadInProgress = _smellieDBReadInProgress;
 
 - (void) setUpImage
 {
+    [self setSmellieDBReadInProgress:NO];
     [self setImage:[NSImage imageNamed:@"ellie"]];
 }
 
@@ -99,6 +102,30 @@ NSString* ORELLIERunFinished = @"ORELLIERunFinished";
     //we don't want this notification
 	[notifyCenter removeObserver:self name:NSWindowDidResignKeyNotification object:nil];
     
+    
+}
+
+- (void) fetchSmellieConfigurationInformation
+{ 
+    //this is dependant upon the current couchDB view that exsists within the database
+    NSString *requestString = [NSString stringWithFormat:@"_design/smellieMainQuery/_view/pullEllieConfigHeaders"];
+    
+    [[self generalDBRef:@"smellie"] getDocumentId:requestString tag:kSmellieConfigHeaderRetrieved];
+    
+    [self setSmellieDBReadInProgress:YES];
+    [self performSelector:@selector(smellieDocumentsRecieved) withObject:nil afterDelay:10.0];
+    
+}
+
+//complete this after the smellie documents have been recieved
+-(void)smellieDocumentsRecieved
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(smellieDocumentsRecieved) object:nil];
+    if (![self smellieDBReadInProgress]) { //killed already
+        return;
+    }
+    
+    [self setSmellieDBReadInProgress:NO];
     
 }
 
@@ -245,6 +272,10 @@ NSString* ORELLIERunFinished = @"ORELLIERunFinished";
     [configDocDic setObject:[self stringDateFromDate:nil] forKey:@"time_stamp"];
     [configDocDic setObject:customRunFile forKey:@"configuration_info"];
     
+    //Fetch the configuration number and increment
+    
+    [configDocDic setObject:[NSNumber numberWithInt:1] forKey:@"configuration_version"];
+    
     //self.runDocument = runDocDict;
     [[aSnotModel orcaDbRefWithEntryDB:aSnotModel withDB:aCouchDBName] addDocument:configDocDic tag:kSmellieRunDocumentAdded];
     
@@ -279,6 +310,12 @@ NSString* ORELLIERunFinished = @"ORELLIERunFinished";
                 NSLog(@"Object: %@\n",aResult);
                 NSLog(@"result: %@\n",[aResult objectForKey:@"run_name"]);
                 //[self parseSmellieRunHeaderDoc:aResult];
+            }
+            
+            else if ([aTag isEqualToString:kSmellieConfigHeaderRetrieved])
+            {
+                NSLog(@"Smellie configuration file Object: %@\n",aResult);
+                //[self parseSmellieConfigHeaderDoc:aResult];
             }
             
             //If no tag is found for the query result

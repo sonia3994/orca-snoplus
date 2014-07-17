@@ -20,12 +20,14 @@
     ORRunModel* runControl;
     ORRunController* theRunController;
     NSMutableArray *smellieSubRunInfo;
+    bool _smellieDBReadInProgress;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunSettings;
 @property (nonatomic,retain) NSTask* exampleTask;
 @property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
 @property (nonatomic,retain) NSMutableArray* smellieSubRunInfo;
+@property (nonatomic,assign) bool smellieDBReadInProgress;
 
 -(void) setUpImage;
 -(void) makeMainController;
@@ -61,6 +63,7 @@
 -(void)sendCustomSmellieCmd:(NSString*)customCmd withArgument1:(NSString*)customArgument1 withArgument2:(NSString*)customArgument2;
 -(void)testFunction;
 -(void)setLaserFrequency20Mhz;
+-(void)fetchSmellieConfigurationInformation;
 
 
 @end

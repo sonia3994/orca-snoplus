@@ -27,8 +27,9 @@
 
     laserHeadSelected = NO;
     fibreSwitchOutputSelected = NO;
-    //SMELLIE Configuration file
     
+    //SMELLIE Configuration file
+
     //Set up the Smellie configuration file
     NSMutableDictionary *genericLaserDriverToDetectorPath = [[NSMutableDictionary alloc] initWithCapacity:10];
     [genericLaserDriverToDetectorPath setObject:@"Empty Channel" forKey:@"laserHeadConnected"];
@@ -556,11 +557,34 @@
     
 }
 
+-(void) fetchRecentVersion
+{
+    NSURL *url = [NSURL URLWithString:@"http://localhost:8080/smellie/_design/smellieMainQuery/_view/pullEllieConfigHeaders?descending=true"];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"ret=%@", ret);
+}
+
 //Submit Smellie configuration file to the Database
 
 -(IBAction)onSelectOfSepiaInput:(id)sender
 {
     //TODO: Read in current information about that Sepia Input and to the detector
+    [self fetchSmellieConfigurationInformationV2];
+    //Download the most recent smellie configuration - this is implemented by run number
+    //NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
+    //ELLIEModel* anELLIEModel = [objs objectAtIndex:0];
+    //[anELLIEModel fetchSmellieConfigurationInformation];
+    
+    //print down the current self-test pmt values
+    [smellieConfigSelfTestNoOfPulses setStringValue:@"10"];
+    [smellieConfigSelfTestLaserTriggerFreq setStringValue:@"10000"];
+    [smellieConfigSelfTestPmtSampleRate setStringValue:@"100000"];
+    [smellieConfigSelfTestNoOfPulsesPerLaser setStringValue:@"100"];
+    [smellieConfigSelfTestNiTriggerOutputPin setStringValue:@"/ctr0"];
+    [smellieConfigSelfTestNiTriggerInputPin setStringValue:@"/ai0:1"];
+    
+    
     int laserHeadIndex = [sender indexOfSelectedItem];
     
     for (id specificConfigValue in configForSmellie){
