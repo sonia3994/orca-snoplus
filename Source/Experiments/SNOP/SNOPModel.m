@@ -1217,6 +1217,20 @@ mtcConfigDoc = _mtcConfigDoc;
     //Initialise a Dictionary to fill the Daughter Card information
     NSMutableDictionary * fecCardArray = [NSMutableDictionary dictionaryWithCapacity:200];
     
+    //Build an empty array for all Fec32 arrays
+    int c;
+    for(c =0;c<kNumOfCrates;c++){
+        NSMutableDictionary *boardsInSlots = [[NSMutableDictionary alloc] initWithCapacity:100];
+        
+        int slot;
+        for(slot=0;slot<kNumSNOCrateSlots-2;slot++){
+            [boardsInSlots setObject:@"" forKey:[NSString stringWithFormat:@"%i",slot]];
+        }
+        [fecCardArray setObject:boardsInSlots forKey:[NSString stringWithFormat:@"%i",c]];
+
+    }
+    
+    
     //Loop over all the FEC cards
     NSArray * fec32ControllerObjs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORFec32Model")];
     
@@ -1235,6 +1249,7 @@ mtcConfigDoc = _mtcConfigDoc;
         //Get the Mother Board Information
         [fec32Iterator setObject:[aFec32Card pullFecForOrcaDB] forKey:@"mother_board"];
         
+        
         //Variable used to loop through all the current settings
         NSMutableDictionary * daughterCardIterator = [NSMutableDictionary dictionaryWithCapacity:20];
     
@@ -1247,9 +1262,13 @@ mtcConfigDoc = _mtcConfigDoc;
     
             //Fill the daughter card iterator
             //daughterCardIterator = [dc pullFecDaughterInformationForOrcaDB];
+            
+            //[NSString stringWithFormat:@"%i",j]
+            NSString *daughterBoardSlot = [NSString stringWithFormat:@"%i",[dc slot]];
+            
         
             //Place the information for each daughter card into the main daughter card array
-            [daughterCardIterator setObject:[dc pullFecDaughterInformationForOrcaDB] forKey:[NSString stringWithFormat:@"%i",j]];
+            [daughterCardIterator setObject:[dc pullFecDaughterInformationForOrcaDB] forKey:daughterBoardSlot];
         
         }//end of looping through all the front end daughter boards
         
@@ -1257,7 +1276,16 @@ mtcConfigDoc = _mtcConfigDoc;
         [fec32Iterator setObject:daughterCardIterator forKey:@"daughter_board"];
         
         //[fecCardArray setObject:fec32Iterator forKey:[NSString stringWithFormat:@"%i",i]];
-        [fecCardArray setObject:fec32Iterator forKey:[aFec32Card boardID]];
+        //[fecCardArray setObject:fec32Iterator forKey:[fecCardArray valueForKeyPath:crateNumberString]];
+        
+        //this works but only places in the first slot
+        NSString *crateNumberString = [NSString stringWithFormat:@"%i",[aFec32Card crateNumber]];
+        NSString *slotNumberString = [NSString stringWithFormat:@"%i",15-([aFec32Card slot]-1)];
+        //[fecCardArray setObject:fec32Iterator forKey:crateNumberString];
+        
+        //NSLog(@"%@",[fecCardArray objectForKey:crateNumberStringv2]);
+        [[fecCardArray objectForKey:crateNumberString] setObject:fec32Iterator forKey:slotNumberString];
+
         
         
     }//end of looping through all the Fec32 Cards
@@ -1283,6 +1311,42 @@ mtcConfigDoc = _mtcConfigDoc;
     [configDocDict setObject:svnVersion forKey:@"daq_version_build"];
     
     [configDocDict setObject:mtcArray forKey:@"mtc_info"];
+    
+    //reorganise the Fec32 cards to make it easier for couchDB
+
+    //Loop through all the crates in the detector
+    /*int c;
+    NSMutableDictionary *organisedFec32Information = [[NSMutableDictionary alloc] initWithCapacity:100];
+    for(c=0;c<kNumOfCrates;c++){
+        
+        //String of the crate being used
+        NSString * stringValueOfCrate = [NSString stringWithFormat:@"%i",c];
+        
+        //Loop through all the motherBoards and check to see it this motherboard id is in a given crate number
+        NSMutableDictionary *motherBoardsInCrate = [[NSMutableDictionary alloc] initWithCapacity:100];
+
+        for(id key in fecCardArray){
+            
+            NSNumber *currentCrateNumber = [NSNumber numberWithInt:[[fecCardArray objectForKey:@"mother_board"] objectForKey:@"crate_number"]];
+            NSNumber *currentSlotNumber = [NSNumber numberWithInt:[[fecCardArray objectForKey:@"mother_board"]objectForKey:@"slot"]];
+            
+            NSMutableDictionary * subDictionary = [[NSMutableDictionary alloc] initWithCapacity:100];
+            [subDictionary setObject:fecCardArray forKey:key];
+            
+            NSString *slotIDForMotherBoard = [NSString stringWithFormat:@"%@",[currentSlotNumber stringValue]];
+            
+            //if this particular mother board is in the current crate in the loop 
+            if(c == [currentCrateNumber intValue]){
+                [motherBoardsInCrate setObject:subDictionary forKey:slotIDForMotherBoard];
+            }
+            
+        }
+        
+        [organisedFec32Information setObject:motherBoardsInCrate forKey:stringValueOfCrate];        
+        
+    }*/
+    
+    //NSLog(@"%@",organisedFec32Information);
     
     //this works but I'm not sure we need to see everything right now???
     [configDocDict setObject:fecCardArray forKey:@"fec32_card_info"];
