@@ -36,6 +36,7 @@
 #import "ORFec32Model.h"
 #import "OROrderedObjManager.h"
 #import "ORSNOConstants.h"
+#import "ORCaen1720Model.h"
 
 NSString* ORSNOPModelViewTypeChanged	= @"ORSNOPModelViewTypeChanged";
 static NSString* SNOPDbConnector	= @"SNOPDbConnector";
@@ -870,7 +871,7 @@ mtcConfigDoc = _mtcConfigDoc;
     
     NSNumber* runNumber = [NSNumber numberWithUnsignedInt:run_number];
 
-    [runDocDict setObject:@"run" forKey:@"doc_type"];
+    [runDocDict setObject:@"run" forKey:@"type"];
     [runDocDict setObject:@"physics" forKey:@"run_type"];
     [runDocDict setObject:[NSNumber numberWithUnsignedInt:0] forKey:@"version"];
     [runDocDict setObject:[self stringUnixFromDate:nil] forKey:@"time_stamp_start"];
@@ -1212,6 +1213,35 @@ mtcConfigDoc = _mtcConfigDoc;
         [[self orcaDbRef:self] addDocument:mtcDocDict tag:kMtcRunDocumentAdded];
     }
     
+    //FILL information from the Caen
+    NSMutableDictionary* caenArray = [NSMutableDictionary dictionaryWithCapacity:100];
+    NSArray * caenObjects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORCaen1720Model")];
+    ORCaen1720Model * theCaen = [caenObjects objectAtIndex:0]; //there is only one Caen object
+    [caenArray setObject:[theCaen eventSize] forKey:@"event_size"];
+    [caenArray setObject:[theCaen enabledMask] forKey:@"enable_mask"];
+    [caenArray setObject:[theCaen postTriggerSetting] forKey:@"post_trigger_size"];
+    [caenArray setObject:[theCaen triggerSourceMask] forKey:@"trigger_source_mask"];
+    [caenArray setObject:[theCaen triggerOutMask] forKey:@"trigger_out_mask"];
+    [caenArray setObject:[theCaen frontPanelControlMask] forKey:@"front_panel_control_mask"];
+    [caenArray setObject:[theCaen coincidenceLevel] forKey:@"coincidence_level"];
+    [caenArray setObject:[theCaen acquisitionMode] forKey:@"acquisition_mode"];
+    [caenArray setObject:[theCaen countAllTriggers] forKey:@"count_all_triggers"];
+    [caenArray setObject:[theCaen customSize] forKey:@"custom_size"];
+    [caenArray setObject:[theCaen isCustomSize] forKey:@"is_custom_size"];
+    [caenArray setObject:[theCaen isFixedSize] forKey:@"is_fixed_size"];
+    [caenArray setObject:[theCaen channelConfigMask] forKey:@"channel_config_mask"];
+    [caenArray setObject:[theCaen waveFormRateGroup] forKey:@"wave_form_rate_group"];
+    [caenArray setObject:[theCaen numberBLTEventsToReadout] forKey:@"number_blt_events"];
+    [caenArray setObject:[theCaen continuousMode] forKey:@"continuous_mode"];
+    [caenArray setObject:[theCaen numberBLTEventsToReadout] forKey:@"number_blt_events"];
+    int l;
+    for(l=0; l < [theCaen numberOfChannels]; l++){
+        [caenArray setObject:[theCaen dac:l] forKey:[NSString stringWithFormat:@"dac_ch_%d",l]];
+        [caenArray setObject:[theCaen threshold:l] forKey:[NSString stringWithFormat:@"thres_ch_%d",l]];
+        [caenArray setObject:[theCaen overUnderThreshold:l] forKey:[NSString stringWithFormat:@"over_thres_ch_%d",l]];
+    }
+
+    
     //FILL THE DATA FROM EACH FRONT END CARD HERE !!!!!
     
     //Initialise a Dictionary to fill the Daughter Card information
@@ -1301,7 +1331,7 @@ mtcConfigDoc = _mtcConfigDoc;
     
     
     //Fill the configuration document with information
-    [configDocDict setObject:@"configuration" forKey:@"doc_type"];
+    [configDocDict setObject:@"configuration" forKey:@"type"];
     [configDocDict setObject:[self stringDateFromDate:nil] forKey:@"time_stamp"];
     [configDocDict setObject:@"0" forKey:@"config_id"]; //need to add in an update for this
     
@@ -1350,6 +1380,10 @@ mtcConfigDoc = _mtcConfigDoc;
     
     //this works but I'm not sure we need to see everything right now???
     [configDocDict setObject:fecCardArray forKey:@"fec32_card_info"];
+    
+    [configDocDict setObject:caenArray forKey:@"caen_info"];
+    
+    //collect the objects that correspond to the CAEN
     
     //add the configuration document
     self.configDocument = configDocDict;
