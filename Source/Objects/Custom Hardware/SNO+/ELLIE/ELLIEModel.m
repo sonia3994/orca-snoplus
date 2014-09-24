@@ -268,7 +268,7 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     //Fetch the run index that is being used
     //NSString* runDescription = [NSString stringWithFormat:@"%@",[aSnotModel]]
     
-    [runDocDict setObject:docType forKey:@"doc_type"];
+    [runDocDict setObject:docType forKey:@"type"];
     [runDocDict setObject:[NSString stringWithFormat:@"%i",0] forKey:@"version"];
     [runDocDict setObject:[NSString stringWithFormat:@"%lu",[runControl runNumber]] forKey:@"index"];
     [runDocDict setObject:smellieRunNameLabel forKey:@"run_description_used"];
@@ -523,6 +523,11 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     //[runControl performSelectorOnMainThread:@selector(stopRun) withObject:nil waitUntilDone:YES];
     //[runControl performSelectorOnMainThread:@selector(startRun) withObject:nil waitUntilDone:YES];
     
+    //Set the Run Type to a SMELLIE run
+    NSArray*  objsSNOP = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel* theSNOPModel = [objsSNOP objectAtIndex:0];
+    [theSNOPModel setRunType:kRunSmellie]; //sets the run_type to a smellie run type
+    
     NSLog(@"SMELLIE_RUN:Setting up a SMELLIE Run\n");
     
     NSLog(@"SMELLIE_RUN:Stopping any Blocking Software on SMELLIE computer(SNODROP)\n");
@@ -651,10 +656,7 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     ORMTCModel* theMTCModel = [objsMTC objectAtIndex:0];
     [theMTCModel stopMTCPedestalsFixedRate]; //stop any pedestals that are currently running
     
-    //get the MTC Object (but only use in Slave Mode)
-    //NSArray*  objsSNOP = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
-    //SNOPModel* theSNOPModel = [objsSNOP objectAtIndex:0];
-    //[theSNOPModel setRunType:kRunSmellie]; //sets the run_type to a smellie run type
+
     
     //get the run controller
     NSArray*  objs3 = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
@@ -885,6 +887,12 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     //[runControl performSelectorOnMainThread:@selector(stopRun) withObject:nil waitUntilDone:YES];
     [runControl performSelectorOnMainThread:@selector(stopRun) withObject:nil waitUntilDone:YES];
     [runControl performSelectorOnMainThread:@selector(startRun) withObject:nil waitUntilDone:YES];
+    
+    //Set the Run Type to a SMELLIE run
+    NSArray*  objsSNOP = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel* theSNOPModel = [objsSNOP objectAtIndex:0];
+    [theSNOPModel setRunType:kRunMaintainence]; //sets the run_type to a smellie run type
+    
     //used to be halt run but this now moves straight into a maintainence run 
     
     //end the run correctly if it is still running

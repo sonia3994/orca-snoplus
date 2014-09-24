@@ -73,6 +73,13 @@
     IBOutlet NSButton *smellieBuildCustomRun;
     IBOutlet NSButton *smellieChangeConfiguration;
     
+    IBOutlet NSButton *tellieEnabled;
+    
+    IBOutlet NSButton *startPhysicsRunButton;
+    IBOutlet NSButton *startMaintainenceRunButton;
+    IBOutlet NSButton *newPhysicsRunButton;
+    IBOutlet NSButton *newMaintainenceRunButton;
+    
     NSImage* _runStopImg;
     NSMutableDictionary *smellieRunFileList;
     NSDictionary *smellieRunFile;
@@ -117,7 +124,6 @@
 //smellie functions -------------------
 - (IBAction) loadSmellieRunAction:(id)sender;
 - (IBAction) callSmellieSettings:(id)sender;
-- (IBAction) checkSmellieInterlockAction:(id)sender;
 - (IBAction) startSmellieRunAction:(id)sender;
 - (IBAction) stopSmellieRunAction:(id)sender;
 - (IBAction) emergencySmellieStopAction:(id)sender;
