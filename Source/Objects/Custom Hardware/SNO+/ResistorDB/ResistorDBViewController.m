@@ -9,13 +9,14 @@
 #import "ResistorDBViewController.h"
 #import "ResistorDBModel.h"
 
+
 @interface ResistorDBViewController ()
 @property (assign) IBOutlet NSProgressIndicator *loadingFromDbWheel;
-
 @end
 
 @implementation ResistorDBViewController
-@synthesize loadingFromDbWheel;
+@synthesize loadingFromDbWheel,
+resistorDocDic = _resistorDocDic;
 
 -(id)init
 {
@@ -113,6 +114,10 @@
         reason = [[model currentQueryResults] objectForKey:@"reason"];
         info = [[model currentQueryResults] objectForKey:@"info"];
         
+        //download the start and end numbers
+        [model setStartRunNumber:[NSNumber numberWithInt:[[[[model currentQueryResults] objectForKey:@"run_range"] objectAtIndex:0] intValue]]];
+        [model setEndRunNumber:[NSNumber numberWithInt:[[[[model currentQueryResults] objectForKey:@"run_range"] objectAtIndex:1] intValue]]];
+        
         //pulledCable isn't a string but an integer!!!
         if([[[[model currentQueryResults] objectForKey:@"pulledCable"] stringValue] isEqualToString:@"0"]){
             pulledCableString = @"NO";
@@ -169,10 +174,13 @@
     
 }
 
+
+
+//This function builds the actual resistor document that will be posted to couchDb
 -(IBAction)updatePmtDatabase:(id)sender
 {
     //fetch the values from the database
-    NSMutableDictionary *resistorDocDic = [[NSMutableDictionary alloc] initWithCapacity:10];
+    
     int crateNumber = [[crateSelect stringValue] intValue];
     int cardNumber = [[cardSelect stringValue] intValue];
     int channelNumber = [[channelSelect stringValue] intValue];
@@ -192,31 +200,81 @@
         reasonString = [updateReasonBox stringValue];   //update from the reason string 
     }
     
+    unsigned int currentRunNumber;
+    currentRunNumber = [model getCurrentRunNumber];
+
+    
+    //Whenever we update the resistor document we are also going to need to change the run range
+    NSMutableArray * runRange = [NSMutableArray arrayWithCapacity:20];
+    [runRange setObject:[NSNumber numberWithInt:[[model startRunNumber] intValue]] atIndexedSubscript:0];
+    [runRange setObject:[NSNumber numberWithInt:currentRunNumber] atIndexedSubscript:1];
+    
+    //Update the old document with the new values
+    NSMutableDictionary *oldResistorDocDic = [[NSMutableDictionary alloc] initWithCapacity:10];
+    oldResistorDocDic = [[model currentQueryResults] mutableCopy];
+    [oldResistorDocDic setObject:runRange forKey:@"run_range"];
+    
+    /* Strictly only allow a run range were the currentRunNumber is larger than the current run number*/
+    if(currentRunNumber >= [[model startRunNumber]intValue]){
+        [model updateResistorDb:oldResistorDocDic];
+    }
+    [oldResistorDocDic release];
+    
+    
+    NSMutableArray * newRunRange = [NSMutableArray arrayWithCapacity:20];
+    [newRunRange setObject:[NSNumber numberWithInt:(currentRunNumber + 1)] atIndexedSubscript:0];
+    [newRunRange setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:1];
+    
+    //Check the old runRange against the new runRange. If these are the same then we don't need to add a new document as it has already been updated. This will only occur if someone tries to update the resistor database on the same crate/card/channel combination within the same run.
+    
+
     NSString *infoString = [updateInfoForPull stringValue];
-    [resistorDocDic setObject:[NSNumber numberWithInt:cardNumber] forKey:@"slot"];
-    [resistorDocDic setObject:infoString forKey:@"info"];
-    [resistorDocDic setObject:pmtRemovedString forKey:@"PmtRemoved"];
-    [resistorDocDic setObject:SNOLowOccString forKey:@"SnoLowOcc"];
-    [resistorDocDic setObject:[[model currentQueryResults] objectForKey:@"SnoPmt"] forKey:@"SnoPmt"];
-    [resistorDocDic setObject:[NSNumber numberWithInt:crateNumber] forKey:@"crate"];
-    [resistorDocDic setObject:badCableString forKey:@"BadCable"];
-    [resistorDocDic setObject:reasonString forKey:@"reason"];
-    [resistorDocDic setObject:resistorStatus forKey:@"rPulled"];
-    [resistorDocDic setObject:@"" forKey:@"NewPmt"];
-    [resistorDocDic setObject:@"" forKey:@"date"];
-    [resistorDocDic setObject:[NSNumber numberWithInt:[pulledCableString intValue]] forKey:@"pulledCable"];
-    [resistorDocDic setObject:pmtReinstalledString forKey:@"PmtReInstalled"];
-    [resistorDocDic setObject:[NSNumber numberWithInt:channelNumber] forKey:@"channel"];
+    NSMutableDictionary* newResistorDoc = [NSMutableDictionary dictionaryWithCapacity:20];
+    [newResistorDoc setObject:newRunRange forKey:@"run_range"];
+    [newResistorDoc setObject:[NSNumber numberWithInt:cardNumber] forKey:@"slot"];
+    [newResistorDoc setObject:infoString forKey:@"info"];
+    [newResistorDoc setObject:pmtRemovedString forKey:@"PmtRemoved"];
+    [newResistorDoc setObject:SNOLowOccString forKey:@"SnoLowOcc"];
+    [newResistorDoc setObject:[[model currentQueryResults] objectForKey:@"SnoPmt"] forKey:@"SnoPmt"];
+    [newResistorDoc setObject:[NSNumber numberWithInt:crateNumber] forKey:@"crate"];
+    [newResistorDoc setObject:badCableString forKey:@"BadCable"];
+    [newResistorDoc setObject:reasonString forKey:@"reason"];
+    [newResistorDoc setObject:resistorStatus forKey:@"rPulled"];
+    [newResistorDoc setObject:@"" forKey:@"NewPmt"];
+    [newResistorDoc setObject:@"" forKey:@"date"];
+    [newResistorDoc setObject:[NSNumber numberWithInt:[pulledCableString intValue]] forKey:@"pulledCable"];
+    [newResistorDoc setObject:pmtReinstalledString forKey:@"PmtReInstalled"];
+    [newResistorDoc setObject:[NSNumber numberWithInt:channelNumber] forKey:@"channel"];
+    self.resistorDocDic = [newResistorDoc mutableCopy];
+    [model checkIfDocumentExists:crateNumber withCard:cardNumber withChannel:channelNumber withRunRange:newRunRange];
     
-    [model updateResistorDb:resistorDocDic];
-    [resistorDocDic release];
     
+}
+
+-(void) updateCheckResistorDb
+{
+    [model addNeweResistorDoc:self.resistorDocDic];
     //update the current query value
-    NSLog(@"value: %i %i %i",crateNumber,cardNumber,channelNumber);
+    int crateNumber = [[crateSelect stringValue] intValue];
+    int cardNumber = [[cardSelect stringValue] intValue];
+    int channelNumber = [[channelSelect stringValue] intValue];
+    //NSLog(@"value: %i %i %i\n",crateNumber,cardNumber,channelNumber);
     [loadingFromDbWheel setHidden:NO];
     [loadingFromDbWheel startAnimation:nil];
     [model queryResistorDb:crateNumber withCard:cardNumber withChannel:channelNumber];
+}
 
+-(void) noNewDocumentRequired
+{
+    [model updateResistorDb:self.resistorDocDic];
+    //update the current query value
+    int crateNumber = [[crateSelect stringValue] intValue];
+    int cardNumber = [[cardSelect stringValue] intValue];
+    int channelNumber = [[channelSelect stringValue] intValue];
+    //NSLog(@"value: %i %i %i\n",crateNumber,cardNumber,channelNumber);
+    [loadingFromDbWheel setHidden:NO];
+    [loadingFromDbWheel startAnimation:nil];
+    [model queryResistorDb:crateNumber withCard:cardNumber withChannel:channelNumber];
 }
 
 - (void) registerNotificationObservers
@@ -228,6 +286,17 @@
                      selector : @selector(resistorDbQueryLoaded)
                          name : resistorDBQueryLoaded
                         object: model];
+    
+    [notifyCenter addObserver : self
+                     selector : @selector(updateCheckResistorDb)
+                         name : ORResistorDocNotExists
+                        object: model];
+    
+    [notifyCenter addObserver : self
+                     selector : @selector(noNewDocumentRequired)
+                         name : ORResistorDocExists
+                        object: model];
+    
 }
 
 @end

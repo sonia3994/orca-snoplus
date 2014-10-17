@@ -10,21 +10,37 @@
 #import "ORCouchDB.h"
 #import "SNOPModel.h"
 #import "ORFec32Model.h"
+#import "ORRunModel.h"
 
 #define kResistorDbHeaderRetrieved @"kResistorDbHeaderRetrieved"
 #define kResistorDbDocumentPosted @"kResistorDbDocumentPosted"
+#define kResistorDbNewDocument @"kResistorDbNewDocument"
+#define kCheckResistorDocExists @"kCheckResistorDocExists"
 
 NSString* resistorDBQueryLoaded     = @"resistorDBQueryLoaded";
 NSString* resistorDBUpdated = @"resistorDBUpdated";
+NSString* ORResistorDocExists = @"ORResistorDocExists";
+NSString* ORResistorDocNotExists= @"ORResistorDocNotExists";
 
 @implementation ResistorDBModel
 @synthesize
 currentQueryResults = _currentQueryResults,
-resistorDocument = _resistorDocument;
+resistorDocument = _resistorDocument,
+startRunNumber = _startRunNumber,
+endRunNumber = _endRunNumber;
 
 - (void) setUpImage
 {
     [self setImage:[NSImage imageNamed:@"resistor"]];
+}
+
+- (unsigned int) getCurrentRunNumber
+{
+    NSArray* runObjects = [[self document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
+    ORRunModel* rc = [runObjects objectAtIndex:0];
+    unsigned int current_run_number;
+    current_run_number = [rc runNumber];
+    return current_run_number;
 }
 
 
@@ -32,7 +48,16 @@ resistorDocument = _resistorDocument;
 {
     [[self orcaDbRefWithEntryDB:self withDB:@"resistor"] updateDocument:aResistorDocDic documentId:[[self currentQueryResults] objectForKey:@"_id"] tag:kResistorDbDocumentPosted];
     
-    [self loadPmtOnlineMaskToFe32FromCouchDb];
+    //Load only the new changes that have occured
+    //[self loadPmtOnlineMaskToFe32FromCouchDb];
+}
+
+-(void) addNeweResistorDoc:(NSMutableDictionary*)aResistorDocDic
+{
+    [[self orcaDbRefWithEntryDB:self withDB:@"resistor"] addDocument:aResistorDocDic tag:kResistorDbNewDocument];
+    
+    //Load only the new changes that have occured
+    //[self loadPmtOnlineMaskToFe32FromCouchDb];
 }
 
 -(void) loadPmtOnlineMaskToFe32FromCouchDb
@@ -49,6 +74,9 @@ resistorDocument = _resistorDocument;
     
     NSHTTPURLResponse *response = nil;
 	NSError *connectionError;
+    
+    
+    //TODO:Remove hardcoding from the localHost database here
 	
 	NSString *urlName=[[NSString alloc] initWithFormat:
                        @"http:localhost:5984/resistor/_design/resistorQuery/_view/getPmtOnlineMask"];
@@ -104,8 +132,10 @@ resistorDocument = _resistorDocument;
                 
                 //check to see if the Fec32 is in the current crate and card combination
                 if(([crateFromDb intValue] == [aFec32Model crateNumber]) && ([cardFromDb intValue] && [aFec32Model slot])){
+                    
                     //now assign the mask for the crate and card/slot of interest
-                    [aFec32Model setOnlineMask:aPmtMask];
+                    //TODO:Check the setOnlineMask Functionality is working
+                    //[aFec32Model setOnlineMask:aPmtMask];
                     
                 }
                 
@@ -142,6 +172,13 @@ resistorDocument = _resistorDocument;
     [[self orcaDbRefWithEntryDB:self withDB:@"resistor"] getDocumentId:requestString tag:kResistorDbHeaderRetrieved];
  }
 
+- (void) checkIfDocumentExists:(int)aCrate withCard:(int)aCard withChannel:(int)aChannel withRunRange:(NSMutableArray*)aRunRange
+{
+    //view to query (make the request within this string)
+    NSString *requestString = [NSString stringWithFormat:@"_design/resistorQuery/_view/checkIfDocExists?key=[%i,%i,%i,%i]",aCrate,aCard,aChannel,[[aRunRange objectAtIndex:0] intValue]];
+    [[self orcaDbRefWithEntryDB:self withDB:@"resistor"] getDocumentId:requestString tag:kCheckResistorDocExists];
+}
+
 - (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
 {
     //Loop over all the FEC cards
@@ -164,6 +201,7 @@ resistorDocument = _resistorDocument;
 
 -(void)couchDBResult:(id)aResult tag:(NSString *)aTag op:(id)anOp{
     @synchronized(self){
+        @try {
         if([aResult isKindOfClass:[NSDictionary class]]){
             NSString* message = [aResult objectForKey:@"Message"];
             if(message){
@@ -173,13 +211,42 @@ resistorDocument = _resistorDocument;
             {
                 [self parseResistorDbResult:aResult];
             }
+            else if ([aTag isEqualToString:kResistorDbNewDocument]){
+                
+            }
+            else if ([aTag isEqualToString:kCheckResistorDocExists]){
+            
+                @try {
+                    
+                    int counter = 0;
+                    for(id key in [aResult objectForKey:@"rows"]){
+                        counter = counter  + 1;
+                    }
+                    
+                    //if the document doesn't exist then post the notification
+                    NSLog(@"result: %@",[aResult objectForKey:@"rows"]);
+                    if(counter > 0){
+                        NSLog(@"CouchDB::Resistor: Updating a current database document\n");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ORResistorDocExists object:self];
+                    }
+                    else if(counter == 0){
+                        NSLog(@"CouchDB::Resistor: Creating a new database file with new Run Range\n");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ORResistorDocNotExists object:self];
+                    }
+                    else{
+                        NSLog(@"Unknown error\n");
+                    }
+                    
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"Exception thrown: %@\n",exception);
+                }
+                
+                //
+                
+            }
             else if ([aTag isEqualToString:kResistorDbDocumentPosted])
             {
-                //NSMutableDictionary* resistorDoc = [[[self resistorDocument] mutableCopy] autorelease];
-                //[resistorDoc setObject:[aResult objectForKey:@"id"] forKey:@"_id"];
-                //[resistorDoc setObject:[aResult objectForKey:@"rev"] forKey:@"_rev"];
-                //NSLog(@"Posted to ResistorDB %@",resistorDoc);
-                //self.resistorDocument = resistorDoc;
                 
             }
             //If no tag is found for the query result
@@ -196,6 +263,11 @@ resistorDocument = _resistorDocument;
         else {
             //no docs found 
         }
+            
+        } //end of try
+        @catch (NSException *exception) {
+            NSLog(@"Exception Thrown due to inability to reach couchDb. Reason: %@\n",exception);
+        }
     }
 }
 
@@ -207,8 +279,6 @@ resistorDocument = _resistorDocument;
     //make notification here to tell controller that this has changed 
     [[NSNotificationCenter defaultCenter] postNotificationName:resistorDBQueryLoaded object:self];
 }
-
-
 
 - (void) makeMainController
 {
