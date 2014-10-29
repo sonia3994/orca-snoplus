@@ -67,6 +67,11 @@
 -(void)setLaserFrequency20Mhz;
 -(void)fetchSmellieConfigurationInformation;
 
+//TELLIE Control Functions
+-(void) pollTellieFibre;
+-(void) fireTellieFibre:(NSArray*)fireCommands;
+-(void) stopTellieFibre:(NSArray*)fireCommands;
+
 
 @end
 

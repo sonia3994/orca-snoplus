@@ -104,9 +104,36 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     
     //we don't want this notification
 	[notifyCenter removeObserver:self name:NSWindowDidResignKeyNotification object:nil];
-    
-    
 }
+
+
+/* TELLIE Functions */
+//This function polls the TELLIE hardware using an XMLPRC Server and requests the response from the hardware
+-(void) pollTellieFibre
+{
+    NSString *responseFromTellie = [[NSString alloc] init];
+    //NSArray * nullCommandArguments = @[@"0",@"0",@"0"];
+    responseFromTellie =[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_readout_script.py" withCmdLineArgs:nil];
+    NSLog(@"Response from Tellie: %@\n",responseFromTellie);
+}
+
+-(void) fireTellieFibre:(NSArray*)fireCommands
+{
+    NSString *responseFromTellie = [[NSString alloc] init];
+    //NSArray * nullCommandArguments = @[@"0",@"0",@"0"];
+    responseFromTellie =[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_readout_script.py" withCmdLineArgs:nil];
+    NSLog(@"Response from Tellie: %@\n",responseFromTellie);
+}
+
+-(void) stopTellieFibre:(NSArray*)fireCommands
+{
+    NSString *responseFromTellie = [[NSString alloc] init];
+    //NSArray * nullCommandArguments = @[@"0",@"0",@"0"];
+    responseFromTellie =[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_stop_script.py" withCmdLineArgs:nil];
+    NSLog(@"Response from Tellie: %@\n",responseFromTellie);
+}
+
+/*Smellie Functions */
 
 - (void) fetchSmellieConfigurationInformation
 { 
@@ -117,7 +144,6 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     
     [self setSmellieDBReadInProgress:YES];
     [self performSelector:@selector(smellieDocumentsRecieved) withObject:nil afterDelay:10.0];
-    
 }
 
 //complete this after the smellie documents have been recieved
@@ -151,10 +177,10 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
 //This calls a python script but can only take two command line arguments 
 -(NSString*)callPythonScript:(NSString*)pythonScriptFilePath withCmdLineArgs:(NSArray*)commandLineArgs
 {
-    if([commandLineArgs count] != 3){
-        NSLog(@"Three command line arguments are required!");
+    /*if([commandLineArgs count] != 3){
+        NSLog(@"Three command line arguments are required!\n");
         return nil;
-    }
+    }*/
     
     NSTask *task;
     task = [[NSTask alloc] init];
