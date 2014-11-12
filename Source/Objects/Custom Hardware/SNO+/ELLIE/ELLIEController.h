@@ -39,9 +39,7 @@
     IBOutlet NSButton* smellieFibreButtonFS055;
     IBOutlet NSButton* smellieFibreButtonFS155;
     IBOutlet NSButton* smellieFibreButtonFS255;
-    IBOutlet NSButton* smellieAllFibresButton;
-    IBOutlet NSButton* testButton;
-    
+    IBOutlet NSButton* smellieAllFibresButton;    
     
     //More Run Information
     IBOutlet NSTextField* smellieOperatorName;      //Operator Name Field
@@ -83,15 +81,11 @@
     
     //TELLIE interface ------------------------------------------
     
-    IBOutlet NSButton *tellieChangeSettings;
-    IBOutlet NSButton *startTellieButton;
-    IBOutlet NSButton *stopTellieButton;
     IBOutlet NSTextField *tellieChannelTf;
     IBOutlet NSTextField *telliePhotonsTf;
     IBOutlet NSTextField *telliePulseRateTf;
     IBOutlet NSTextField *telliePulseHeightTf;
     IBOutlet NSTextField *telliePulseWidthTf;
-    IBOutlet NSButton *tellieValidateSettingsButton; //need to validate the values are correct before sending
     IBOutlet NSTextField *tellieValidationStatusLabel;
     IBOutlet NSTextField *tellieRunStatusLabel;
     IBOutlet NSButton *tellieFireFibreButton;
@@ -100,13 +94,15 @@
     IBOutlet NSTextField *tellieFibreDelayTf;
     IBOutlet NSTextField *tellieTriggerDelayTf;
     
+    IBOutlet NSButton *tellieValidateSettingsButton;
     
+    IBOutlet NSButton *startTellieRunButton;
+    IBOutlet NSButton *stopTellieRunButton;
     NSTextField *automaticallyChangeTellieTriggerInput;
 }
 
 
 //@property (nonatomic,retain) NSMutableDictionary* smellieRunSettingsFromGUI;
-
 -(id)init;
 -(void)dealloc;
 -(void) updateWindow;
@@ -134,11 +130,12 @@
 -(IBAction)pollTellieFibreAction:(id)sender;
 -(IBAction)stopTellieFibreAction:(id)sender;
 -(IBAction)validateTellieSettingsAction:(id)sender;
+-(IBAction)startTellieRunAction:(id)sender;
+-(IBAction)stopTellieRunAction:(id)sender;
 
 -(BOOL) areTellieSettingsValid;
+-(BOOL) isTellieRunning;
 -(void) initialiseTellie;
--(void) updateGuiTellieIsReady;
--(void) updateGuiTellieIsNotReady;
 
 @end
 

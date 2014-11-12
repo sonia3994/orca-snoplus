@@ -9,6 +9,9 @@
 #import "ELLIEController.h"
 #import "ELLIEModel.h"
 #import "SNOPModel.h"
+#import "SNOP_Run_Constants.h"
+#import "ORRunModel.h"
+
 
 @implementation ELLIEController
     NSMutableDictionary *laserHeadDic;
@@ -21,9 +24,8 @@
 -(id)init
 {
     self = [super initWithWindowNibName:@"ellie"];
-    //[smellieConfigAttenutationFactor setKeyboardType:UIKeyboardTypeNumberPad];
-
-
+    //[smellieConfigAttenutationFactor setKeyboardType:UIKeyboardTypeNumberPad]
+    
     laserHeadSelected = NO;
     fibreSwitchOutputSelected = NO;
     
@@ -77,18 +79,14 @@
     }
     @catch (NSException *e) {
         NSLog(@"CouchDB for ELLIE isn't connected properly. Please reload the ELLIE Gui and check the database connections\n");
-        NSLog(@"Reason for error %@",e);
+        NSLog(@"Reason for error %@ \n",e);
     }
         
     //load most recent smellie config file 
     laserHeadDic = [[NSMutableDictionary alloc] initWithCapacity:100];
         
-    
-    
     //NSMutableDictionary *smellieRunInfo = [[NSMutableDictionary alloc] init];
-    
     //NSLog(@"Value of smellie %@",[smellieRunInfo objectForKey:@"run_name"]);
-    
     //[smellieRunName release];
     
     /*Setting up TELLIE GUI */
@@ -136,7 +134,19 @@
 }
 
 
-//TELLIE Functions 
+//TELLIE Functions
+
+
+-(IBAction)startTellieRunAction:(id)sender
+{
+    [model startTellieRun];
+}
+
+
+-(IBAction)stopTellieRunAction:(id)sender
+{
+    [model stopTellieRun];
+}
 
 //Check to see if Tellie setting are correct
 -(BOOL) areTellieSettingsValid
@@ -146,54 +156,8 @@
      
 -(void) initialiseTellie
 {
-    [self updateGuiTellieIsNotReady];
     [telliePollButton setEnabled:YES];
     
-}
-
--(void) updateGuiTellieIsReady
-{
-    //Now we have confirmed the validation
-    [tellieValidateSettingsButton setEnabled:NO];
-    [tellieChangeSettings setEnabled:YES];
-    [startTellieButton setEnabled:YES];
-    [stopTellieButton setEnabled:YES];
-    [tellieChannelTf setEnabled:NO];
-    [telliePhotonsTf setEnabled:NO];
-    [telliePulseRateTf setEnabled:NO];
-    [telliePulseHeightTf setEnabled:NO];
-    [telliePulseWidthTf setEnabled:NO];
-}
-
--(void) updateGuiTellieIsNotReady
-{
-    //Now we have confirmed the validation
-    [tellieValidateSettingsButton setEnabled:YES];
-    [tellieChangeSettings setEnabled:NO];
-    [startTellieButton setEnabled:NO];
-    [stopTellieButton setEnabled:NO];
-    [tellieChannelTf setEnabled:YES];
-    [telliePhotonsTf setEnabled:YES];
-    [telliePulseRateTf setEnabled:YES];
-    [telliePulseHeightTf setEnabled:YES];
-    [telliePulseWidthTf setEnabled:YES];
-}
-
-//Validate that the GUI settings make sense
--(IBAction)validateTellieSettingsAction:(id)sender
-{
-    //Confirm the validation of the tellie fibre settings
-    BOOL settingsOk = [self areTellieSettingsValid];
-    
-    if(settingsOk){
-        [self updateGuiTellieIsReady];
-    }
-    else if (!settingsOk){
-        [self updateGuiTellieIsNotReady];
-    }
-    else{
-        NSLog(@"TELLIE_CONTROL:Please reset the Tellie GUI by closing it and reopening it\n");
-    }
 }
 
 - (BOOL) isNumeric:(NSString *)s{
@@ -221,8 +185,23 @@
     }
 }*/
 
+-(void)controlTextDidBeginEditing:(NSNotification *)note{
+    
+    BOOL tellieValuesAlreadySet = [self areTellieValuesCorrectlySet:[NSColor greenColor]];
+    
+    if(tellieValuesAlreadySet){
+        [self setTellieTextFieldBackgroundsColors:[NSColor orangeColor]];
+    }
+    else{
+        [[note object] setBackgroundColor:[NSColor orangeColor]];
+    }
+    
+}
+
+//Use this delegate function to check the tellie settings are correct 
 -(void)controlTextDidEndEditing:(NSNotification *)note {
     NSTextField * changedField = [note object];
+    
     
     //check to see if the note is the trigger delay
     if([note object] == tellieTriggerDelayTf)
@@ -262,11 +241,11 @@
         int fibreDelayRemainder = (int)(fibreDelayNumber*100)  % (int)(minimumNumberFibreDelaySteps*100);
         
         if(fibreDelayNumber  > maxmiumFibreDelay){
-            NSLog(@"Tellie: Maximum Trigger Delay is 1275ns, setting to the maximum trigger delay\n");
+            NSLog(@"Tellie: Maximum Fibre Delay is %g ns, setting to the maximum Fibre delay\n",maxmiumFibreDelay);
             [[note object] setFloatValue:maxmiumFibreDelay];
         }
         else if (fibreDelayNumber  < minimumFibreDelay){
-            NSLog(@"Tellie: Minimum Trigger Delay is 0ns, setting to the minimum trigger delay\n");
+            NSLog(@"Tellie: Minimum Fibre Delay is %g ns, setting to the minimum Fibre delay\n",minimumFibreDelay);
             [[note object] setFloatValue:minimumFibreDelay];
         }
         else{
@@ -279,13 +258,78 @@
             }
         }
     }
-    
-    
-    
-    //set the background colour to green
-    //[[note object] setBackgroundColor:[NSColor greenColor]];
-    //[[note object] setForegroundColor:[NSColor greenColor]];
-    //[[note object] setColor:[NSColor greenColor]];
+    // check the pulse rate
+    else if ([note object] == telliePulseRateTf)
+    {
+        float pulseRate = [[note object] floatValue];
+        //0.25ns discrete steps
+        float minimumNumberPulseRateSteps = 0.004;     //in ns
+        float minimumPulseRate = 0.1;                //in ns
+        float maxmiumPulseRate = 256.020;             //in ns
+        int pulseRateRemainder = (int)(pulseRate*1000)  % (int)(minimumNumberPulseRateSteps*1000);
+        
+        if(pulseRate  > maxmiumPulseRate){
+            NSLog(@"Tellie: Maximum Pulse Rate is %g ns, setting to the maximum Pulse Rate\n",maxmiumPulseRate);
+            [[note object] setFloatValue:maxmiumPulseRate];
+        }
+        else if (pulseRate  < minimumPulseRate){
+            NSLog(@"Tellie: Minimum Fibre Delay is %g ns, setting to the minimum Fibre delay\n",minimumPulseRate);
+            [[note object] setFloatValue:minimumPulseRate];
+        }
+        else{
+            if (pulseRate == 0) {
+                //do nothing, this value is valid
+            }
+            else {
+                //Make the trigger delay divisible by 5
+                [[note object] setFloatValue:(pulseRate  - ((float)pulseRateRemainder/1000.0))];
+            }
+        }
+    }
+    //check the values of the pulse width and height
+    else if( ([note object] == telliePulseHeightTf) || ([note object] == telliePulseWidthTf)){
+        
+        int currentValue = [[note object] intValue];
+        int minimumValue = 0;
+        int maxmiumValue = 16383;
+        
+        if(currentValue  > maxmiumValue){
+            NSLog(@"Tellie: Maximum Fibre Width/Height is %i ns, setting to the maximum Fibre Width/Height\n",maxmiumValue);
+            [[note object] setIntValue:maxmiumValue];
+        }
+        else if (currentValue  < minimumValue){
+            NSLog(@"Tellie: Minimum Fibre Width/Height is %i ns, setting to the minimum Fibre Width/Height\n",minimumValue);
+            [[note object] setIntValue:minimumValue];
+        }
+        else{
+            //do nothing
+        }
+    }
+    //check the channel value
+    else if([note object] == tellieChannelTf){
+        
+        int currentChannelNumber = [[note object] intValue];
+        int minimumChannelNumber = 1;
+        int maxmiumChannelNumber = 110;
+        
+        if(currentChannelNumber  > maxmiumChannelNumber){
+            NSLog(@"Tellie: Channel Numbers only go up to %i\n",maxmiumChannelNumber);
+            [[note object] setIntValue:maxmiumChannelNumber];
+        }
+        else if (currentChannelNumber  < minimumChannelNumber){
+            NSLog(@"Tellie: Channel Numbers are not greater than %i\n\n",minimumChannelNumber);
+            [[note object] setIntValue:minimumChannelNumber];
+        }
+        else{
+            //do nothing
+        }
+    }
+    //check any other delegate accidentally assigned to the file's owner 
+    else{
+        //do nothing
+    }
+    //set the background colour
+    //[[note object] setBackgroundColor:[NSColor orangeColor]];
 }
 
 
@@ -298,65 +342,115 @@
 //manual override to stop the Tellie Fibre firing
 -(IBAction)stopTellieFibreAction:(id)sender
 {
+    [self setTellieTextFieldBackgroundsColors:[NSColor orangeColor]];
     [model stopTellieFibre:nil];
+}
+
+-(void)setTellieTextFieldBackgroundsColors:(NSColor*)aColor
+{
+    [tellieTriggerDelayTf setBackgroundColor:aColor];
+    [tellieChannelTf setBackgroundColor:aColor];
+    [tellieFibreDelayTf setBackgroundColor:aColor];
+    [telliePulseWidthTf setBackgroundColor:aColor];
+    [telliePulseHeightTf setBackgroundColor:aColor];
+    [telliePulseRateTf setBackgroundColor:aColor];
+}
+
+-(BOOL)areTellieValuesCorrectlySet:(NSColor*)aColor{
+    
+    BOOL backgroundColorSet = YES;
+    backgroundColorSet *= [[tellieTriggerDelayTf backgroundColor] isEqualTo:aColor];
+    backgroundColorSet *= [[tellieFibreDelayTf backgroundColor] isEqualTo:aColor];
+    backgroundColorSet *= [[telliePulseWidthTf backgroundColor] isEqualTo:aColor];
+    backgroundColorSet *= [[telliePulseHeightTf backgroundColor] isEqualTo:aColor];
+    backgroundColorSet *= [[telliePulseRateTf backgroundColor] isEqualTo:aColor];
+    return backgroundColorSet;
+}
+
+
+
+-(IBAction)validateTellieSettingsAction:(id)sender{
+    [tellieTriggerDelayTf.window makeFirstResponder:nil];
+    [tellieFibreDelayTf.window makeFirstResponder:nil];
+    [telliePulseWidthTf.window makeFirstResponder:nil];
+    [telliePulseHeightTf.window makeFirstResponder:nil];
+    [telliePulseRateTf.window makeFirstResponder:nil];
+
+    //check the settings are validated and have been set
+    if([self areTellieValuesCorrectlySet:[NSColor orangeColor]]){
+        [self setTellieTextFieldBackgroundsColors:[NSColor greenColor]];
+    }
+    else{
+        NSLog(@"Tellie: Validate all settings for Tellie\n");
+    }
+}
+
+
+-(BOOL)isTellieRunning
+{
+    BOOL tellieRunInProgress = NO;
+    NSArray*  snopModelObjects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel * aSnopModel = [snopModelObjects objectAtIndex:0];
+    int runType = [aSnopModel getRunType];
+    
+    //collect ORRunModel objects
+    NSArray*  runModelObjects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
+    ORRunModel* aRunModel = [runModelObjects objectAtIndex:0];
+    
+
+    //check there is a tellie run going
+    if((runType == kRunTellie) && ([aRunModel isRunning])){
+        tellieRunInProgress = YES;
+    }
+    else{
+        tellieRunInProgress = NO;
+    }
+    return tellieRunInProgress;
 }
 
 -(IBAction)fireTellieFibreAction:(id)sender
 {
-    [model fireTellieFibre:nil];
-}
-
--(BOOL) isTellieChannelValid
-{
-    //Need logic to check the channel is correct here
-    return YES;
-}
-
--(BOOL) isTelliePhotonNumberValid
-{
-    //Need a valid range for the number of photons for Tellie
-    return YES;
-}
-
--(BOOL) isTelliePulseRateValid
-{
-    //Need a valid range for the Pulse rate of Tellie
-    return YES;
-}
-
--(BOOL) isTelliePulseHeightValid
-{
-    //Need a valid pulse height range for Tellie
-    return YES;
-}
-
--(BOOL) isTelliePulseWidthValid
-{
-    //Need a valid Pulse width range for Tellie
-    return YES;
-}
-
--(BOOL) isTellieTriggerDelayValid
-{
-    //0 to 1275 ns (in 5ns discrete steps, so again, adjustment needed if user enters e.g. 1.0 ns)
-    int minimumTriggerDelay = 0;
-    int maximumTriggerDelay = 1275;
-    NSNumber *tellieTriggerDelay = [NSNumber numberWithInt:[[tellieTriggerDelayTf value] intValue]];
-    if( ([tellieTriggerDelay intValue] <= maximumTriggerDelay) && ([tellieTriggerDelay intValue] >= minimumTriggerDelay)){
-        NSLog(@"TELLIE_CONTROL: Setting Trigger Delay to %i ns\n",[tellieTriggerDelay intValue]);
-        return YES;
+    [tellieTriggerDelayTf.window makeFirstResponder:nil];
+    [tellieFibreDelayTf.window makeFirstResponder:nil];
+    [telliePulseWidthTf.window makeFirstResponder:nil];
+    [telliePulseHeightTf.window makeFirstResponder:nil];
+    [telliePulseRateTf.window makeFirstResponder:nil];
+    
+    NSMutableDictionary *fireTellieCommands = [[NSMutableDictionary alloc] initWithCapacity:10];
+    [fireTellieCommands setObject:[NSNumber numberWithInt:[telliePulseWidthTf intValue]] forKey:@"pulse_width"];
+    [fireTellieCommands setObject:[NSNumber numberWithInt:[telliePulseHeightTf intValue]] forKey:@"pulse_height"];
+    [fireTellieCommands setObject:[NSNumber numberWithFloat:[telliePulseRateTf floatValue]] forKey:@"pulse_rate"];
+    [fireTellieCommands setObject:[NSNumber numberWithInt:[tellieChannelTf intValue]] forKey:@"channel"];
+    [fireTellieCommands setObject:[NSNumber numberWithFloat:[tellieFibreDelayTf floatValue]] forKey:@"fibre_delay"];
+    [fireTellieCommands setObject:[NSNumber numberWithInt:[tellieTriggerDelayTf intValue]] forKey:@"trigger_delay"];
+    
+    //check the settings are validated and have been set 
+    if([self areTellieValuesCorrectlySet:[NSColor greenColor]]){
+        //lock the settings
+        
+        //check to see that tellie is running 
+        if([self isTellieRunning]){
+            //update the subRun settings held in the model
+            NSMutableDictionary *tellieSettings = [[NSMutableDictionary alloc] initWithCapacity:10];
+            [tellieSettings setObject:[NSNumber numberWithInt:[tellieTriggerDelayTf intValue]] forKey:@"trigger_delay"];
+            [tellieSettings setObject:[NSNumber numberWithFloat:[tellieFibreDelayTf floatValue]] forKey:@"fibre_delay"];
+            [tellieSettings setObject:[NSNumber numberWithInt:[telliePulseRateTf floatValue]] forKey:@"pulse_rate"];
+            [tellieSettings setObject:[NSNumber numberWithInt:[telliePulseHeightTf intValue]] forKey:@"pulse_height"];
+            [tellieSettings setObject:[NSNumber numberWithInt:[telliePulseWidthTf intValue]] forKey:@"pulse_width"];
+            [tellieSettings setObject:[NSNumber numberWithInt:[tellieChannelTf intValue]] forKey:@"channel"];
+            [model setTellieSubRunSettings:tellieSettings];
+            [model fireTellieFibre:fireTellieCommands];
+        }
+        else{
+            NSLog(@"Tellie: Please start a Tellie run, before firing fibres\n");
+        }
     }
     else{
-        NSLog(@"TELLIE_CONTROL: Trigger delay cannot be larger than 1275ns\n");
-        return NO;
+        NSLog(@"Tellie: Validate all settings for Tellie\n");
     }
+    
 }
 
--(BOOL) isTellieFibreDelayValid
-{
-    //Need a valid fibre delay range
-    return YES;
-}
 
 //SMELLIE functions -------------------------
 
@@ -748,6 +842,36 @@
     
     
 }
+
+-(void) fetchCurrentTellieSubRunFile
+{
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel* aSnotModel = [objs objectAtIndex:0];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:%u/smellie/_design/smellieMainQuery/_view/fetchMostRecentConfigVersion?descending=True&limit=1",[aSnotModel orcaDBIPAddress],[aSnotModel orcaDBPort]];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSNumber *currentVersionNumber;
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSError *error =  nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[ret dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    if(!error){
+        @try{
+            //format the json response
+            NSString *stringValueOfCurrentVersion = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"rows"] valueForKey:@"value"]objectAtIndex:0]];
+            currentVersionNumber = [NSNumber numberWithInt:[stringValueOfCurrentVersion intValue]];
+        }
+        @catch (NSException *e) {
+            NSLog(@"Error in fetching from the TellieDb: %@",e);
+        }
+    }
+    else{
+        NSLog(@"Error querying couchDB, please check the connection is correct %@",error);
+    }
+
+    
+    
+}
+
 
 -(NSNumber*) fetchRecentVersion
 {

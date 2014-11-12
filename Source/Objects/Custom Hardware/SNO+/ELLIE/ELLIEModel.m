@@ -63,7 +63,9 @@ NSString* ORELLIERunFinished = @"ORELLIERunFinished";
 @synthesize exampleTask;
 @synthesize smellieRunHeaderDocList;
 @synthesize smellieSubRunInfo,
+tellieRunDoc,
 currentOrcaSettingsForSmellie,
+tellieSubRunSettings,
 smellieDBReadInProgress = _smellieDBReadInProgress;
 
 - (void) setUpImage
@@ -107,6 +109,46 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
 }
 
 
+-(void) startTellieRun
+{
+    //Collect a series of objects from the SNOPModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel* aSnotModel = [objs objectAtIndex:0];
+    
+    //add run control object
+    NSArray*  runControlObjsArray = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
+    runControl = [runControlObjsArray objectAtIndex:0];
+    
+    
+    if(![runControl isRunning]){
+        [aSnotModel setRunType:kRunTellie];
+        [runControl performSelectorOnMainThread:@selector(startRun) withObject:nil waitUntilDone:YES];
+    }
+    
+    //check the run is going and that it is a tellie run
+    if(([runControl isRunning]) && ([aSnotModel getRunType] == kRunTellie)){
+        //start the tellie run document
+        [self _pushInitialTellieRunDocument];
+    }
+    
+}
+
+-(void) stopTellieRun
+{
+    //Collect a series of objects from the SNOPModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel* aSnotModel = [objs objectAtIndex:0];
+    [aSnotModel setRunType:kRunUndefined];
+    
+    //add run control object
+    NSArray*  runControlObjsArray = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
+    runControl = [runControlObjsArray objectAtIndex:0];
+    
+    if([runControl isRunning]){
+        [runControl performSelectorOnMainThread:@selector(haltRun) withObject:nil waitUntilDone:YES];
+    }
+}
+
 /* TELLIE Functions */
 //This function polls the TELLIE hardware using an XMLPRC Server and requests the response from the hardware
 -(void) pollTellieFibre
@@ -117,12 +159,30 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     NSLog(@"Response from Tellie: %@\n",responseFromTellie);
 }
 
--(void) fireTellieFibre:(NSArray*)fireCommands
+-(void) fireTellieFibre:(NSMutableDictionary*)fireCommands
 {
-    NSString *responseFromTellie = [[NSString alloc] init];
+    //add run control object
+    NSArray*  runControlObjsArray = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
+    runControl = [runControlObjsArray objectAtIndex:0];
+    
+    //start a new subrun
+    [runControl performSelectorOnMainThread:@selector(prepareForNewSubRun) withObject:nil waitUntilDone:YES];
+    [runControl performSelectorOnMainThread:@selector(startNewSubRun) withObject:nil waitUntilDone:YES];
+    
+    //wait a small amount of time to establish sub run info 
+    [NSThread sleepForTimeInterval:0.5f];
+    
+    //TODO:Add this back in 
+    //Post to the Database what is about to happen
+    //NSString *responseFromTellie = [[NSString alloc] init];
     //NSArray * nullCommandArguments = @[@"0",@"0",@"0"];
-    responseFromTellie =[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_fire_script.py" withCmdLineArgs:nil];
-    NSLog(@"Response from Tellie: %@\n",responseFromTellie);
+    
+    //responseFromTellie =[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_fire_script.py" withCmdLineArgs:nil];
+    //NSLog(@"Response from Tellie: %@\n",responseFromTellie);
+    
+    //TODO: Only post if there is a good reason.
+    [self updateTellieDocument:fireCommands];
+
 }
 
 -(void) stopTellieFibre:(NSArray*)fireCommands
@@ -311,6 +371,88 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     [runDocPool release];
 }
 
+-(void) _pushInitialTellieRunDocument
+{
+    NSAutoreleasePool* runDocPool = [[NSAutoreleasePool alloc] init];
+    NSMutableDictionary* runDocDict = [[NSMutableDictionary alloc] initWithCapacity:10];
+    
+
+    NSArray*  objs3 = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
+    runControl = [objs3 objectAtIndex:0];
+    
+    NSString* docType = [NSMutableString stringWithFormat:@"tellie_run"];
+    
+    NSMutableArray *subRunArray = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    [runDocDict setObject:docType forKey:@"type"];
+    [runDocDict setObject:[NSString stringWithFormat:@"%i",0] forKey:@"version"];
+    [runDocDict setObject:[NSString stringWithFormat:@"%lu",[runControl runNumber]] forKey:@"index"];
+    [runDocDict setObject:[self stringUnixFromDate:nil] forKey:@"issue_time_unix"];
+    [runDocDict setObject:[self stringDateFromDate:nil] forKey:@"issue_time_iso"];
+    [runDocDict setObject:[NSNumber numberWithInt:[runControl runNumber]] forKey:@"run"];
+    [runDocDict setObject:subRunArray forKey:@"sub_run_info"];
+    
+    self.tellieRunDoc = runDocDict;
+    
+    [[self orcaDbRefWithEntryDB:self withDB:@"tellie"] addDocument:runDocDict tag:kTellieRunDocumentAdded];
+    
+    //wait for main thread to receive acknowledgement from couchdb
+    NSDate* timeout = [NSDate dateWithTimeIntervalSinceNow:2.0];
+    while ([timeout timeIntervalSinceNow] > 0 && ![self.tellieRunDoc objectForKey:@"_id"]) {
+        [NSThread sleepForTimeInterval:0.1];
+    }
+    
+    [runDocPool release];
+}
+
+- (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
+{
+    
+    //Collect a series of objects from the SNOPModel
+    NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+    SNOPModel* aSnotModel = [objs objectAtIndex:0];
+    
+    ORCouchDB* result = [ORCouchDB couchHost:aSnotModel.orcaDBIPAddress
+                                        port:aSnotModel.orcaDBPort
+                                    username:aSnotModel.orcaDBUserName
+                                         pwd:aSnotModel.orcaDBPassword
+                                    database:entryDB
+                                    delegate:self];
+    
+    if (aCouchDelegate)
+        [result setDelegate:aCouchDelegate];
+    
+    return [[result retain] autorelease];
+}
+
+- (void) updateTellieDocument:(NSDictionary*)subRunDoc
+{
+    NSAutoreleasePool* runDocPool = [[NSAutoreleasePool alloc] init];
+    NSMutableDictionary* runDocDict = [[self.tellieRunDoc mutableCopy] autorelease];
+    NSMutableDictionary* subRunDocDict = [[self.tellieSubRunSettings mutableCopy] autorelease];
+    
+    [subRunDocDict setObject:[NSNumber numberWithInt:[runControl subRunNumber]] forKey:@"sub_run_number"];
+        
+    NSMutableArray * subRunInfo = [[NSMutableArray alloc] initWithCapacity:10];
+    subRunInfo = [[runDocDict objectForKey:@"sub_run_info"] mutableCopy];
+    
+    [subRunInfo addObject:subRunDocDict];
+    [runDocDict setObject:subRunInfo forKey:@"sub_run_info"];
+    
+    self.tellieRunDoc = runDocDict;
+    
+    
+    //check to see if run is offline or not
+    if([[ORGlobal sharedGlobal] runMode] == kNormalRun){
+        [[self orcaDbRefWithEntryDB:self withDB:@"tellie"]
+                            updateDocument:runDocDict
+                                documentId:[runDocDict objectForKey:@"_id"]
+                                       tag:kTellieRunDocumentUpdated];
+    }
+    
+    [runDocPool release];
+}
+
 -(void) _pushEllieConfigDocToDB:(NSString*)aCouchDBName runFiletoPush:(NSMutableDictionary*)customRunFile withDocType:(NSString*)aDocType
 {
     NSAutoreleasePool* configDocPool = [[NSAutoreleasePool alloc] init];
@@ -370,6 +512,12 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
             {
                 NSLog(@"Smellie configuration file Object: %@\n",aResult);
                 //[self parseSmellieConfigHeaderDoc:aResult];
+            }
+            else if ([aTag isEqualToString:kTellieRunDocumentAdded])
+            {
+                NSMutableDictionary* runDoc = [[[self tellieRunDoc] mutableCopy] autorelease];
+                [runDoc setObject:[aResult objectForKey:@"id"] forKey:@"_id"];
+                self.tellieRunDoc = runDoc;
             }
             
             //If no tag is found for the query result
