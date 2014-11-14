@@ -94,9 +94,11 @@
     
     bool _smellieDBReadInProgress;
     bool _smellieDocUploaded;
+    unsigned long snopRunTypeMask;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
+@property (nonatomic,assign) unsigned long snopRunTypeMask;
 
 @property (nonatomic,copy) NSString* orcaDBUserName;
 @property (nonatomic,copy) NSString* orcaDBPassword;
@@ -187,8 +189,8 @@
 - (ORCouchDB*) orcaDbRefWithEntryDB:(id)aCouchDelegate withDB:(NSString*)entryDB;
 
 //run type definition functions
-- (void) setRunType:(int)aRunType;
-- (int) getRunType;
+- (void) setSnopRunTypeMask:(unsigned long)aRunType;
+- (unsigned long) getSnopRunTypeMask;
 
 //smellie functions -------
 - (void) getSmellieRunListInfo;
