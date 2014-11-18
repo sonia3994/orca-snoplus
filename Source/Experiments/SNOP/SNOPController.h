@@ -40,6 +40,9 @@
     IBOutlet NSComboBox *debugDBIPAddressPU;
     IBOutlet NSMatrix* hvStatusMatrix;
     
+    //Run Types Information
+    IBOutlet NSMatrix*  globalRunTypesMatrix;
+    
     //Run information
     IBOutlet NSTextField* currentRunNumber;
     IBOutlet NSTextField* currentRunType;
@@ -84,12 +87,17 @@
     NSMutableDictionary *smellieRunFileList;
     NSDictionary *smellieRunFile;
     NSThread *smellieThread;
+    NSNumber * runTypeMask;
+    
+    NSMutableDictionary *snopRunTypeMaskDic; 
     
 }
 
 @property (nonatomic,retain) NSImage* runStopImg;
 @property (nonatomic,retain) NSMutableDictionary *smellieRunFileList;
+@property (nonatomic,retain) NSMutableDictionary *snopRunTypeMaskDic;
 @property (nonatomic,retain) NSDictionary *smellieRunFile;
+@property (nonatomic,retain) NSNumber *runTypeMask;
 
 #pragma mark ¥¥¥Initialization
 - (void) registerNotificationObservers;
@@ -132,6 +140,8 @@
 - (void) setDetectorTitle;
 - (void) viewTypeChanged:(NSNotification*)aNote;
 - (void) tabView:(NSTabView*)aTabView didSelectTabViewItem:(NSTabViewItem*)tabViewItem;
+-(void) windowDidLoad;
+-(void) fetchRunMaskSettings;
 
 @end
 @interface ORDetectorView (SNO)

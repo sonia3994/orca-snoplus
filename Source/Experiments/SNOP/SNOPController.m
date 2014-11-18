@@ -34,13 +34,16 @@
 #import "ORMTCModel.h"
 #import "SNOP_Run_Constants.h"
 
+
 NSString* ORSNOPRequestHVStatus = @"ORSNOPRequestHVStatus";
 
 @implementation SNOPController
 
 @synthesize
 runStopImg = _runStopImg,
+runTypeMask,
 smellieRunFileList,
+snopRunTypeMaskDic,
 smellieRunFile;
 
 #pragma mark ¥¥¥Initialization
@@ -48,6 +51,30 @@ smellieRunFile;
 {
     self = [super initWithWindowNibName:@"SNOP"];
     return self;
+}
+
+-(void)windowDidLoad
+{
+    
+    /*if([[globalRunTypesMatrix cellAtRow:i column:0] intValue] == 1){
+        maskValue |= (0x1UL << i);
+    }*/
+    
+    //build run type dictionary from the runTypes in the GUI
+    self.snopRunTypeMaskDic = nil; //reset the current GUI information
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] initWithCapacity:20];
+    int i;
+    for(i=0;i<31;i++){
+        NSButtonCell * test = [[NSButtonCell alloc] init];
+        test = [globalRunTypesMatrix cellAtRow:i column:0];
+        NSString * keyString = [[NSString alloc] init];
+        keyString = [test title];
+        //this works
+        [temp setObject:[NSString stringWithFormat:@"empty"] forKey:keyString];
+
+    }
+    
+    self.snopRunTypeMaskDic = temp;
 }
 
 
@@ -58,12 +85,12 @@ smellieRunFile;
 
 -(void) awakeFromNib
 {
-	detectorSize		= NSMakeSize(620,595);
-	detailsSize		= NSMakeSize(620,595);//NSMakeSize(450,589);
-	focalPlaneSize		= NSMakeSize(620,595);//NSMakeSize(450,589);
-	couchDBSize		= NSMakeSize(620,595);//NSMakeSize(450,480);
-	hvMasterSize		= NSMakeSize(620,595);
-	runsSize		= NSMakeSize(620,595);
+	detectorSize		= NSMakeSize(820,640);
+	detailsSize		= NSMakeSize(820,640);//NSMakeSize(450,589);
+	focalPlaneSize		= NSMakeSize(820,640);//NSMakeSize(450,589);
+	couchDBSize		= NSMakeSize(820,640);//(620,595);//NSMakeSize(450,480);
+	hvMasterSize		= NSMakeSize(820,640);
+	runsSize		= NSMakeSize(820,640);
 	
 	blankView = [[NSView alloc] init];
     [tabView setFocusRingType:NSFocusRingTypeNone];
@@ -126,6 +153,12 @@ smellieRunFile;
                          name: ORRunStatusChangedNotification
                        object: theRunControl];
     
+    //TODO: add the notification for changedRunType on SNO+
+    /*[notifyCenter addObserver:self
+                     selector:@selector(runTypesChanged:)
+                         name:nil
+                       object:nil];*/
+    
     
 }
 
@@ -137,8 +170,23 @@ smellieRunFile;
     [self dbOrcaDBIPChanged:nil];
     [self dbDebugDBIPChanged:nil];
     [self fetchNhitSettings];
+    [self fetchRunMaskSettings];
     //[self runNumberChanged:nil]; //update the run number
     [self runStatusChanged:nil]; //update the run status
+}
+
+-(void) fetchRunMaskSettings
+{
+    int i;
+    for(i=0;i<31;i++){
+        unsigned long mask = 0;
+        mask = [[model runTypeMask] unsignedLongValue];
+        //read the bitmask from the run mask
+        int valueToSetInMatrix = (int) ((mask >> i) & 0x1UL);
+        [[globalRunTypesMatrix cellAtRow:i column:0] setIntValue:valueToSetInMatrix];
+        
+    }
+    //[globalRunTypesMatrix
 }
 
 -(IBAction)setTellie:(id)sender
@@ -152,7 +200,7 @@ smellieRunFile;
 
 -(IBAction)fireTellie:(id)sender
 {
-    
+
 }
 
 -(void)fetchNhitSettings
@@ -213,18 +261,18 @@ smellieRunFile;
 
         //Check to see if TELLIE is enabled
         if([tellieEnabled isEnabled]){
-            [model setRunType:kRunStandardPhysicsRunWithoutTellie];
+            //[model setRunType:kRunStandardPhysicsRunWithoutTellie];
         }
         else{
-            [model setRunType:kRunStandardPhysicsRun];
+            //[model setRunType:kRunStandardPhysicsRun];
         }
     }
     else if ([[sender title] isEqualToString:@"Start Maint. Run"]){
-        [model setRunType:kRunMaintainence];
+        //[model setRunType:kRunMaintainence];
     }
     else{
         NSLog(@"SNOP_CONTROL:Run isn't correctly defined. Please check NSButton titles");
-        [model setRunType:kRunUndefined];
+        //[model setRunType:kRunUndefined];
     }
     
     
@@ -242,21 +290,58 @@ smellieRunFile;
         
         //Check to see if TELLIE is enabled
         if([tellieEnabled isEnabled]){
-            [model setRunType:kRunStandardPhysicsRunWithoutTellie];
+            //[model setRunType:kRunStandardPhysicsRunWithoutTellie];
         }
         else{
-            [model setRunType:kRunStandardPhysicsRun];
+            //[model setRunType:kRunStandardPhysicsRun];
         }
     }
     else if ([[sender title] isEqualToString:@"New Maint. Run"]){
-        [model setRunType:kRunMaintainence];
+        //[model setRunType:kRunMaintainence];
     }
     else{
         NSLog(@"SNOP_CONTROL:Run isn't correctly defined. Please check NSButton titles");
-        [model setRunType:kRunUndefined];
+        //[model setRunType:kRunUndefined];
     }
     
 }
+
+
+- (IBAction)changedRunTypeMatrixAction:(id)sender
+{    
+    //write in the new runType mask
+    unsigned long maskValue = 0;
+    int i;
+    //only goes up to 31 because there is some strange problem with objective c recasting implictly an unsigned long as a long
+    for(i=0;i<31;i++){
+        if([[globalRunTypesMatrix cellAtRow:i column:0] intValue] == 1){
+            NSButtonCell * test = [[NSButtonCell alloc] init];
+            test = [globalRunTypesMatrix cellAtRow:i column:0];
+            NSString * keyString = [[NSString alloc] init];
+            keyString = [test title];
+            [snopRunTypeMaskDic setObject:[NSNumber numberWithInt:[[globalRunTypesMatrix cellAtRow:i column:0] intValue]] forKey:keyString];
+            //set the actual bit mask
+            maskValue |= (0x1UL << i);
+        }
+    }
+    
+    //self.runTypeMask = nil;
+    NSNumber * maskValueForStore = [[NSNumber alloc] init];
+    maskValueForStore = [NSNumber numberWithUnsignedLong:maskValue];
+    self.runTypeMask = maskValueForStore;
+    
+    [model setRunTypeMask:maskValueForStore];
+    
+    //A bit of test code to see a 32-bit word
+    /*NSMutableString *str = [NSMutableString stringWithFormat:@""];
+    for(NSInteger numberCopy = maskValue; numberCopy > 0; numberCopy >>= 1)
+    {
+        // Prepend "0" or "1", depending on the bit
+        [str insertString:((numberCopy & 1) ? @"1" : @"0") atIndex:0];
+    }*/
+}
+
+
 - (IBAction)stopRunAction:(id)sender {
     NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORRunModel")];
     ORRunModel* theRunControl = [objs objectAtIndex:0];
@@ -264,7 +349,7 @@ smellieRunFile;
     [currentStatus setStringValue:[self getStoppingString]];
     
     //reset the run Type to be undefined
-    [model setRunType:kRunUndefined];
+    //[model setRunType:kRunUndefined];
 }
 
 - (void) startRun
@@ -797,7 +882,7 @@ smellieRunFile;
     [smellieStartRunButton setEnabled:NO];
     
     //assign the run type as a SMELLIE run
-    [model setRunType:kRunSmellie];
+    //[model setRunType:kRunSmellie];
 
     //start different sub runs as the laser runs through
     //communicate with smellie model
@@ -811,9 +896,13 @@ smellieRunFile;
     //Method for completing this without a new thread 
     //[theELLIEModel startSmellieRun:smellieRunFile];
     
-    smellieThread = [[NSThread alloc] initWithTarget:theELLIEModel selector:@selector(startSmellieRun:) object:smellieRunFile];
-    [smellieThread start];
-    
+    if([model isRunTypeMaskedIn:@"Smellie"]){
+        smellieThread = [[NSThread alloc] initWithTarget:theELLIEModel selector:@selector(startSmellieRun:) object:smellieRunFile];
+        [smellieThread start];
+    }
+    else{
+        NSLog(@"Smellie Run Type is not masked in. Please mask this in and try again \n");
+    }
     
     //[NSThread detachNewThreadSelector:@selector(startSmellieRun:) toTarget:theELLIEModel withObject:smellieRunFile];
     
@@ -831,7 +920,7 @@ smellieRunFile;
     
     
     //unassign the run type as a SMELLIE run
-    [model setRunType:kRunUndefined];
+    //[model setRunType:kRunUndefined];
    
     //Collect a series of objects from the ELLIEModel
     NSArray*  objs = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ELLIEModel")];
@@ -869,7 +958,7 @@ smellieRunFile;
     [smellieStopRunButton setEnabled:NO];
     
     //unassign the run type as a SMELLIE run
-    [model setRunType:kRunUndefined];
+    //[model setRunType:kRunUndefined];
     //[smellieCheckInterlock setEnabled:NO];
     //turn the interlock off
     //(if a smellie run is currently operating) start a maintainence run
