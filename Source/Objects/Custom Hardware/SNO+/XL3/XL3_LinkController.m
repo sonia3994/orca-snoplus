@@ -603,6 +603,8 @@ static NSDictionary* xl3Ops;
 
     [hvRelayMaskLowField setIntValue:relayMask & 0xffffffff];
     [hvRelayMaskHighField setIntValue:relayMask >> 32];
+    
+    [self splitRelayMask:relayMask];
 
     unsigned char slot;
     unsigned char pmtic;
@@ -1188,12 +1190,25 @@ static NSDictionary* xl3Ops;
 {
     [model setIsPollingXl3:false];
 }
+
+//split the relayMask into a low and high parts for posting to couchdb
+-(void)splitRelayMask:(unsigned long long)aHvRelayMask
+{
+    //split the hvRelayMask into two parts
+    uint32_t highMask = (uint32_t)((aHvRelayMask & 0xFFFFFFFF00000000ULL) >> 32);
+    uint32_t lowMask = (uint32_t)(aHvRelayMask & 0xFFFFFFFF);
+    [model setRelayHighMask:highMask];
+    [model setRelayLowMask:lowMask];
+}
+
+
 //hv
 - (IBAction)hvRelayMaskHighAction:(id)sender
 {
     [[sender window] makeFirstResponder:tabView];
     unsigned long long newRelayMask = [model relayMask] & 0xFFFFFFFFULL;
     newRelayMask |= ((unsigned long long)[sender intValue]) << 32;
+    [self splitRelayMask:newRelayMask];
     [model setRelayMask:newRelayMask];
 }
 
@@ -1202,6 +1217,7 @@ static NSDictionary* xl3Ops;
     [[sender window] makeFirstResponder:tabView];
     unsigned long long newRelayMask = [model relayMask] & (0xFFFFFFFFULL << 32);
     newRelayMask |= [sender intValue] & 0xFFFFFFFF;
+    [self splitRelayMask:newRelayMask];
     [model setRelayMask:newRelayMask];    
 }
 
@@ -1216,6 +1232,10 @@ static NSDictionary* xl3Ops;
             newRelayMask |= ([[sender cellAtRow:pmtic column:15-slot] intValue]?1ULL:0ULL) << (slot*4 + pmtic);
         }
     }
+    
+    //split the hvRelayMask into two parts
+    [self splitRelayMask:newRelayMask];
+    
     [model setRelayMask:newRelayMask];
 }
 
