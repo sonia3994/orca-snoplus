@@ -314,8 +314,8 @@ mtcConfigDoc = _mtcConfigDoc;
         data[5] = _epedStruct.chargePulseAmp;
         data[6] = _epedStruct.stepNumber;
         data[7] = _epedStruct.calType;
-        data[8] = 0;//_epedStruct.nTSlopePoints;
-        data[9] = 0;
+        data[8] = 0;//_epedStruct.nTSlopePoints; //GTID set by Builder
+        data[9] = _epedStruct.nTSlopePoints; //nTSlopePoints overrides the flag set by builder
         
         NSData* pdata = [[NSData alloc] initWithBytes:data length:sizeof(long)*(eped_rec_length)];
         [[NSNotificationCenter defaultCenter] postNotificationName:ORQueueRecordForShippingNotification object:pdata];
