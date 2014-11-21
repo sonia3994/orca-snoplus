@@ -150,6 +150,8 @@
 - (void) zeroPedestalMasks;
 - (void) updatePedestalMasks:(unsigned int)pattern;
 
+- (void) startPollingWithCrate:(int)aCrateNumber;
+
 #pragma mark ¥¥¥Notifications
 - (void) registerNotificationObservers;
 - (void) runStateChanged:(NSNotification*)aNote;

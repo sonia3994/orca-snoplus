@@ -93,6 +93,28 @@ mtcConfigDoc = _mtcConfigDoc;
 @synthesize smellieRunHeaderDocList;
 
 
+/* Setting up polling of CMOS Rates */
+
+-(void) startPollingWithCrate:(int)aCrateNumber
+{
+    //Gersende and Chris (Xl3 printing status)
+    NSArray* xl3Objects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORXL3Model")];
+    ORXL3Model * currentSelectedXl3; 
+    
+    //Pick the xl3 for the current run number
+    for( id xl3 in xl3Objects){
+        if([xl3 crateNumber] == aCrateNumber){
+            //assign the currentSelectedXl3
+            currentSelectedXl3 = xl3;
+        }
+    }
+    //unsigned short fastestRate = 0;
+    //[currentSelectedXl3 setPollXl3Time:fastestRate];
+    //[currentSelectedXl3 pollXl3:true];
+}
+
+
+
 #pragma mark ¥¥¥Initialization
 
 - (void) setUpImage

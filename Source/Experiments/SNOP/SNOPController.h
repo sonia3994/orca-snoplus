@@ -91,6 +91,8 @@
     
     NSMutableDictionary *snopRunTypeMaskDic; 
     
+    IBOutlet NSButton *startPollingButton;
+    IBOutlet NSTextField *crateNumber;
 }
 
 @property (nonatomic,retain) NSImage* runStopImg;
@@ -110,6 +112,7 @@
 
 #pragma mark ¥¥¥Actions
 - (IBAction) viewTypeAction:(id)sender;
+- (IBAction) pollingAction:(id)sender;
 
 
 - (IBAction) orcaDBIPAddressAction:(id)sender;

@@ -77,6 +77,13 @@ smellieRunFile;
     self.snopRunTypeMaskDic = temp;
 }
 
+/* Controller functions for running the polling loop */
+
+- (IBAction)pollingAction:(id)sender
+{
+    [model startPollingWithCrate:[crateNumber intValue]];
+}
+
 
 - (NSString*) defaultPrimaryMapFilePath
 {
@@ -687,32 +694,32 @@ smellieRunFile;
 	
     if([tabView indexOfTabViewItem:tabViewItem] == 0){
 		[[self window] setContentView:blankView];
-		[self resizeWindowToSize:detectorSize];
+		//[self resizeWindowToSize:detectorSize];
 		[[self window] setContentView:tabView];
     }
     else if([tabView indexOfTabViewItem:tabViewItem] == 5){
         [[self window] setContentView:blankView];
-        [self resizeWindowToSize:runsSize];
+        //[self resizeWindowToSize:runsSize];
         [[self window] setContentView:tabView];
     }
     else if([tabView indexOfTabViewItem:tabViewItem] == 2){
 		[[self window] setContentView:blankView];
-		[self resizeWindowToSize:detailsSize];
+		//self resizeWindowToSize:detailsSize];
 		[[self window] setContentView:tabView];
     }
     else if([tabView indexOfTabViewItem:tabViewItem] == 3){
 		[[self window] setContentView:blankView];
-		[self resizeWindowToSize:focalPlaneSize];
+		//[self resizeWindowToSize:focalPlaneSize];
 		[[self window] setContentView:tabView];
     }
     else if([tabView indexOfTabViewItem:tabViewItem] == 4){
 	    [[self window] setContentView:blankView];
-	    [self resizeWindowToSize:couchDBSize];
+	    //[self resizeWindowToSize:couchDBSize];
 	    [[self window] setContentView:tabView];
     }
     else if([tabView indexOfTabViewItem:tabViewItem] == 5){
 	    [[self window] setContentView:blankView];
-	    [self resizeWindowToSize:hvMasterSize];
+	    //[self resizeWindowToSize:hvMasterSize];
 	    [[self window] setContentView:tabView];
     }
 
