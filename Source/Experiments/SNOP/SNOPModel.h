@@ -97,6 +97,7 @@
     bool _smellieDocUploaded;
     NSMutableDictionary * snopRunTypeMask;
     NSNumber * runTypeMask;
+    bool snopPollingCmos;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
@@ -127,6 +128,7 @@
 
 @property (nonatomic,assign) bool smellieDBReadInProgress;
 @property (nonatomic,assign) bool smellieDocUploaded;
+@property (nonatomic,assign) bool snopPollingCmos;
 
 @property (copy) NSDictionary* runDocument;
 @property (copy) NSDictionary* configDocument;
@@ -151,6 +153,7 @@
 - (void) updatePedestalMasks:(unsigned int)pattern;
 
 - (void) startPollingWithCrate:(int)aCrateNumber;
+- (void) stopPollingWithCrate:(int)aCrateNumber;
 
 #pragma mark ¥¥¥Notifications
 - (void) registerNotificationObservers;

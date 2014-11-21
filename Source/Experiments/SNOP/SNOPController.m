@@ -50,15 +50,18 @@ smellieRunFile;
 -(id)init
 {
     self = [super initWithWindowNibName:@"SNOP"];
+    
     return self;
 }
 
 -(void)windowDidLoad
 {
-    
     /*if([[globalRunTypesMatrix cellAtRow:i column:0] intValue] == 1){
         maskValue |= (0x1UL << i);
     }*/
+    
+    //Set the snopPollingCmos rate to be off
+    [model setSnopPollingCmos:NO]; 
     
     //build run type dictionary from the runTypes in the GUI
     self.snopRunTypeMaskDic = nil; //reset the current GUI information
@@ -81,7 +84,33 @@ smellieRunFile;
 
 - (IBAction)pollingAction:(id)sender
 {
-    [model startPollingWithCrate:[crateNumber intValue]];
+    //Toggle the button
+    if([model snopPollingCmos]){
+        [startPollingButton setStringValue:[NSString stringWithFormat:@"Start Polling"]];
+        [model setSnopPollingCmos:NO]; //turn off the polling
+        @try{
+            [model stopPollingWithCrate:[crateNumber intValue]];
+        }
+        @catch (NSException *e) {
+            NSLog(@"Error trying to stop cmos polling, error given = %@\n",e);
+        }
+        
+    }
+    else if (![model snopPollingCmos]){
+        [startPollingButton setStringValue:[NSString stringWithFormat:@"Stop Polling"]];
+        [model setSnopPollingCmos:YES]; //turn off the polling
+        @try{
+            [model startPollingWithCrate:[crateNumber intValue]];
+        }
+        @catch (NSException *e) {
+            NSLog(@"Error trying to start cmos polling, error given = %@\n",e);
+        }
+    }
+    else{
+        NSLog(@"Error in attempting to poll the CMOS rates from SNOP GUI\n");
+    }
+    
+    
 }
 
 
@@ -138,6 +167,12 @@ smellieRunFile;
                      selector : @selector(hvStatusChanged:)
                          name : ORXL3ModelHvStatusChanged
                         object: nil];
+    
+    [notifyCenter addObserver : self
+                     selector : @selector(cmosValuesChanged:)
+                         name : ORXL3CMOSValuesChanged
+                        object: nil];
+    
     
     [notifyCenter addObserver : self
                      selector : @selector(hvStatusChanged:)
@@ -449,6 +484,13 @@ smellieRunFile;
 - (void) dbDebugDBIPChanged:(NSNotification*)aNote
 {
     [debugDBIPAddressPU setStringValue:[model debugDBIPAddress]];
+}
+
+- (void) cmosValuesChanged:(NSNotification*)aNote
+{
+    //assign the note as an NSMatrix 
+    NSDictionary *dicMatrixToLoad = aNote.userInfo;
+    cmosMatrix = [dicMatrixToLoad objectForKey:@"matrixToSend"];
 }
 
 - (void) hvStatusChanged:(NSNotification*)aNote

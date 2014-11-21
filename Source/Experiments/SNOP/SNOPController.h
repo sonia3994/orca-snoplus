@@ -91,6 +91,7 @@
     
     NSMutableDictionary *snopRunTypeMaskDic; 
     
+    IBOutlet NSMatrix *cmosMatrix;
     IBOutlet NSButton *startPollingButton;
     IBOutlet NSTextField *crateNumber;
 }

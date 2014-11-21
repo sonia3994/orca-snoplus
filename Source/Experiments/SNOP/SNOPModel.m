@@ -88,6 +88,7 @@ smellieDocUploaded = _smellieDocUploaded,
 configDocument  = _configDocument,
 snopRunTypeMask = snopRunTypeMask,
 runTypeMask= runTypeMask,
+snopPollingCmos = snopPollingCmos,
 mtcConfigDoc = _mtcConfigDoc;
 
 @synthesize smellieRunHeaderDocList;
@@ -97,7 +98,6 @@ mtcConfigDoc = _mtcConfigDoc;
 
 -(void) startPollingWithCrate:(int)aCrateNumber
 {
-    //Gersende and Chris (Xl3 printing status)
     NSArray* xl3Objects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORXL3Model")];
     ORXL3Model * currentSelectedXl3; 
     
@@ -108,12 +108,25 @@ mtcConfigDoc = _mtcConfigDoc;
             currentSelectedXl3 = xl3;
         }
     }
-    //unsigned short fastestRate = 0;
-    //[currentSelectedXl3 setPollXl3Time:fastestRate];
-    //[currentSelectedXl3 pollXl3:true];
+    unsigned short fastestRate = 0;
+    [currentSelectedXl3 setPollXl3Time:fastestRate];
+    [currentSelectedXl3 pollXl3:true];
 }
 
-
+- (void)stopPollingWithCrate:(int)aCrateNumber
+{
+    NSArray* xl3Objects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORXL3Model")];
+    ORXL3Model * currentSelectedXl3;
+    
+    //Pick the xl3 for the current run number
+    for( id xl3 in xl3Objects){
+        if([xl3 crateNumber] == aCrateNumber){
+            //assign the currentSelectedXl3
+            currentSelectedXl3 = xl3;
+        }
+    }
+    [currentSelectedXl3 setIsPollingCMOSRates:false];
+}
 
 #pragma mark ¥¥¥Initialization
 

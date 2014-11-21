@@ -90,6 +90,7 @@ NSString* ORXL3ModelHVCMOSRateLimitChanged = @"ORXL3ModelHVCMOSRateLimitChanged"
 NSString* ORXL3ModelHVCMOSRateIgnoreChanged = @"ORXL3ModelHVCMOSRateIgnoreChanged";
 NSString* ORXL3ModelXl3VltThresholdChanged = @"ORXL3ModelXl3VltThresholdChanged";
 NSString* ORXL3ModelXl3VltThresholdInInitChanged = @"ORXL3ModelXl3VltThresholdInInitChanged";
+NSString* ORXL3CMOSValuesChanged = @"ORXL3CMOSValuesChanged";
 
 extern NSString* ORSNOPRequestHVStatus;
 
@@ -3023,6 +3024,66 @@ void SwapLongBlock(void* p, int32_t n)
             }
             [msg appendFormat:@"\n"];
             NSLogFont([NSFont userFixedPitchFontOfSize:10], msg);
+        }
+        
+        /*Fetch the SNOP Model to update the SNOP GUI */
+        NSArray* allSNOPModelObjects = [[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"SNOPModel")];
+        SNOPModel* theSNOPModel = [allSNOPModelObjects objectAtIndex:0];
+        
+        //Main SNOP GUI calling the 
+        if ((!isPollingXl3) && [self calcCMOSRatesFromCounts] && [theSNOPModel snopPollingCmos]) {
+            
+            NSMutableString* msg = [NSMutableString stringWithFormat:@"%@ CMOS rates:\n", [[self xl3Link] crateName]];
+            unsigned char slot_idx = 0;
+            
+            NSMatrix * matrixToSend = [[NSMatrix alloc] init];
+            
+            if (msk < msk_full) {
+                [msg appendFormat:@"slots masked out: "];
+                unsigned int msk_missing = msk_full & ~msk;
+                for (i=0; i<16; i++) {
+                    if (msk_missing & (1UL << i)) {
+                        [msg appendFormat:@"%d, ", i];
+                    }
+                }
+                [msg appendFormat:@"\n"];
+            }
+            
+            if (num_slots > 8) {
+                slot_idx = 0;
+                unsigned char j = 0;
+                for (i=0; i<8; i++) {
+                    if ((msk >> i) & 0x1) {
+                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:i column:j] setIntValue:rates_lo.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_lo.rates[slot_idx*32 + j]];
+                        slot_idx++;
+                    }
+                }
+                slot_idx=0;
+                for (i=0; i<8; i++) {
+                    if ((msk >> (i + 8)) & 0x1) {
+                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:i column:j] setIntValue:rates_hi.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_hi.rates[slot_idx*32 + j]];
+                        slot_idx++;
+                    }
+                }
+            }
+            else {
+                slot_idx = 0;
+                unsigned char j = 0;
+                for (i=0; i<16; i++) {
+                    if ((msk >> i) & 0x1) {
+                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:i column:j] setIntValue:rates_lo.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_lo.rates[slot_idx*32 + j]];
+                        slot_idx++;
+                    }
+                }
+            }
+            //[msg appendFormat:@"\n"];
+            //NSLogFont([NSFont userFixedPitchFontOfSize:10], msg);
+
+            //send a notification to the SNOPModel and let it update its values
+            //[[NSNotificationCenter defaultCenter] postNotificationName:ORXL3CMOSValuesChanged object:self];
+            NSDictionary *dicToPost = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     matrixToSend, @"matrixToSend",nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ORXL3CMOSValuesChanged object:self userInfo:dicToPost];
         }
 
         //data packet
