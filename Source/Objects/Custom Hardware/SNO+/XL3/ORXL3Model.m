@@ -3031,7 +3031,7 @@ void SwapLongBlock(void* p, int32_t n)
         SNOPModel* theSNOPModel = [allSNOPModelObjects objectAtIndex:0];
         
         //Main SNOP GUI calling the 
-        if ((!isPollingXl3) && [self calcCMOSRatesFromCounts] && [theSNOPModel snopPollingCmos]) {
+        if ((isPollingXl3) && [self calcCMOSRatesFromCounts] && [theSNOPModel snopPollingCmos]) {
             
             NSMutableString* msg = [NSMutableString stringWithFormat:@"%@ CMOS rates:\n", [[self xl3Link] crateName]];
             unsigned char slot_idx = 0;
@@ -3054,14 +3054,14 @@ void SwapLongBlock(void* p, int32_t n)
                 unsigned char j = 0;
                 for (i=0; i<8; i++) {
                     if ((msk >> i) & 0x1) {
-                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:i column:j] setIntValue:rates_lo.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_lo.rates[slot_idx*32 + j]];
+                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:j column:i] setIntValue:rates_lo.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_lo.rates[slot_idx*32 + j]];
                         slot_idx++;
                     }
                 }
                 slot_idx=0;
                 for (i=0; i<8; i++) {
                     if ((msk >> (i + 8)) & 0x1) {
-                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:i column:j] setIntValue:rates_hi.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_hi.rates[slot_idx*32 + j]];
+                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:j column:i] setIntValue:rates_hi.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_hi.rates[slot_idx*32 + j]];
                         slot_idx++;
                     }
                 }
@@ -3071,13 +3071,22 @@ void SwapLongBlock(void* p, int32_t n)
                 unsigned char j = 0;
                 for (i=0; i<16; i++) {
                     if ((msk >> i) & 0x1) {
-                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:i column:j] setIntValue:rates_lo.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_lo.rates[slot_idx*32 + j]];
+                        for (j=0; j<32; j++) [[matrixToSend cellAtRow:j column:i] setIntValue:rates_lo.rates[slot_idx*32 + j]];//[msg appendFormat:@"%9.0f ", rates_lo.rates[slot_idx*32 + j]];
                         slot_idx++;
                     }
                 }
             }
             //[msg appendFormat:@"\n"];
             //NSLogFont([NSFont userFixedPitchFontOfSize:10], msg);
+            
+            int jkk,ikk;
+            for(ikk=0;ikk<16;ikk++){
+                for(jkk=0;jkk<32;jkk++){
+                    if([[matrixToSend cellAtRow:jkk column:ikk] intValue] > 0){
+                        NSLog(@"a value is greater than 0 %i ",[[matrixToSend cellAtRow:jkk column:ikk] intValue]);
+                    }
+                }
+            }
 
             //send a notification to the SNOPModel and let it update its values
             //[[NSNotificationCenter defaultCenter] postNotificationName:ORXL3CMOSValuesChanged object:self];

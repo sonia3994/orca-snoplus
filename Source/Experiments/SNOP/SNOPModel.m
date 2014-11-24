@@ -110,7 +110,8 @@ mtcConfigDoc = _mtcConfigDoc;
     }
     unsigned short fastestRate = 0;
     [currentSelectedXl3 setPollXl3Time:fastestRate];
-    [currentSelectedXl3 pollXl3:true];
+    [currentSelectedXl3 setIsPollingCMOSRates:YES]; //setIsPollingXl3
+    [currentSelectedXl3 setIsPollingXl3:true];
 }
 
 - (void)stopPollingWithCrate:(int)aCrateNumber

@@ -86,7 +86,8 @@ smellieRunFile;
 {
     //Toggle the button
     if([model snopPollingCmos]){
-        [startPollingButton setStringValue:[NSString stringWithFormat:@"Start Polling"]];
+        [startPollingButton setTitle:[NSString stringWithFormat:@"Start Polling"]];
+        [self updateWindow];
         [model setSnopPollingCmos:NO]; //turn off the polling
         @try{
             [model stopPollingWithCrate:[crateNumber intValue]];
@@ -97,8 +98,9 @@ smellieRunFile;
         
     }
     else if (![model snopPollingCmos]){
-        [startPollingButton setStringValue:[NSString stringWithFormat:@"Stop Polling"]];
-        [model setSnopPollingCmos:YES]; //turn off the polling
+        [startPollingButton setTitle:[NSString stringWithFormat:@"Stop Polling"]];
+        [self updateWindow];
+        [model setSnopPollingCmos:YES]; //turn on the polling
         @try{
             [model startPollingWithCrate:[crateNumber intValue]];
         }
@@ -490,7 +492,16 @@ smellieRunFile;
 {
     //assign the note as an NSMatrix 
     NSDictionary *dicMatrixToLoad = aNote.userInfo;
-    cmosMatrix = [dicMatrixToLoad objectForKey:@"matrixToSend"];
+    NSMatrix * matrixToLoad = [dicMatrixToLoad objectForKey:@"matrixToSend"];
+    int i,j;
+    for(i=0;i<16;i++){
+        for(j=0;j<32;j++){
+            [[cmosMatrix cellAtRow:j column:i] setIntValue:[[matrixToLoad cellAtRow:j column:i] intValue]];
+        }
+    }
+    //cmosMatrix = [dicMatrixToLoad objectForKey:@"matrixToSend"];
+    //[cmosMatrix setValue:[dicMatrixToLoad objectForKey:@"matrixToSend"]];
+    [self updateWindow];
 }
 
 - (void) hvStatusChanged:(NSNotification*)aNote
