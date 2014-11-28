@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">13F34</string>
+		<string key="IBDocument.SystemVersion">12F37</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1265.21</string>
-		<string key="IBDocument.HIToolboxVersion">698.00</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -178,7 +178,6 @@
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="268797301">
 																<reference key="NSNextResponder" ref="337775809"/>
@@ -221,7 +220,7 @@
 																				</object>
 																				<string>.</string>
 																				<integer value="1000"/>
-																				<string>,</string>
+																				<string/>
 																				<string>-0.00</string>
 																				<string>0.00</string>
 																				<boolean value="NO"/>
@@ -250,7 +249,7 @@
 																		<reference key="NS.max" ref="674807105"/>
 																		<nil key="NS.rounding"/>
 																		<string key="NS.decimal">.</string>
-																		<string key="NS.thousand">,</string>
+																		<string key="NS.thousand"/>
 																		<bool key="NS.hasthousands">NO</bool>
 																		<bool key="NS.localized">YES</bool>
 																		<bool key="NS.allowsfloats">YES</bool>
@@ -268,7 +267,6 @@
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSCustomView" id="137642470">
 																<reference key="NSNextResponder" ref="337775809"/>
@@ -468,7 +466,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="149914749">
 																<reference key="NSNextResponder" ref="872669104"/>
@@ -487,7 +484,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="939222194">
 																<reference key="NSNextResponder" ref="872669104"/>
@@ -506,7 +502,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSCustomView" id="707523575">
 																<reference key="NSNextResponder" ref="872669104"/>
@@ -534,7 +529,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSCustomView" id="339600344">
 																<reference key="NSNextResponder" ref="872669104"/>
@@ -616,7 +610,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSScrollView" id="274570118">
 												<reference key="NSNextResponder" ref="663820862"/>
@@ -650,7 +643,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 																</object>
 																<string key="NSFrameSize">{183, 149}</string>
 																<reference key="NSSuperview" ref="474790945"/>
-																<reference key="NSNextKeyView" ref="513840977"/>
+																<reference key="NSNextKeyView" ref="500347556"/>
 																<object class="NSTextContainer" key="NSTextContainer" id="770567296">
 																	<object class="NSLayoutManager" key="NSLayoutManager">
 																		<object class="NSTextStorage" key="NSTextStorage">
@@ -793,7 +786,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												</object>
 												<string key="NSFrame">{{398, 387}, {185, 151}}</string>
 												<reference key="NSSuperview" ref="663820862"/>
-												<reference key="NSNextKeyView" ref="500347556"/>
+												<reference key="NSNextKeyView" ref="474790945"/>
 												<int key="NSsFlags">133650</int>
 												<reference key="NSVScroller" ref="731753660"/>
 												<reference key="NSHScroller" ref="500347556"/>
@@ -855,7 +848,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSBox" id="641125797">
 												<reference key="NSNextResponder" ref="663820862"/>
@@ -940,7 +932,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="207616526">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -959,7 +950,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="1070486828">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -978,7 +968,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="59833388">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -997,7 +986,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="25313583">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -1016,7 +1004,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSButton" id="146657754">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -1234,7 +1221,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="748969874">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -1253,7 +1239,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSButton" id="1049528188">
 																<reference key="NSNextResponder" ref="29760438"/>
@@ -1455,7 +1440,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSButton" id="371198154">
 												<reference key="NSNextResponder" ref="663820862"/>
@@ -1550,13 +1534,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 												<int key="NSvFlags">12</int>
 												<string key="NSFrame">{{10, -7}, {555, 346}}</string>
 												<reference key="NSSuperview" ref="811234258"/>
-												<reference key="NSNextKeyView" ref="235427262"/>
+												<reference key="NSNextKeyView" ref="1063456030"/>
 												<object class="NSMutableArray" key="NSTabViewItems">
 													<bool key="EncodedWithXMLCoder">YES</bool>
 													<object class="NSTabViewItem" id="921074279">
 														<string key="NSIdentifier">1</string>
 														<object class="NSView" key="NSView" id="235427262">
-															<reference key="NSNextResponder" ref="170326259"/>
+															<nil key="NSNextResponder"/>
 															<int key="NSvFlags">256</int>
 															<object class="NSMutableArray" key="NSSubviews">
 																<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1587,7 +1571,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="650676371">
 																					<reference key="NSNextResponder" ref="401706450"/>
@@ -1606,7 +1589,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="997247793">
 																					<reference key="NSNextResponder" ref="401706450"/>
@@ -1625,14 +1607,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="568783987">
 																					<reference key="NSNextResponder" ref="401706450"/>
 																					<int key="NSvFlags">268</int>
 																					<string key="NSFrame">{{437, 7}, {24, 17}}</string>
 																					<reference key="NSSuperview" ref="401706450"/>
-																					<reference key="NSNextKeyView" ref="324767356"/>
+																					<reference key="NSNextKeyView" ref="435773934"/>
 																					<bool key="NSEnabled">YES</bool>
 																					<object class="NSTextFieldCell" key="NSCell" id="172853201">
 																						<int key="NSCellFlags">68157504</int>
@@ -1644,7 +1625,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="698255532">
 																					<reference key="NSNextResponder" ref="401706450"/>
@@ -1663,7 +1643,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="293198188">
 																					<reference key="NSNextResponder" ref="401706450"/>
@@ -1682,7 +1661,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="718551965">
 																					<reference key="NSNextResponder" ref="401706450"/>
@@ -1701,7 +1679,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSButton" id="791692581">
 																					<reference key="NSNextResponder" ref="401706450"/>
@@ -1755,229 +1732,21 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSTitlePosition">2</int>
 																	<bool key="NSTransparent">NO</bool>
 																</object>
-																<object class="NSBox" id="324767356">
-																	<reference key="NSNextResponder" ref="235427262"/>
-																	<int key="NSvFlags">12</int>
-																	<object class="NSMutableArray" key="NSSubviews">
-																		<bool key="EncodedWithXMLCoder">YES</bool>
-																		<object class="NSView" id="644511467">
-																			<reference key="NSNextResponder" ref="324767356"/>
-																			<int key="NSvFlags">274</int>
-																			<object class="NSMutableArray" key="NSSubviews">
-																				<bool key="EncodedWithXMLCoder">YES</bool>
-																				<object class="NSComboBox" id="530770793">
-																					<reference key="NSNextResponder" ref="644511467"/>
-																					<int key="NSvFlags">268</int>
-																					<string key="NSFrame">{{216, 10}, {255, 26}}</string>
-																					<reference key="NSSuperview" ref="644511467"/>
-																					<reference key="NSNextKeyView" ref="405719932"/>
-																					<bool key="NSEnabled">YES</bool>
-																					<object class="NSComboBoxCell" key="NSCell" id="715045431">
-																						<int key="NSCellFlags">342884416</int>
-																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents"/>
-																						<reference key="NSSupport" ref="12138123"/>
-																						<reference key="NSControlView" ref="530770793"/>
-																						<bool key="NSDrawsBackground">YES</bool>
-																						<reference key="NSBackgroundColor" ref="609885"/>
-																						<reference key="NSTextColor" ref="760789883"/>
-																						<int key="NSVisibleItemCount">5</int>
-																						<bool key="NSHasVerticalScroller">YES</bool>
-																						<object class="NSMutableArray" key="NSPopUpListData">
-																							<bool key="EncodedWithXMLCoder">YES</bool>
-																							<string>Basic User</string>
-																							<string>Detector Operator</string>
-																							<string>Experienced Detector Operator</string>
-																							<string>DAQ Expert</string>
-																						</object>
-																						<reference key="NSDelegate" ref="530770793"/>
-																						<object class="NSComboTableView" key="NSTableView" id="270284135">
-																							<reference key="NSNextResponder"/>
-																							<int key="NSvFlags">274</int>
-																							<string key="NSFrameSize">{13, 84}</string>
-																							<reference key="NSSuperview"/>
-																							<reference key="NSWindow"/>
-																							<string key="NSReuseIdentifierKey">_NS:24</string>
-																							<bool key="NSEnabled">YES</bool>
-																							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																							<bool key="NSControlAllowsExpansionToolTips">YES</bool>
-																							<object class="NSMutableArray" key="NSTableColumns">
-																								<bool key="EncodedWithXMLCoder">YES</bool>
-																								<object class="NSTableColumn">
-																									<double key="NSWidth">10</double>
-																									<double key="NSMinWidth">10</double>
-																									<double key="NSMaxWidth">1000</double>
-																									<object class="NSTableHeaderCell" key="NSHeaderCell">
-																										<int key="NSCellFlags">75497472</int>
-																										<int key="NSCellFlags2">0</int>
-																										<string key="NSContents"/>
-																										<object class="NSFont" key="NSSupport" id="373999222">
-																											<string key="NSName">LucidaGrande</string>
-																											<double key="NSSize">12</double>
-																											<int key="NSfFlags">16</int>
-																										</object>
-																										<object class="NSColor" key="NSBackgroundColor">
-																											<int key="NSColorSpace">3</int>
-																											<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
-																										</object>
-																										<reference key="NSTextColor" ref="574738242"/>
-																									</object>
-																									<object class="NSTextFieldCell" key="NSDataCell">
-																										<int key="NSCellFlags">338690112</int>
-																										<int key="NSCellFlags2">268436480</int>
-																										<string key="NSContents">DAQ Expert</string>
-																										<reference key="NSSupport" ref="12138123"/>
-																										<reference key="NSControlView" ref="270284135"/>
-																										<bool key="NSDrawsBackground">YES</bool>
-																										<object class="NSColor" key="NSBackgroundColor" id="989676500">
-																											<int key="NSColorSpace">6</int>
-																											<string key="NSCatalogName">System</string>
-																											<string key="NSColorName">controlBackgroundColor</string>
-																											<reference key="NSColor" ref="812565755"/>
-																										</object>
-																										<reference key="NSTextColor" ref="760789883"/>
-																									</object>
-																									<int key="NSResizingMask">3</int>
-																									<bool key="NSIsResizeable">YES</bool>
-																									<reference key="NSTableView" ref="270284135"/>
-																								</object>
-																							</object>
-																							<double key="NSIntercellSpacingWidth">3</double>
-																							<double key="NSIntercellSpacingHeight">2</double>
-																							<reference key="NSBackgroundColor" ref="989676500"/>
-																							<object class="NSColor" key="NSGridColor" id="301281326">
-																								<int key="NSColorSpace">6</int>
-																								<string key="NSCatalogName">System</string>
-																								<string key="NSColorName">gridColor</string>
-																								<object class="NSColor" key="NSColor">
-																									<int key="NSColorSpace">3</int>
-																									<bytes key="NSWhite">MC41AA</bytes>
-																								</object>
-																							</object>
-																							<double key="NSRowHeight">19</double>
-																							<string key="NSAction">tableViewAction:</string>
-																							<int key="NSTvFlags">-765427712</int>
-																							<reference key="NSDelegate" ref="715045431"/>
-																							<reference key="NSDataSource" ref="715045431"/>
-																							<reference key="NSTarget" ref="715045431"/>
-																							<int key="NSColumnAutoresizingStyle">1</int>
-																							<int key="NSDraggingSourceMaskForLocal">15</int>
-																							<int key="NSDraggingSourceMaskForNonLocal">0</int>
-																							<bool key="NSAllowsTypeSelect">YES</bool>
-																							<int key="NSTableViewDraggingDestinationStyle">0</int>
-																							<int key="NSTableViewGroupRowStyle">1</int>
-																						</object>
-																					</object>
-																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
-																				</object>
-																				<object class="NSTextField" id="328053427">
-																					<reference key="NSNextResponder" ref="644511467"/>
-																					<int key="NSvFlags">268</int>
-																					<string key="NSFrame">{{16, 14}, {155, 17}}</string>
-																					<reference key="NSSuperview" ref="644511467"/>
-																					<reference key="NSNextKeyView" ref="530770793"/>
-																					<bool key="NSEnabled">YES</bool>
-																					<object class="NSTextFieldCell" key="NSCell" id="555839016">
-																						<int key="NSCellFlags">68157504</int>
-																						<int key="NSCellFlags2">272630784</int>
-																						<string key="NSContents">Select User Experience: </string>
-																						<reference key="NSSupport" ref="12138123"/>
-																						<reference key="NSControlView" ref="328053427"/>
-																						<reference key="NSBackgroundColor" ref="709140192"/>
-																						<reference key="NSTextColor" ref="760789883"/>
-																					</object>
-																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
-																				</object>
-																			</object>
-																			<string key="NSFrame">{{1, 1}, {486, 43}}</string>
-																			<reference key="NSSuperview" ref="324767356"/>
-																			<reference key="NSNextKeyView" ref="328053427"/>
-																			<string key="NSReuseIdentifierKey">_NS:11</string>
-																		</object>
-																	</object>
-																	<string key="NSFrame">{{14, 168}, {488, 59}}</string>
-																	<reference key="NSSuperview" ref="235427262"/>
-																	<reference key="NSNextKeyView" ref="644511467"/>
-																	<string key="NSOffsets">{0, 0}</string>
-																	<object class="NSTextFieldCell" key="NSTitleCell">
-																		<int key="NSCellFlags">67108864</int>
-																		<int key="NSCellFlags2">0</int>
-																		<string key="NSContents">User Experience</string>
-																		<reference key="NSSupport" ref="26"/>
-																		<reference key="NSBackgroundColor" ref="609885"/>
-																		<object class="NSColor" key="NSTextColor">
-																			<int key="NSColorSpace">3</int>
-																			<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
-																		</object>
-																	</object>
-																	<reference key="NSContentView" ref="644511467"/>
-																	<int key="NSBorderType">1</int>
-																	<int key="NSBoxType">0</int>
-																	<int key="NSTitlePosition">2</int>
-																	<bool key="NSTransparent">NO</bool>
-																</object>
-																<object class="NSButton" id="405719932">
-																	<reference key="NSNextResponder" ref="235427262"/>
-																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{15, 118}, {139, 36}}</string>
-																	<reference key="NSSuperview" ref="235427262"/>
-																	<reference key="NSNextKeyView" ref="726563725"/>
-																	<bool key="NSEnabled">YES</bool>
-																	<object class="NSButtonCell" key="NSCell" id="138820725">
-																		<int key="NSCellFlags">67108864</int>
-																		<int key="NSCellFlags2">134217728</int>
-																		<string key="NSContents">Start Physics Run</string>
-																		<object class="NSFont" key="NSSupport" id="484819030">
-																			<string key="NSName">LucidaGrande</string>
-																			<double key="NSSize">15</double>
-																			<int key="NSfFlags">16</int>
-																		</object>
-																		<reference key="NSControlView" ref="405719932"/>
-																		<int key="NSButtonFlags">-2033434624</int>
-																		<int key="NSButtonFlags2">130</int>
-																		<string key="NSAlternateContents"/>
-																		<string key="NSKeyEquivalent"/>
-																		<int key="NSPeriodicDelay">400</int>
-																		<int key="NSPeriodicInterval">75</int>
-																	</object>
-																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																</object>
-																<object class="NSButton" id="726563725">
-																	<reference key="NSNextResponder" ref="235427262"/>
-																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{198, 118}, {136, 36}}</string>
-																	<reference key="NSSuperview" ref="235427262"/>
-																	<reference key="NSNextKeyView" ref="435773934"/>
-																	<bool key="NSEnabled">YES</bool>
-																	<object class="NSButtonCell" key="NSCell" id="438636163">
-																		<int key="NSCellFlags">67108864</int>
-																		<int key="NSCellFlags2">134217728</int>
-																		<string key="NSContents">New Physics Run</string>
-																		<reference key="NSSupport" ref="484819030"/>
-																		<reference key="NSControlView" ref="726563725"/>
-																		<int key="NSButtonFlags">-2033434624</int>
-																		<int key="NSButtonFlags2">130</int>
-																		<string key="NSAlternateContents"/>
-																		<string key="NSKeyEquivalent"/>
-																		<int key="NSPeriodicDelay">400</int>
-																		<int key="NSPeriodicInterval">75</int>
-																	</object>
-																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																</object>
 																<object class="NSButton" id="1019738850">
 																	<reference key="NSNextResponder" ref="235427262"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{364, 89}, {137, 36}}</string>
+																	<string key="NSFrame">{{358, 171}, {137, 36}}</string>
 																	<reference key="NSSuperview" ref="235427262"/>
-																	<reference key="NSNextKeyView" ref="55968118"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="1041469683">
 																		<int key="NSCellFlags">67108864</int>
 																		<int key="NSCellFlags2">134217728</int>
 																		<string key="NSContents">Stop Run</string>
-																		<reference key="NSSupport" ref="484819030"/>
+																		<object class="NSFont" key="NSSupport" id="484819030">
+																			<string key="NSName">LucidaGrande</string>
+																			<double key="NSSize">15</double>
+																			<int key="NSfFlags">16</int>
+																		</object>
 																		<reference key="NSControlView" ref="1019738850"/>
 																		<int key="NSButtonFlags">-2033434624</int>
 																		<int key="NSButtonFlags2">130</int>
@@ -1991,14 +1760,14 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<object class="NSButton" id="435773934">
 																	<reference key="NSNextResponder" ref="235427262"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{15, 60}, {139, 36}}</string>
+																	<string key="NSFrame">{{15, 171}, {139, 36}}</string>
 																	<reference key="NSSuperview" ref="235427262"/>
 																	<reference key="NSNextKeyView" ref="236923408"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="636647437">
 																		<int key="NSCellFlags">67108864</int>
 																		<int key="NSCellFlags2">134217728</int>
-																		<string key="NSContents">Start Maint. Run</string>
+																		<string key="NSContents">Start Run</string>
 																		<reference key="NSSupport" ref="484819030"/>
 																		<reference key="NSControlView" ref="435773934"/>
 																		<int key="NSButtonFlags">-2033434624</int>
@@ -2013,14 +1782,14 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<object class="NSButton" id="236923408">
 																	<reference key="NSNextResponder" ref="235427262"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{198, 60}, {136, 36}}</string>
+																	<string key="NSFrame">{{190, 171}, {136, 36}}</string>
 																	<reference key="NSSuperview" ref="235427262"/>
 																	<reference key="NSNextKeyView" ref="1019738850"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="64134207">
 																		<int key="NSCellFlags">67108864</int>
 																		<int key="NSCellFlags2">134217728</int>
-																		<string key="NSContents">New Maint. Run</string>
+																		<string key="NSContents">New Run</string>
 																		<reference key="NSSupport" ref="484819030"/>
 																		<reference key="NSControlView" ref="236923408"/>
 																		<int key="NSButtonFlags">-2033434624</int>
@@ -2034,7 +1803,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																</object>
 															</object>
 															<string key="NSFrame">{{10, 25}, {535, 308}}</string>
-															<reference key="NSSuperview" ref="170326259"/>
 															<reference key="NSNextKeyView" ref="65688259"/>
 														</object>
 														<string key="NSLabel">PHYSICS</string>
@@ -2224,7 +1992,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="248322184">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2243,7 +2010,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="140056668">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2300,7 +2066,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -2311,7 +2077,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="34528186">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2368,7 +2133,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -2379,7 +2144,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="675654135">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2436,7 +2200,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -2447,7 +2211,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSComboBox" id="431388720">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2488,7 +2251,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<int key="NSCellFlags">75497472</int>
 																						<int key="NSCellFlags2">0</int>
 																						<string key="NSContents"/>
-																						<reference key="NSSupport" ref="373999222"/>
+																						<object class="NSFont" key="NSSupport" id="373999222">
+																							<string key="NSName">LucidaGrande</string>
+																							<double key="NSSize">12</double>
+																							<int key="NSfFlags">16</int>
+																						</object>
 																						<object class="NSColor" key="NSBackgroundColor">
 																							<int key="NSColorSpace">3</int>
 																							<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
@@ -2501,7 +2268,12 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSSupport" ref="26"/>
 																						<reference key="NSControlView" ref="137092218"/>
 																						<bool key="NSDrawsBackground">YES</bool>
-																						<reference key="NSBackgroundColor" ref="989676500"/>
+																						<object class="NSColor" key="NSBackgroundColor" id="989676500">
+																							<int key="NSColorSpace">6</int>
+																							<string key="NSCatalogName">System</string>
+																							<string key="NSColorName">controlBackgroundColor</string>
+																							<reference key="NSColor" ref="812565755"/>
+																						</object>
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<int key="NSResizingMask">3</int>
@@ -2512,7 +2284,15 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																			<double key="NSIntercellSpacingWidth">3</double>
 																			<double key="NSIntercellSpacingHeight">2</double>
 																			<reference key="NSBackgroundColor" ref="989676500"/>
-																			<reference key="NSGridColor" ref="301281326"/>
+																			<object class="NSColor" key="NSGridColor" id="301281326">
+																				<int key="NSColorSpace">6</int>
+																				<string key="NSCatalogName">System</string>
+																				<string key="NSColorName">gridColor</string>
+																				<object class="NSColor" key="NSColor">
+																					<int key="NSColorSpace">3</int>
+																					<bytes key="NSWhite">MC41AA</bytes>
+																				</object>
+																			</object>
 																			<double key="NSRowHeight">16</double>
 																			<string key="NSAction">tableViewAction:</string>
 																			<int key="NSTvFlags">-767524864</int>
@@ -2528,7 +2308,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSComboBox" id="319199276">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2609,7 +2388,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSSlider" id="338758733">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2651,7 +2429,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="563065234">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2670,7 +2447,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSSlider" id="61755823">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2712,7 +2488,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="698748690">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2769,7 +2544,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -2780,7 +2555,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="616551725">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2837,7 +2611,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -2848,7 +2622,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSComboBox" id="590326872">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2929,7 +2702,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="1025596366">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2948,7 +2720,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="605059076">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2967,7 +2738,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="409045641">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -2986,7 +2756,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="129000187">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3043,7 +2812,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3054,7 +2823,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="657223184">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3111,7 +2879,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3122,7 +2890,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="1026983411">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3141,7 +2908,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="955086675">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3198,7 +2964,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3209,7 +2975,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="530985499">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3228,7 +2993,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="26472940">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3285,7 +3049,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3296,7 +3060,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="779306684">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3315,7 +3078,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="21399520">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3372,7 +3134,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3383,7 +3145,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="55926706">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3402,7 +3163,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="1053455352">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3459,7 +3219,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3470,7 +3230,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="268628095">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3489,7 +3248,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="108711716">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3546,7 +3304,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3557,7 +3315,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="487314426">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3576,7 +3333,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="714865564">
 																	<reference key="NSNextResponder" ref="220696038"/>
@@ -3633,7 +3389,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3644,12 +3400,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="712484752">
 																	<reference key="NSNextResponder" ref="220696038"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{169, 288}, {196, 14}}</string>
+																	<string key="NSFrame">{{167, 288}, {238, 14}}</string>
 																	<reference key="NSSuperview" ref="220696038"/>
 																	<reference key="NSNextKeyView" ref="55926706"/>
 																	<bool key="NSEnabled">YES</bool>
@@ -3663,7 +3418,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 															</object>
 															<string key="NSFrame">{{10, 25}, {535, 308}}</string>
@@ -3787,7 +3541,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="479354574">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -3806,7 +3559,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="820839999">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -3825,7 +3577,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="431207117">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -3882,7 +3633,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3893,7 +3644,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="963658834">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -3950,7 +3700,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -3961,7 +3711,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSComboBox" id="73444061">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4042,7 +3791,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSComboBox" id="936546671">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4123,7 +3871,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSSlider" id="95697936">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4165,7 +3912,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSPopUpButton" id="810562500">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4252,7 +3998,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="519424566">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4271,12 +4016,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="48725937">
 																	<reference key="NSNextResponder" ref="1041244433"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{107, 288}, {328, 14}}</string>
+																	<string key="NSFrame">{{76, 288}, {412, 14}}</string>
 																	<reference key="NSSuperview" ref="1041244433"/>
 																	<reference key="NSNextKeyView" ref="916898441"/>
 																	<bool key="NSEnabled">YES</bool>
@@ -4290,7 +4034,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="452480079">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4309,7 +4052,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="828385652">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4328,7 +4070,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="935895032">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4385,7 +4126,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -4396,7 +4137,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="814332857">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4415,7 +4155,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="285066949">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4434,7 +4173,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="1010466971">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4491,7 +4229,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -4502,7 +4240,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSTextField" id="32111140">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4559,7 +4296,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																				<bool key="NS.raise.dividebyzero">YES</bool>
 																			</object>
 																			<string key="NS.decimal">.</string>
-																			<string key="NS.thousand">,</string>
+																			<string key="NS.thousand"/>
 																			<bool key="NS.hasthousands">YES</bool>
 																			<bool key="NS.localized">YES</bool>
 																			<bool key="NS.allowsfloats">YES</bool>
@@ -4570,7 +4307,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="393839667"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSMatrix" id="122092308">
 																	<reference key="NSNextResponder" ref="1041244433"/>
@@ -4778,7 +4514,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1021359365">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -4835,7 +4570,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																								<bool key="NS.raise.dividebyzero">YES</bool>
 																							</object>
 																							<string key="NS.decimal">.</string>
-																							<string key="NS.thousand">,</string>
+																							<string key="NS.thousand"/>
 																							<bool key="NS.hasthousands">YES</bool>
 																							<bool key="NS.localized">YES</bool>
 																							<bool key="NS.allowsfloats">YES</bool>
@@ -4846,7 +4581,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="393839667"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1039351761">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -4865,7 +4599,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="82746457">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -4884,7 +4617,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="976076908">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -4941,7 +4673,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																								<bool key="NS.raise.dividebyzero">YES</bool>
 																							</object>
 																							<string key="NS.decimal">.</string>
-																							<string key="NS.thousand">,</string>
+																							<string key="NS.thousand"/>
 																							<bool key="NS.hasthousands">YES</bool>
 																							<bool key="NS.localized">YES</bool>
 																							<bool key="NS.allowsfloats">YES</bool>
@@ -4952,7 +4684,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="393839667"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="587393638">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -4971,7 +4702,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1064358926">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -4990,7 +4720,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="704339339">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5047,7 +4776,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																								<bool key="NS.raise.dividebyzero">YES</bool>
 																							</object>
 																							<string key="NS.decimal">.</string>
-																							<string key="NS.thousand">,</string>
+																							<string key="NS.thousand"/>
 																							<bool key="NS.hasthousands">YES</bool>
 																							<bool key="NS.localized">YES</bool>
 																							<bool key="NS.allowsfloats">YES</bool>
@@ -5058,7 +4787,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="393839667"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="112123083">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5115,7 +4843,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																								<bool key="NS.raise.dividebyzero">YES</bool>
 																							</object>
 																							<string key="NS.decimal">.</string>
-																							<string key="NS.thousand">,</string>
+																							<string key="NS.thousand"/>
 																							<bool key="NS.hasthousands">YES</bool>
 																							<bool key="NS.localized">YES</bool>
 																							<bool key="NS.allowsfloats">YES</bool>
@@ -5126,7 +4854,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="393839667"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="513952574">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5183,7 +4910,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																								<bool key="NS.raise.dividebyzero">YES</bool>
 																							</object>
 																							<string key="NS.decimal">.</string>
-																							<string key="NS.thousand">,</string>
+																							<string key="NS.thousand"/>
 																							<bool key="NS.hasthousands">YES</bool>
 																							<bool key="NS.localized">YES</bool>
 																							<bool key="NS.allowsfloats">YES</bool>
@@ -5194,7 +4921,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="393839667"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="459073710">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5213,7 +4939,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSPopUpButton" id="518363985">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5300,7 +5025,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="34887861">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5319,7 +5043,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="400095621">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5338,7 +5061,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="85465333">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5395,7 +5117,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																								<bool key="NS.raise.dividebyzero">YES</bool>
 																							</object>
 																							<string key="NS.decimal">.</string>
-																							<string key="NS.thousand">,</string>
+																							<string key="NS.thousand"/>
 																							<bool key="NS.hasthousands">YES</bool>
 																							<bool key="NS.localized">YES</bool>
 																							<bool key="NS.allowsfloats">YES</bool>
@@ -5406,7 +5128,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="393839667"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSButton" id="36674229">
 																					<reference key="NSNextResponder" ref="677135706"/>
@@ -5599,7 +5320,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSBox" id="877569734">
 																	<reference key="NSNextResponder" ref="93427548"/>
@@ -5628,7 +5348,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="815563681">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5647,7 +5366,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="985027777">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5666,7 +5384,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="391411033">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5685,7 +5402,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="61993902">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5704,7 +5420,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="114509883">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5728,7 +5443,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="109887019">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5748,7 +5462,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="892423306">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5768,7 +5481,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="754694177">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5788,7 +5500,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="446911907">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5808,7 +5519,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="440018522">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5831,7 +5541,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="470687876">
 																					<reference key="NSNextResponder" ref="176911908"/>
@@ -5850,7 +5559,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																			</object>
 																			<string key="NSFrame">{{1, 1}, {280, 246}}</string>
@@ -6075,7 +5783,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<object class="NSTextField" id="76571060">
 																	<reference key="NSNextResponder" ref="93427548"/>
 																	<int key="NSvFlags">268</int>
-																	<string key="NSFrame">{{172, 292}, {200, 14}}</string>
+																	<string key="NSFrame">{{138, 292}, {234, 14}}</string>
 																	<reference key="NSSuperview" ref="93427548"/>
 																	<reference key="NSNextKeyView" ref="582288326"/>
 																	<bool key="NSEnabled">YES</bool>
@@ -6089,7 +5797,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		<reference key="NSTextColor" ref="760789883"/>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 															</object>
 															<string key="NSFrame">{{10, 25}, {535, 308}}</string>
@@ -6101,7 +5808,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													</object>
 													<object class="NSTabViewItem" id="516323043">
 														<object class="NSView" key="NSView" id="1063456030">
-															<nil key="NSNextResponder"/>
+															<reference key="NSNextResponder" ref="170326259"/>
 															<int key="NSvFlags">256</int>
 															<object class="NSMutableArray" key="NSSubviews">
 																<bool key="EncodedWithXMLCoder">YES</bool>
@@ -6185,7 +5892,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																		</object>
 																	</object>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																	<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																</object>
 																<object class="NSBox" id="124681982">
 																	<reference key="NSNextResponder" ref="1063456030"/>
@@ -6214,7 +5920,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="695758346">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6233,7 +5938,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="483179034">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6252,7 +5956,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="116960878">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6271,7 +5974,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1053965076">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6290,7 +5992,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="782901569">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6309,7 +6010,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="79824814">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6328,7 +6028,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="275598037">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6347,7 +6046,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="254161905">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6367,7 +6065,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="255427728">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6387,7 +6084,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="174457722">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6407,7 +6103,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="651772927">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6427,7 +6122,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1008778960">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6447,7 +6141,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="263069160">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6467,7 +6160,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="3265155">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6487,7 +6179,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="505987637">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6507,7 +6198,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1034933331">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6526,7 +6216,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="338401896">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6545,7 +6234,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="1069237996">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6564,7 +6252,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																				<object class="NSTextField" id="535554855">
 																					<reference key="NSNextResponder" ref="1036104495"/>
@@ -6583,7 +6270,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																						<reference key="NSTextColor" ref="760789883"/>
 																					</object>
 																					<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																					<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																				</object>
 																			</object>
 																			<string key="NSFrame">{{1, 1}, {280, 246}}</string>
@@ -6788,7 +6474,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{302, 33}, {233, 32}}</string>
 																	<reference key="NSSuperview" ref="1063456030"/>
-																	<reference key="NSNextKeyView" ref="170326259"/>
+																	<reference key="NSNextKeyView" ref="55968118"/>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="461151889">
 																		<int key="NSCellFlags">67108864</int>
@@ -6807,6 +6493,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																</object>
 															</object>
 															<string key="NSFrame">{{10, 25}, {535, 308}}</string>
+															<reference key="NSSuperview" ref="170326259"/>
 															<reference key="NSNextKeyView" ref="810549704"/>
 														</object>
 														<string key="NSLabel">SMELLIE</string>
@@ -6850,14 +6537,14 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 														<reference key="NSTabView" ref="170326259"/>
 													</object>
 												</object>
-												<reference key="NSSelectedTabViewItem" ref="921074279"/>
+												<reference key="NSSelectedTabViewItem" ref="516323043"/>
 												<reference key="NSFont" ref="26"/>
 												<int key="NSTvFlags">134217728</int>
 												<bool key="NSAllowTruncatedLabels">YES</bool>
 												<bool key="NSDrawsBackground">YES</bool>
 												<object class="NSMutableArray" key="NSSubviews">
 													<bool key="EncodedWithXMLCoder">YES</bool>
-													<reference ref="235427262"/>
+													<reference ref="1063456030"/>
 												</object>
 											</object>
 											<object class="NSBox" id="642962872">
@@ -6887,7 +6574,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="111923867">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -6906,7 +6592,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="678837252">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -6925,7 +6610,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="387110948">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -6944,7 +6628,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="192648426">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -6963,7 +6646,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="173877417">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -6982,7 +6664,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="911197394">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7001,7 +6682,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="792829880">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7020,7 +6700,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="834703362">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7039,7 +6718,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="552652120">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7058,7 +6736,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="467074605">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7077,7 +6754,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="189348552">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7096,7 +6772,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="810178399">
 																<reference key="NSNextResponder" ref="864683801"/>
@@ -7115,7 +6790,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 														</object>
 														<string key="NSFrame">{{1, 1}, {545, 53}}</string>
@@ -7172,7 +6846,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="1015380542">
 																<reference key="NSNextResponder" ref="674166582"/>
@@ -7191,26 +6864,24 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="676771548">
 																<reference key="NSNextResponder" ref="674166582"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{105, 14}, {116, 17}}</string>
+																<string key="NSFrame">{{76, 14}, {184, 17}}</string>
 																<reference key="NSSuperview" ref="674166582"/>
-																<reference key="NSNextKeyView"/>
+																<reference key="NSNextKeyView" ref="642962872"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSTextFieldCell" key="NSCell" id="474158575">
 																	<int key="NSCellFlags">68157504</int>
 																	<int key="NSCellFlags2">272630784</int>
-																	<string key="NSContents">Physics </string>
+																	<string key="NSContents"> --</string>
 																	<reference key="NSSupport" ref="12138123"/>
 																	<reference key="NSControlView" ref="676771548"/>
 																	<reference key="NSBackgroundColor" ref="709140192"/>
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="762854381">
 																<reference key="NSNextResponder" ref="674166582"/>
@@ -7229,7 +6900,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 														</object>
 														<string key="NSFrame">{{1, 1}, {271, 62}}</string>
@@ -7286,7 +6956,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="534140988">
 																<reference key="NSNextResponder" ref="1016824405"/>
@@ -7305,12 +6974,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="480026953">
 																<reference key="NSNextResponder" ref="1016824405"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{99, 83}, {155, 17}}</string>
+																<string key="NSFrame">{{72, 82}, {155, 17}}</string>
 																<reference key="NSSuperview" ref="1016824405"/>
 																<reference key="NSNextKeyView" ref="17543852"/>
 																<bool key="NSEnabled">YES</bool>
@@ -7324,7 +6992,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="506430717">
 																<reference key="NSNextResponder" ref="1016824405"/>
@@ -7343,12 +7010,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="17543852">
 																<reference key="NSNextResponder" ref="1016824405"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{6, 58}, {47, 17}}</string>
+																<string key="NSFrame">{{6, 59}, {47, 17}}</string>
 																<reference key="NSSuperview" ref="1016824405"/>
 																<reference key="NSNextKeyView" ref="38199569"/>
 																<bool key="NSEnabled">YES</bool>
@@ -7362,12 +7028,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="38199569">
 																<reference key="NSNextResponder" ref="1016824405"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{99, 58}, {155, 17}}</string>
+																<string key="NSFrame">{{55, 59}, {199, 17}}</string>
 																<reference key="NSSuperview" ref="1016824405"/>
 																<reference key="NSNextKeyView" ref="670407411"/>
 																<bool key="NSEnabled">YES</bool>
@@ -7381,7 +7046,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="129464721">
 																<reference key="NSNextResponder" ref="1016824405"/>
@@ -7400,7 +7064,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="670407411">
 																<reference key="NSNextResponder" ref="1016824405"/>
@@ -7419,7 +7082,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="1044787444">
 																<reference key="NSNextResponder" ref="1016824405"/>
@@ -7438,7 +7100,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="902882370">
 																<reference key="NSNextResponder" ref="1016824405"/>
@@ -7457,7 +7118,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 														</object>
 														<string key="NSFrame">{{1, 1}, {260, 133}}</string>
@@ -7502,7 +7162,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<int key="NSvFlags">256</int>
 																<string key="NSFrame">{{18, 21}, {131, 558}}</string>
 																<reference key="NSSuperview" ref="500048265"/>
-																<reference key="NSNextKeyView"/>
 																<bool key="NSEnabled">YES</bool>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																<int key="NSNumRows">31</int>
@@ -8077,7 +7736,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSScrollView" id="840050694">
 												<reference key="NSNextResponder" ref="984136729"/>
@@ -8094,7 +7752,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<int key="NSvFlags">256</int>
 																<string key="NSFrameSize">{194, 254}</string>
 																<reference key="NSSuperview" ref="1069735936"/>
-																<reference key="NSNextKeyView" ref="261125013"/>
+																<reference key="NSNextKeyView" ref="286580019"/>
 																<bool key="NSEnabled">YES</bool>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																<bool key="NSControlAllowsExpansionToolTips">YES</bool>
@@ -8248,7 +7906,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 												</object>
 												<string key="NSFrame">{{72, 256}, {196, 272}}</string>
 												<reference key="NSSuperview" ref="984136729"/>
-												<reference key="NSNextKeyView" ref="286580019"/>
+												<reference key="NSNextKeyView" ref="1069735936"/>
 												<int key="NSsFlags">133266</int>
 												<reference key="NSVScroller" ref="261125013"/>
 												<reference key="NSHScroller" ref="286580019"/>
@@ -8276,7 +7934,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSButton" id="599441490">
 												<reference key="NSNextResponder" ref="984136729"/>
@@ -8457,7 +8114,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<int key="NSvFlags">256</int>
 																<string key="NSFrameSize">{133, 387}</string>
 																<reference key="NSSuperview" ref="699644068"/>
-																<reference key="NSNextKeyView" ref="130363841"/>
+																<reference key="NSNextKeyView" ref="490745865"/>
 																<bool key="NSEnabled">YES</bool>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																<bool key="NSControlAllowsExpansionToolTips">YES</bool>
@@ -8632,13 +8289,12 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 												</object>
 												<string key="NSFrame">{{62, 178}, {135, 405}}</string>
 												<reference key="NSSuperview" ref="1050071563"/>
-												<reference key="NSNextKeyView" ref="490745865"/>
+												<reference key="NSNextKeyView" ref="699644068"/>
 												<int key="NSsFlags">133682</int>
 												<reference key="NSVScroller" ref="130363841"/>
 												<reference key="NSHScroller" ref="951319280"/>
 												<reference key="NSContentView" ref="699644068"/>
 												<reference key="NSHeaderClipView" ref="522844459"/>
-												<reference key="NSCornerView" ref="490745865"/>
 												<bytes key="NSScrollAmts">QSAAAEEgAABBcAAAQXAAAA</bytes>
 												<double key="NSMinMagnification">0.25</double>
 												<double key="NSMaxMagnification">4</double>
@@ -8738,7 +8394,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													</object>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSPopUpButton" id="600876886">
 												<reference key="NSNextResponder" ref="1050071563"/>
@@ -8817,7 +8472,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 										</object>
 										<string key="NSFrame">{{10, 25}, {789, 605}}</string>
@@ -8925,7 +8579,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="212723875">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -8944,7 +8597,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="1006389238">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -8963,7 +8615,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSButton" id="410690608">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9066,7 +8717,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																<nil key="NSDataSource"/>
 															</object>
 															<object class="NSSecureTextField" id="732718456">
@@ -9091,7 +8741,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="204842335">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9111,7 +8760,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="393839667"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="540920075">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9130,7 +8778,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="237304700">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9150,7 +8797,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="393839667"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="546540819">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9169,7 +8815,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="403373220">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9189,7 +8834,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="393839667"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSBox" id="681721794">
 																<reference key="NSNextResponder" ref="1040922648"/>
@@ -9335,7 +8979,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="586770388">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9354,7 +8997,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="989336726">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9373,7 +9015,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSButton" id="282014743">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9476,7 +9117,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 																<nil key="NSDataSource"/>
 															</object>
 															<object class="NSSecureTextField" id="880841232">
@@ -9501,7 +9141,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	</object>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="140579281">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9521,7 +9160,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="393839667"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="784688830">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9540,7 +9178,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="801227505">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9560,7 +9197,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="393839667"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="865154379">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9579,7 +9215,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="760789883"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSTextField" id="10264648">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -9599,7 +9234,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<reference key="NSTextColor" ref="393839667"/>
 																</object>
 																<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-																<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 															</object>
 															<object class="NSBox" id="161276347">
 																<reference key="NSNextResponder" ref="795839734"/>
@@ -10711,7 +10345,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSTextField" id="169826131">
 												<reference key="NSNextResponder" ref="669671780"/>
@@ -10730,7 +10363,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSTextField" id="462459177">
 												<reference key="NSNextResponder" ref="669671780"/>
@@ -10749,7 +10381,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSTextField" id="753632538">
 												<reference key="NSNextResponder" ref="669671780"/>
@@ -10768,7 +10399,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 													<reference key="NSTextColor" ref="760789883"/>
 												</object>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-												<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 											</object>
 											<object class="NSBox" id="808728726">
 												<reference key="NSNextResponder" ref="669671780"/>
@@ -10962,7 +10592,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="474184058"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1600, 1178}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -10970,18 +10600,15 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				<string key="NSClassName">OHexFormatter</string>
 			</object>
 			<object class="NSCustomView" id="673584470">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<string key="NSFrameSize">{100, 100}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
 				<string key="NSClassName">BiStateView</string>
 			</object>
 			<object class="NSView" id="223699439">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<string key="NSFrameSize">{124, 1}</string>
-				<reference key="NSSuperview"/>
 			</object>
 			<object class="NSObjectController" id="209764890">
 				<string key="NSObjectClassName">SNOPModel</string>
@@ -10989,11 +10616,9 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
 			</object>
 			<object class="NSTextField" id="198677907">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{328, 14}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
 				<bool key="NSEnabled">YES</bool>
 				<object class="NSTextFieldCell" key="NSCell" id="931278749">
 					<int key="NSCellFlags">68157504</int>
@@ -11005,14 +10630,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<reference key="NSTextColor" ref="760789883"/>
 				</object>
 				<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-				<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 			</object>
 			<object class="NSButton" id="683194600">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{121, 32}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
 				<bool key="NSEnabled">YES</bool>
 				<object class="NSButtonCell" key="NSCell" id="109815269">
 					<int key="NSCellFlags">67108864</int>
@@ -11827,22 +11449,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">startRunAction:</string>
-						<reference key="source" ref="1011014513"/>
-						<reference key="destination" ref="405719932"/>
-					</object>
-					<int key="connectionID">3784</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">newRunAction:</string>
-						<reference key="source" ref="1011014513"/>
-						<reference key="destination" ref="726563725"/>
-					</object>
-					<int key="connectionID">3785</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">stopRunAction:</string>
 						<reference key="source" ref="1011014513"/>
 						<reference key="destination" ref="1019738850"/>
@@ -11923,27 +11529,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">startPhysicsRunButton</string>
-						<reference key="source" ref="1011014513"/>
-						<reference key="destination" ref="405719932"/>
-					</object>
-					<int key="connectionID">3921</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">startMaintainenceRunButton</string>
 						<reference key="source" ref="1011014513"/>
 						<reference key="destination" ref="435773934"/>
 					</object>
 					<int key="connectionID">3922</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">newPhysicsRunButton</string>
-						<reference key="source" ref="1011014513"/>
-						<reference key="destination" ref="726563725"/>
-					</object>
-					<int key="connectionID">3923</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -14672,9 +14262,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="65688259"/>
-							<reference ref="405719932"/>
-							<reference ref="726563725"/>
-							<reference ref="324767356"/>
 							<reference ref="435773934"/>
 							<reference ref="236923408"/>
 							<reference ref="1019738850"/>
@@ -16839,34 +16426,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<reference key="parent" ref="791692581"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">3727</int>
-						<reference key="object" ref="405719932"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="138820725"/>
-						</object>
-						<reference key="parent" ref="235427262"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3728</int>
-						<reference key="object" ref="138820725"/>
-						<reference key="parent" ref="405719932"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3729</int>
-						<reference key="object" ref="726563725"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="438636163"/>
-						</object>
-						<reference key="parent" ref="235427262"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3730</int>
-						<reference key="object" ref="438636163"/>
-						<reference key="parent" ref="726563725"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">3731</int>
 						<reference key="object" ref="1019738850"/>
 						<object class="NSMutableArray" key="children">
@@ -16956,13 +16515,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference ref="506430717"/>
 							<reference ref="774185481"/>
 							<reference ref="534140988"/>
-							<reference ref="480026953"/>
 							<reference ref="38199569"/>
 							<reference ref="17543852"/>
 							<reference ref="1044787444"/>
 							<reference ref="670407411"/>
 							<reference ref="902882370"/>
 							<reference ref="129464721"/>
+							<reference ref="480026953"/>
 						</object>
 						<reference key="parent" ref="811234258"/>
 					</object>
@@ -17632,44 +17191,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<int key="objectID">3547</int>
 						<reference key="object" ref="19382934"/>
 						<reference key="parent" ref="1008049274"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3891</int>
-						<reference key="object" ref="324767356"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="328053427"/>
-							<reference ref="530770793"/>
-						</object>
-						<reference key="parent" ref="235427262"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3908</int>
-						<reference key="object" ref="530770793"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="715045431"/>
-						</object>
-						<reference key="parent" ref="324767356"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3909</int>
-						<reference key="object" ref="715045431"/>
-						<reference key="parent" ref="530770793"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3910</int>
-						<reference key="object" ref="328053427"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="555839016"/>
-						</object>
-						<reference key="parent" ref="324767356"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3911</int>
-						<reference key="object" ref="555839016"/>
-						<reference key="parent" ref="328053427"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">3912</int>
@@ -18766,10 +18287,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<string>3718.IBPluginDependency</string>
 					<string>3719.IBPluginDependency</string>
 					<string>3720.IBPluginDependency</string>
-					<string>3727.IBPluginDependency</string>
-					<string>3728.IBPluginDependency</string>
-					<string>3729.IBPluginDependency</string>
-					<string>3730.IBPluginDependency</string>
 					<string>3731.IBPluginDependency</string>
 					<string>3732.IBPluginDependency</string>
 					<string>3733.IBPluginDependency</string>
@@ -18844,12 +18361,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<string>3854.IBPluginDependency</string>
 					<string>3855.IBPluginDependency</string>
 					<string>3856.IBPluginDependency</string>
-					<string>3891.IBPluginDependency</string>
-					<string>3908.IBPluginDependency</string>
-					<string>3909.IBComboBoxObjectValuesKey.objectValues</string>
-					<string>3909.IBPluginDependency</string>
-					<string>3910.IBPluginDependency</string>
-					<string>3911.IBPluginDependency</string>
 					<string>3912.IBPluginDependency</string>
 					<string>3913.IBPluginDependency</string>
 					<string>3916.IBPluginDependency</string>
@@ -19753,10 +19264,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -19774,18 +19281,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<object class="NSArray">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<string>Basic User</string>
-						<string>Detector Operator</string>
-						<string>Experienced Detector Operator</string>
-						<string>DAQ Expert</string>
-					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

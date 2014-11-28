@@ -44,6 +44,7 @@ NSString* ORSNOPModelViewTypeChanged	= @"ORSNOPModelViewTypeChanged";
 static NSString* SNOPDbConnector	= @"SNOPDbConnector";
 NSString* ORSNOPModelOrcaDBIPAddressChanged = @"ORSNOPModelOrcaDBIPAddressChanged";
 NSString* ORSNOPModelDebugDBIPAddressChanged = @"ORSNOPModelDebugDBIPAddressChanged";
+NSString* SNOPRunTypeChangedNotification = @"SNOPRunTypeChangedNotification";
 
 #define kOrcaRunDocumentAdded   @"kOrcaRunDocumentAdded"
 #define kOrcaRunDocumentUpdated @"kOrcaRunDocumentUpdated"
@@ -107,6 +108,7 @@ mtcConfigDoc = _mtcConfigDoc;
 
 - (void) setSnopRunTypeMask:(NSMutableDictionary*)aSnopRunTypeMask
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SNOPRunTypeChangedNotification object:self];
     snopRunTypeMask = aSnopRunTypeMask;
 }
 
@@ -781,7 +783,6 @@ mtcConfigDoc = _mtcConfigDoc;
 	}
 	return @"";
 }
-
 
 #pragma mark ¥¥¥DataTaker
 - (void) setDataIds:(id)assigner

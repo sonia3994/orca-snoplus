@@ -217,3 +217,4 @@
 extern NSString* ORSNOPModelViewTypeChanged;
 extern NSString* ORSNOPModelOrcaDBIPAddressChanged;
 extern NSString* ORSNOPModelDebugDBIPAddressChanged;
+extern NSString* SNOPRunTypeChangedNotification;
