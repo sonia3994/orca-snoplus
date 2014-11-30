@@ -716,6 +716,8 @@ mtcConfigDoc = _mtcConfigDoc;
         SBC_Packet aPacket;
         aPacket.cmdHeader.destination = kSNO;
         aPacket.cmdHeader.cmdID = kSNOReadHVStop;
+        //aPacket.message[0] = '\0';
+        //aPacket.cmdHeader.numberBytesinPayload    = 0;
         aPacket.cmdHeader.numberBytesinPayload = 1 * sizeof( long );
         unsigned long* payloadPtr = (unsigned long*) aPacket.payload;
         payloadPtr[0] = 0;
