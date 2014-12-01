@@ -185,6 +185,11 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
 
     //responseFromTellie = [self performSelector:@selector(callPythonScript:withCmdLineArgs:) onThread:[NSThread currentThread] withObject:tellieCommandLineArguments waitUntilDone:YES];
     
+    double numberOfShots = [[fireCommands objectForKey:@"number_of_shots"] doubleValue];
+    double timeBetweenShotsInMicroSeconds = [[fireCommands objectForKey:@"pulse_rate"] doubleValue]/(1000);
+    double timeToSleep = 1.0*numberOfShots*timeBetweenShotsInMicroSeconds;
+    
+    
     //hold the fire command on this thread
     dispatch_sync(dispatch_get_current_queue(), ^{
         responseFromTellie =[self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_fire_script.py" withCmdLineArgs:nullCommandArguments];
@@ -192,17 +197,26 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     });
 
     NSLog(@"in here");
-
+    [NSThread sleepForTimeInterval:timeToSleep];
     
-    //wait for 1/4 of the tellie cycle to issue the poll command
-    //[NSThread sleepForTimeInterval:1.5];
-    //[NSThread sleepForTimeInterval:([[fireCommands objectForKey:@"pulse_rate"] floatValue]/4000.0)]; //value is given in milliseconds
-    //responseFromTellie = [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_readout_script.py" withCmdLineArgs:nil];
-    //NSLog(@"Response from Tellie Readout Command: %@\n",responseFromTellie);
+    //[NSThread sleepForTimeInterval:1.0];
+    __block NSString * responseFromPoll = [[NSString alloc] init];
+    dispatch_sync(dispatch_get_current_queue(), ^{
+        responseFromPoll = [self callPythonScript:@"/Users/snotdaq/Desktop/orca-python/tellie/tellie_readout_script.py" withCmdLineArgs:nil];
+        NSLog(@"Response from Tellie Fire command: %@\n",responseFromPoll);
+    });
+    
+    @try {
+        [fireCommands setObject:[NSNumber numberWithInt:[responseFromPoll intValue]] forKey:@"pin_readout"];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Unable to add pin readout due to error %@",exception);
+    }
     
     [self updateTellieDocument:fireCommands];
 
 }
+
 
 -(void) stopTellieFibre:(NSArray*)fireCommands
 {
@@ -464,12 +478,20 @@ smellieDBReadInProgress = _smellieDBReadInProgress;
     NSMutableDictionary* subRunDocDict = [[self.tellieSubRunSettings mutableCopy] autorelease];
     
     [subRunDocDict setObject:[NSNumber numberWithInt:[runControl subRunNumber]] forKey:@"sub_run_number"];
-        
+    @try{
+        [subRunDocDict setObject:[NSNumber numberWithInt:[[subRunDoc objectForKey:@"pin_readout"] intValue]] forKey:@"pin_readout"];
+    }
+    @catch (NSException *e) {
+        NSLog(@"Error in pin readout %@",e);
+    }
     NSMutableArray * subRunInfo = [[NSMutableArray alloc] initWithCapacity:10];
     subRunInfo = [[runDocDict objectForKey:@"sub_run_info"] mutableCopy];
+
     
     [subRunInfo addObject:subRunDocDict];
     [runDocDict setObject:subRunInfo forKey:@"sub_run_info"];
+    
+
     
     self.tellieRunDoc = runDocDict;
     
