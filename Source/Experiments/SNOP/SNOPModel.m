@@ -736,13 +736,13 @@ mtcConfigDoc = _mtcConfigDoc;
     NSLog(@"Started emergency stop polling\n");
     bool hvStatus = TRUE;
     //SBC_Link *sbcLink = [[SBC_Link alloc] init];
-    //NSNumber *hvStatus = [[NSNumber alloc] initWithBool:TRUE];
+    //NSNumber *hvStatus = [[NSNumber alloc] initWithBool:TRUE]
     
     BOOL isTimeToquit = NO;
     while (!isTimeToquit) {
         //SBC_Link *sbcLink = [[SBC_Link alloc] init];
         SBC_Packet aPacket;
-        [NSThread sleepForTimeInterval:2.0];
+        [NSThread sleepForTimeInterval:0.1];
         //SBC_Link *sbcLink = [[SBC_Link alloc] init];
         @try {
             //bool hvStatus = TRUE;
@@ -759,14 +759,24 @@ mtcConfigDoc = _mtcConfigDoc;
                 //SBC_Packet aPacket;
                 aPacket.cmdHeader.destination = kSNO;
                 aPacket.cmdHeader.cmdID = kSNOReadHVStop;
-                aPacket.cmdHeader.numberBytesinPayload = 1 * sizeof( long );
-                unsigned long* payloadPtr = (unsigned long*) aPacket.payload;
+                aPacket.cmdHeader.numberBytesinPayload = 1.0 * sizeof( long );
+                unsigned long* payloadPtr = malloc(sizeof(aPacket.payload));//(unsigned long*) aPacket.payload;
                 payloadPtr[0] = 0;
+                /*NSLog(@"sbc retain count %i\n",[sbcLink retainCount]);
+                NSLog(@"self count %i\n",[self retainCount]);
+                NSLog(@"thread count %i\n",[[NSThread currentThread] retainCount]);
+                NSLog(@"autorelease pool %i\n",[eStopPollPool retainCount]);
+                NSLog(@"size of packet %i\n",1.0*sizeof(aPacket));*/
+                
+                //unsigned long* responsePtr = malloc(sizeof(aPacket.payload));//(unsigned long*) aPacket.payload;
                 @try
                 {
                     [sbcLink send: &aPacket receive: &aPacket];
-                    unsigned long* responsePtr = (unsigned long*) aPacket.payload;
-                    hvStatus = (BOOL)responsePtr[0];
+                    //responsePtr = (unsigned long*)aPacket.payload;
+                    //hvStatus = (BOOL)responsePtr[0];
+                    hvStatus = (BOOL)aPacket.payload[0];
+                    //NSLog(@"size of responsPtr %i\n",[responsePtr[0] free])
+                    //free(responsePtr);
                     //NSLog(@"hv_status %ld",hvStatus);
                     /*if( errorCode )
                      {
@@ -779,18 +789,25 @@ mtcConfigDoc = _mtcConfigDoc;
                     NSLog( @"Error: %@ with reason: %@\n", [e name], [e reason] );
                     //@throw e;
                 }
+                //free(responsePtr);
+                free(payloadPtr);
+                //free(aPacket.cmdHeader.numberBytesinPayload);
                 
             } //end of if statement
         }
         @catch (NSException *exception) {
             NSLog(@"Unable to poll eStop because error: %@\n",exception);
         }
+        //[aPacket.payload
+
+
         
         if([[NSThread currentThread] isCancelled]) isTimeToquit = YES;
         
         if(!hvStatus){
             isTimeToquit = YES;
         }
+        
         
         //[sbcLink release];
         //hvStatus = [self eStopPoll];
@@ -805,9 +822,9 @@ mtcConfigDoc = _mtcConfigDoc;
         NSLog(@"panic but automatic shutdown is not enabled");
     }
     
-    
     [eStopPollPool release];
     [[NSThread currentThread] cancel];
+    [[NSThread currentThread] release];
     //}
     //issue notification!!!
 }
