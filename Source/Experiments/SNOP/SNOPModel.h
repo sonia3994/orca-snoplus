@@ -97,6 +97,10 @@
     bool _smellieDocUploaded;
     NSMutableDictionary * snopRunTypeMask;
     NSNumber * runTypeMask;
+    
+    NSThread * eStopThread;
+    
+    bool isEmergencyStopEnabled;
 }
 
 @property (nonatomic,retain) NSMutableDictionary* smellieRunHeaderDocList;
@@ -127,6 +131,7 @@
 
 @property (nonatomic,assign) bool smellieDBReadInProgress;
 @property (nonatomic,assign) bool smellieDocUploaded;
+@property (nonatomic,assign) bool isEmergencyStopEnabled;
 
 @property (copy) NSDictionary* runDocument;
 @property (copy) NSDictionary* configDocument;
@@ -168,7 +173,8 @@
 - (void) updateRHDRSruct;
 - (void) shipRHDRRecord;
 
--(void) eStopPoll;
+-(BOOL) eStopPoll;
+-(void) eStopPolling;
 
 #pragma mark ¥¥¥Accessors
 - (void) setViewType:(int)aViewType;

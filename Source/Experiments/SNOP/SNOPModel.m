@@ -90,6 +90,7 @@ smellieDocUploaded = _smellieDocUploaded,
 configDocument  = _configDocument,
 snopRunTypeMask = snopRunTypeMask,
 runTypeMask= runTypeMask,
+isEmergencyStopEnabled = isEmergencyStopEnabled,
 mtcConfigDoc = _mtcConfigDoc;
 
 @synthesize smellieRunHeaderDocList;
@@ -698,7 +699,7 @@ mtcConfigDoc = _mtcConfigDoc;
 - (id) sbcLink
 {
     NSArray* theSBCs = [[self document] collectObjectsOfClass:NSClassFromString(@"ORVmecpuModel")];
-    NSLog(@"Found %d SBCs.\n", theSBCs.count);
+    //NSLog(@"Found %d SBCs.\n", theSBCs.count);
     for(id anSBC in theSBCs)
     {
         return [anSBC sbcLink];
@@ -706,18 +707,123 @@ mtcConfigDoc = _mtcConfigDoc;
     return nil;
 }
 
--(void) eStopPoll
+-(void) eStopPolling
 {
-    SBC_Link* sbcLink = [self sbcLink];
+    SBC_Link * sbcLink = [self sbcLink];
+    eStopThread = [[NSThread alloc] initWithTarget:self selector:@selector(fullEStopPoll:) object:sbcLink];
+    [eStopThread start];
+    //@try {
+        //[self performSelectorInBackground:@selector(fullEStopPoll) withObject:nil];
+        //[NSThread detachNewThreadSelector:@selector(fullEStopPoll) toTarget:self withObject:nil];
+    //}
+    //@catch (NSException *exception) {
+      //  NSLog(@"Unable to start polling thread because %@\n",exception);
+    //}
+    //[self performSelectorInBackground:@selector(fullEStopPoll) withObject:nil];
+    /*BOOL hvStatus = TRUE;
+    //while (hvStatus) {
+        hvStatus = [self eStopPoll];
+    //}
+    NSLog(@"panic!!!!");*/
+    //issue notification!!!
+}
+
+-(void) fullEStopPoll:(SBC_Link*)sbcLink
+{
+    NSAutoreleasePool *eStopPollPool = [[NSAutoreleasePool alloc] init];
+
+    //@autoreleasepool {
+    NSLog(@"Started emergency stop polling\n");
+    bool hvStatus = TRUE;
+    //SBC_Link *sbcLink = [[SBC_Link alloc] init];
+    //NSNumber *hvStatus = [[NSNumber alloc] initWithBool:TRUE];
+    
+    BOOL isTimeToquit = NO;
+    while (!isTimeToquit) {
+        //SBC_Link *sbcLink = [[SBC_Link alloc] init];
+        SBC_Packet aPacket;
+        [NSThread sleepForTimeInterval:2.0];
+        //SBC_Link *sbcLink = [[SBC_Link alloc] init];
+        @try {
+            //bool hvStatus = TRUE;
+            //[hvStatus setValue:[NSNumber numberWithBool:[self eStopPoll]]];
+            //[hvStatus release];
+            //hvStatus = [self eStopPoll];
+            //SBC_Link *sbcLink = [[SBC_Link alloc] init];
+            //sbcLink = [self sbcLink];
+            //long hvStatus = 0;
+            if( sbcLink != nil )
+            {
+                //NSLog(@"Made SBC Link.\n");
+                //long hvStatus = 0;
+                //SBC_Packet aPacket;
+                aPacket.cmdHeader.destination = kSNO;
+                aPacket.cmdHeader.cmdID = kSNOReadHVStop;
+                aPacket.cmdHeader.numberBytesinPayload = 1 * sizeof( long );
+                unsigned long* payloadPtr = (unsigned long*) aPacket.payload;
+                payloadPtr[0] = 0;
+                @try
+                {
+                    [sbcLink send: &aPacket receive: &aPacket];
+                    unsigned long* responsePtr = (unsigned long*) aPacket.payload;
+                    hvStatus = (BOOL)responsePtr[0];
+                    //NSLog(@"hv_status %ld",hvStatus);
+                    /*if( errorCode )
+                     {
+                     @throw [NSException exceptionWithName:@"Reset All Camera error" reason:@"SBC and/or LabJack failed.\n" userInfo:nil];
+                     }*/
+                }
+                @catch( NSException* e )
+                {
+                    NSLog( @"SBC failed pol hv\n" );
+                    NSLog( @"Error: %@ with reason: %@\n", [e name], [e reason] );
+                    //@throw e;
+                }
+                
+            } //end of if statement
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Unable to poll eStop because error: %@\n",exception);
+        }
+        
+        if([[NSThread currentThread] isCancelled]) isTimeToquit = YES;
+        
+        if(!hvStatus){
+            isTimeToquit = YES;
+        }
+        
+        //[sbcLink release];
+        //hvStatus = [self eStopPoll];
+        //[NSThread sleepForTimeInterval:0.5];
+    }
+    
+    if(isEmergencyStopEnabled){
+        NSLog(@"panic and ramp down");
+        [[[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORXL3Model")] makeObjectsPerformSelector:@selector(hvPanicDown)];
+    }
+    else{
+        NSLog(@"panic but automatic shutdown is not enabled");
+    }
+    
+    
+    [eStopPollPool release];
+    [[NSThread currentThread] cancel];
+    //}
+    //issue notification!!!
+}
+
+-(BOOL) eStopPoll
+{
+    SBC_Link *sbcLink = [[SBC_Link alloc] init];
+    sbcLink = [self sbcLink];
+   long hvStatus = 0;
     if( sbcLink != nil )
     {
-        NSLog(@"Made SBC Link.\n");
-        long hvStatus = 0;
+        //NSLog(@"Made SBC Link.\n");
+        //long hvStatus = 0;
         SBC_Packet aPacket;
         aPacket.cmdHeader.destination = kSNO;
         aPacket.cmdHeader.cmdID = kSNOReadHVStop;
-        //aPacket.message[0] = '\0';
-        //aPacket.cmdHeader.numberBytesinPayload    = 0;
         aPacket.cmdHeader.numberBytesinPayload = 1 * sizeof( long );
         unsigned long* payloadPtr = (unsigned long*) aPacket.payload;
         payloadPtr[0] = 0;
@@ -726,7 +832,7 @@ mtcConfigDoc = _mtcConfigDoc;
             [sbcLink send: &aPacket receive: &aPacket];
             unsigned long* responsePtr = (unsigned long*) aPacket.payload;
             hvStatus = responsePtr[0];
-            NSLog(@"hv_status %ld",hvStatus);
+            //NSLog(@"hv_status %ld",hvStatus);
             /*if( errorCode )
             {
                 @throw [NSException exceptionWithName:@"Reset All Camera error" reason:@"SBC and/or LabJack failed.\n" userInfo:nil];
@@ -738,7 +844,10 @@ mtcConfigDoc = _mtcConfigDoc;
             NSLog( @"Error: %@ with reason: %@\n", [e name], [e reason] );
             //@throw e;
         }
-    }
+    
+    } //end of if statement
+    return (BOOL)hvStatus ;
+        
 }
 
 - (NSString*) experimentDetailsLock

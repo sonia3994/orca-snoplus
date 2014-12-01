@@ -83,11 +83,16 @@
     IBOutlet NSButton *newPhysicsRunButton;
     IBOutlet NSButton *newMaintainenceRunButton;
     
+    //eStop buttons
+    IBOutlet NSButton *emergyencyStopEnabled;
+    
+    
     NSImage* _runStopImg;
     NSMutableDictionary *smellieRunFileList;
     NSDictionary *smellieRunFile;
     NSThread *smellieThread;
     NSNumber * runTypeMask;
+    NSThread *eStopPollingThread;
     
     NSMutableDictionary *snopRunTypeMaskDic; 
     
@@ -136,6 +141,9 @@
 - (IBAction) startSmellieRunAction:(id)sender;
 - (IBAction) stopSmellieRunAction:(id)sender;
 - (IBAction) emergencySmellieStopAction:(id)sender;
+
+//eStop functions
+- (IBAction) enmergencyStopToggle:(id)sender;
 
 #pragma mark ¥¥¥Details Interface Management
 - (void) setDetectorTitle;

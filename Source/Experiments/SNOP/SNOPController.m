@@ -173,6 +173,7 @@ smellieRunFile;
     [self fetchRunMaskSettings];
     //[self runNumberChanged:nil]; //update the run number
     [self runStatusChanged:nil]; //update the run status
+    [model setIsEmergencyStopEnabled:TRUE]; //enable the emergency stop
 }
 
 -(void) fetchRunMaskSettings
@@ -896,13 +897,13 @@ smellieRunFile;
     //Method for completing this without a new thread 
     //[theELLIEModel startSmellieRun:smellieRunFile];
     
-    if([model isRunTypeMaskedIn:@"Smellie"]){
+    //if([model isRunTypeMaskedIn:@"Smellie"]){
         smellieThread = [[NSThread alloc] initWithTarget:theELLIEModel selector:@selector(startSmellieRun:) object:smellieRunFile];
         [smellieThread start];
-    }
-    else{
-        NSLog(@"Smellie Run Type is not masked in. Please mask this in and try again \n");
-    }
+    //}
+    //else{
+    //    NSLog(@"Smellie Run Type is not masked in. Please mask this in and try again \n");
+    //}
     
     //[NSThread detachNewThreadSelector:@selector(startSmellieRun:) toTarget:theELLIEModel withObject:smellieRunFile];
     
@@ -910,9 +911,25 @@ smellieRunFile;
     
 }
 
+- (IBAction) enmergencyStopToggle:(id)sender
+{
+    /*if([emergyencyStopEnabled state] == 1){
+        [model setIsEmergencyStopEnabled:true];
+    }
+    else{
+        [model setIsEmergencyStopEnabled:false];
+    }*/
+    [model setIsEmergencyStopEnabled:(bool)[sender state]];
+}
+
 -(IBAction)eStop:(id)sender
 {
-    [model eStopPoll];
+    //if([eStopPollingThread isCancelled])
+    //eStopPollingThread = [[NSThread alloc] initWithTarget:model selector:@selector(eStopPolling) object:nil];
+    //[eStopPollingThread start]
+    //[model startEStopThread];
+    //[model eStopPoll];
+    [model eStopPolling];
 }
 
 - (IBAction) stopSmellieRunAction:(id)sender

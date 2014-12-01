@@ -1322,7 +1322,7 @@ void hvEStopPoll(SBC_Packet* aPacket)
     
     //unsigned int crate_mask = p[0];
     //unsigned char mtcat_id = p[1];
-    int32_t responseFromHv = 2;
+    int32_t responseFromHv = 0;
     
     char* dl_err;
     void* hdl = NULL;
