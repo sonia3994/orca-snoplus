@@ -8,7 +8,7 @@
 //This program was prepared for the Regents of the University of 
 //Washington at the Center for Experimental Nuclear Physics and 
 //Astrophysics (CENPA) sponsored in part by the United States 
-//Department of Energy (DOE) under Grant #DE-FG02-97ER41020. 
+//Department of Energy (DOE) under Grant #DE-FG02-97ER41020.
 //The University has certain rights in the program pursuant to 
 //the contract and the program should not be copied or distributed 
 //outside your organization.  The DOE and the University of 
@@ -39,6 +39,8 @@
 #import "ORCaen1720Model.h"
 #import "ELLIEModel.h"
 #import "SNOP_Run_Constants.h"
+#import "SBC_Link.h"
+#import "SNOCmds.h"
 
 NSString* ORSNOPModelViewTypeChanged	= @"ORSNOPModelViewTypeChanged";
 static NSString* SNOPDbConnector	= @"SNOPDbConnector";
@@ -89,6 +91,7 @@ smellieDocUploaded = _smellieDocUploaded,
 configDocument  = _configDocument,
 snopRunTypeMask = snopRunTypeMask,
 runTypeMask= runTypeMask,
+isEmergencyStopEnabled = isEmergencyStopEnabled,
 mtcConfigDoc = _mtcConfigDoc;
 
 @synthesize smellieRunHeaderDocList;
@@ -695,7 +698,95 @@ mtcConfigDoc = _mtcConfigDoc;
 	return @"SNOPDetectorLock";
 }
 
-- (NSString*) experimentDetailsLock	
+- (id) sbcLink
+{
+    NSArray* theSBCs = [[self document] collectObjectsOfClass:NSClassFromString(@"ORVmecpuModel")];
+    //NSLog(@"Found %d SBCs.\n", theSBCs.count);
+    for(id anSBC in theSBCs)
+    {
+        return [anSBC sbcLink];
+    }
+    return nil;
+}
+
+-(void) testerHv
+{
+    __block bool hvStatus =TRUE;
+    
+    dispatch_queue_t eStopQueue = dispatch_queue_create("eStopQueue", NULL);
+    
+    dispatch_async(eStopQueue, ^{
+        while (hvStatus) {
+            sleep(3.0); //1s
+        
+            //[NSThread sleepForTimeInterval:1.0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                hvStatus = (BOOL)[self eStopPoll];
+            });
+            //[self performSelectorOnMainThread:@selector(eStopPoll:) withObject:hvStatus waitUntilDone:YES];
+            //NSLog(@"status %ld",hvStatus);
+        
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(isEmergencyStopEnabled){
+                
+                NSLog(@"PANIC DOWN\n");
+                [[[[NSApp delegate] document] collectObjectsOfClass:NSClassFromString(@"ORXL3Model")] makeObjectsPerformSelector:@selector(hvPanicDown)];
+            }
+            else{
+                NSLog(@"Panic Down enabled but automatic shutdown is not enabled\n");
+            }
+        });
+    });
+}
+
+-(void) eStopPolling
+{
+    [self testerHv];
+}
+
+-(BOOL) eStopPoll
+{
+    SBC_Link *sbcLink = [[SBC_Link alloc] init];
+    sbcLink = [self sbcLink];
+   long hvStatus = 1;
+    if( sbcLink != nil )
+    {
+        //NSLog(@"Made SBC Link.\n");
+        //long hvStatus = 0;
+        SBC_Packet aPacket;
+        aPacket.cmdHeader.destination = kSNO;
+        aPacket.cmdHeader.cmdID = kSNOReadHVStop;
+        aPacket.cmdHeader.numberBytesinPayload = 1 * sizeof( long );
+        unsigned long* payloadPtr = (unsigned long*) aPacket.payload;
+        payloadPtr[0] = 0;
+        @try
+        {
+            [sbcLink send: &aPacket receive: &aPacket];
+            unsigned long* responsePtr = (unsigned long*) aPacket.payload;
+            hvStatus = responsePtr[0];
+            //NSLog(@"hv_status %ld",hvStatus);
+            /*if( errorCode )
+            {
+                @throw [NSException exceptionWithName:@"Reset All Camera error" reason:@"SBC and/or LabJack failed.\n" userInfo:nil];
+            }*/
+        }
+        @catch( NSException* e )
+        {
+            NSLog( @"SBC failed pol hv\n" );
+            NSLog( @"Error: %@ with reason: %@\n", [e name], [e reason] );
+            //@throw e;
+        }
+    
+    } //end of if statement
+    //return (BOOL)hvStatus ;
+    //NSLog(@"status");
+    return (BOOL)hvStatus;
+        
+}
+
+- (NSString*) experimentDetailsLock
 {
 	return @"SNOPDetailsLock";
 }
