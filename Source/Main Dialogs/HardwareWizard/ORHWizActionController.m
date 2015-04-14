@@ -249,13 +249,19 @@ static NSString* valueChangeString[kNumActions] = {
             if(paramMethodSelector) numberOfSettableArguments = [[param methodSignatureForSelector:paramMethodSelector] numberOfArguments]-2;
             if(numberOfSettableArguments == 0){
                 [valueChangeField setStringValue:@""];
+                [parameterValueTextField setEnabled:0];
+                [parameterValueStepper setEnabled:0];
             }
             else {
                 [valueChangeField setStringValue:valueChangeString[actionTag]];
+                [parameterValueTextField setEnabled:1];
+                [parameterValueStepper setEnabled:1];
             }
         }
         else {
             [valueChangeField setStringValue:@""];
+            [parameterValueTextField setEnabled:0];
+            [parameterValueStepper setEnabled:0];
         }
         
         if(actionTag==kAction_Restore || actionTag==kAction_Restore_All){

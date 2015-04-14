@@ -23,6 +23,7 @@
 #import "OROrderedObjHolding.h"
 #import "Sno_Monitor_Adcs.h"
 #import "ORXL3Model.h"
+#import "ORHWWizard.h"
 
 @class ORFecDaughterCardModel;
 @class ORCommandList;
@@ -176,7 +177,7 @@ typedef struct Fec32CmosShiftReg{
 	unsigned short	cmos_shift_item[7];
 } aFec32CmosShiftReg;
 
-@interface ORFec32Model :  ORSNOCard <OROrderedObjHolding>
+@interface ORFec32Model :  ORSNOCard <OROrderedObjHolding, ORHWWizard>
 {
 	unsigned char	cmos[6];	//board related	0-ISETA1 1-ISETA0 2-ISETM1 3-ISETM0 4-TACREF 5-VMAX
 	unsigned char	vRes;		//VRES for bipolar chip
@@ -227,21 +228,37 @@ typedef struct Fec32CmosShiftReg{
 - (void)			setVariableDisplay:(int)aVariableDisplay;
 - (unsigned long)	pedEnabledMask;
 - (void)			setPedEnabledMask:(unsigned long) aMask;
+- (void)            setPed:(short)chan enabled:(short)state;
+- (BOOL)            pedEnabled:(short)chan;
 - (unsigned long)	onlineMask;
 - (void)			setOnlineMask:(unsigned long) aMask;
 - (unsigned long)	seqDisabledMask;
 - (void)			setSeqDisabledMask:(unsigned long) aMask;
+- (void)			setSeq:(short)chan enabled:(short)state;
 - (BOOL)			seqDisabled:(short)chan;
+- (BOOL)			seqEnabled:(short)chan;
 - (BOOL)			trigger20nsDisabled:(short)chan;
 - (BOOL)			trigger100nsDisabled:(short)chan;
+- (BOOL)			trigger20nsEnabled:(short)chan;
+- (BOOL)			trigger100nsEnabled:(short)chan;
+- (BOOL)			trigger20ns100nsEnabled:(short)chan;
 - (void)			setTrigger20ns:(short) chan disabled:(short)state;
 - (void)			setTrigger100ns:(short) chan disabled:(short)state;
+- (void)            setTrigger20ns:(short)chan enabled:(short)state;
+- (void)            setTrigger100ns:(short)chan enabled:(short)state;
+- (void)            setTrigger20ns100ns:(short)chan enabled:(short)state;
 - (unsigned long)	trigger20nsDisabledMask;
 - (void)			setTrigger20nsDisabledMask:(unsigned long) aMask;
 - (unsigned long)	trigger100nsDisabledMask;
 - (void)			setTrigger100nsDisabledMask:(unsigned long) aMask;
 - (BOOL)			qllEnabled;
 - (void)			setQllEnabled:(BOOL) aState;
+- (short)           getVth:(short)chan;
+- (void)            setVth:(short)chan withValue:(short)aValue;
+- (void)            setVthToEcal:(short)chan;
+- (void)            setVthToMax:(short)chan;
+- (short)           getVThAboveZero:(short)chan;
+- (void)            setVThAboveZero:(short)chan withValue:(unsigned char)aValue;
 
 - (int)				globalCardNumber;
 - (NSComparisonResult) globalCardNumberCompare:(id)aCard;

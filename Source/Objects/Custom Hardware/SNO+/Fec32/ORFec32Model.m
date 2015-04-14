@@ -32,6 +32,8 @@
 #import "ORVmeReadWriteCommand.h"
 #import "ORCommandList.h"
 #import "OROrderedObjManager.h"
+#import "ORHWWizSelection.h"
+#import "ORHWWizParam.h"
 
 //#define VERIFY_CMOS_SHIFT_REGISTER	// uncomment this to verify CMOS shift register loads - PH 09/17/99
 
@@ -286,6 +288,16 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     [[NSNotificationCenter defaultCenter] postNotificationName:ORFecPedEnabledMaskChanged object:self];
 }
 
+- (void) setPed:(short)chan enabled:(short)state
+{
+    if(state) pedEnabledMask |= (1<<chan);
+    else      pedEnabledMask &= ~(1<<chan);
+}
+- (BOOL) pedEnabled:(short)chan
+{
+    return (pedEnabledMask & (1<<chan)) != 0;
+}
+
 - (unsigned long) seqDisabledMask
 {
 	return seqDisabledMask;
@@ -298,30 +310,74 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     [[NSNotificationCenter defaultCenter] postNotificationName:ORFecSeqDisabledMaskChanged object:self];
 }
 
+-(void) setSeq:(short)chan enabled:(short)state
+{
+    if(state) seqDisabledMask &= ~(1<<chan);
+    else      seqDisabledMask |= (1<<chan);
+}
+
 - (BOOL) seqDisabled:(short)chan
 {
-	return (seqDisabledMask & (1<<chan))!=0;
+    return (seqDisabledMask & (1<<chan))!=0;
+}
+- (BOOL) seqEnabled:(short)chan
+{
+    return (seqDisabledMask & (1<<chan))==0;
 }
 
 - (BOOL) trigger20nsDisabled:(short)chan
 {
-	return (trigger20nsDisabledMask & (1<<chan))!=0;
+    return (trigger20nsDisabledMask & (1<<chan))!=0;
+}
+- (BOOL) trigger20nsEnabled:(short)chan
+{
+    return (trigger20nsDisabledMask & (1<<chan))==0;
 }
 - (void) setTrigger20ns:(short) chan disabled:(short)state
 {
-	if(state) trigger20nsDisabledMask |= (1<<chan);
-	else      trigger20nsDisabledMask &= ~(1<<chan);
+    if(state) trigger20nsDisabledMask |= (1<<chan);
+    else      trigger20nsDisabledMask &= ~(1<<chan);
+}
+- (void) setTrigger20ns:(short) chan enabled:(short)state
+{
+    if(state) trigger20nsDisabledMask &= ~(1<<chan);
+    else      trigger20nsDisabledMask |= (1<<chan);
 }
 
 - (BOOL) trigger100nsDisabled:(short)chan
 {
-	return (trigger100nsDisabledMask & (1<<chan))!=0;
+    return (trigger100nsDisabledMask & (1<<chan))!=0;
+}
+- (BOOL) trigger100nsEnabled:(short)chan
+{
+    return (trigger100nsDisabledMask & (1<<chan))==0;
 }
 - (void) setTrigger100ns:(short) chan disabled:(short)state
 {
-	if(state) trigger100nsDisabledMask |= (1<<chan);
-	else      trigger100nsDisabledMask &= ~(1<<chan);
+    if(state) trigger100nsDisabledMask |= (1<<chan);
+    else      trigger100nsDisabledMask &= ~(1<<chan);
 }
+- (void) setTrigger100ns:(short) chan enabled:(short)state
+{
+    if(state) trigger100nsDisabledMask &= ~(1<<chan);
+    else      trigger100nsDisabledMask |= (1<<chan);
+}
+
+- (BOOL) trigger20ns100nsEnabled:(short)chan
+{
+    return (trigger20nsDisabledMask & (1<<chan))==0 && (trigger100nsDisabledMask & (1<<chan))==0;
+}
+- (void) setTrigger20ns100ns:(short) chan enabled:(short)state
+{
+    if(state) {
+        trigger20nsDisabledMask &= ~(1<<chan);
+        trigger100nsDisabledMask &= ~(1<<chan);
+    } else {
+        trigger20nsDisabledMask |= (1<<chan);
+        trigger100nsDisabledMask |= (1<<chan);
+    }
+}
+
 - (unsigned long) trigger20nsDisabledMask
 {
 	return trigger20nsDisabledMask;
@@ -357,6 +413,73 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     onlineMask = aMask;
     [[NSNotificationCenter defaultCenter] postNotificationName:ORFecOnlineMaskChanged object:self];
 	[[[self guardian] adapter] initCrateRegistersOnly];
+}
+
+- (short) getVth:(short)chan
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        return [dc[dcNum] vt:dcChan];
+    } else {
+        return -1;
+    }
+}
+- (void) setVth:(short)chan withValue:(short)aValue
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        [dc[dcNum] setVt:dcChan withValue:aValue];
+    }
+}
+- (short) getVthEcal:(short)chan
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        return [dc[dcNum] vt_ecal:dcChan];
+    } else {
+        return -1;
+    }
+}
+- (void) setVthToEcal:(short)chan
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        [dc[dcNum] setVt:dcChan withValue:[dc[dcNum] vt_ecal:dcChan]];
+    }
+}
+- (void) setVthToMax:(short)chan
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        [dc[dcNum] setVt:dcChan withValue:255];
+    }
+}
+- (short) getVThAboveZero:(short)chan
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        return [dc[dcNum] vt:dcChan] - [dc[dcNum] vt_zero:dcChan];
+    } else {
+        return -1;
+    }
+}
+- (void) setVThAboveZero:(short)chan withValue:(unsigned char)aValue
+{
+    short dcNum = chan/8;
+    if (dcNum<4 && dcPresent[dcNum]) {
+        short dcChan = chan - dcNum*8;
+        short val = aValue + [dc[dcNum] vt_zero:dcChan];
+        if (val > 255) val = 255;
+        if (val >= 0) {
+            [dc[dcNum] setVt:dcChan withValue:val];
+        }
+    }
 }
 
 - (int) globalCardNumber
@@ -1293,6 +1416,68 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
         if (cmosRate[ch] < 0) count++;
     }
     return count;    
+}
+
+#pragma mark •••HWWizard
+- (int) numberOfChannels
+{
+    return 32;
+}
+- (NSArray*) wizardParameters
+{
+    NSMutableArray* a = [NSMutableArray array];
+    ORHWWizParam* p;
+    
+    p = [[[ORHWWizParam alloc] init] autorelease];
+    [p setName:@"Threshold"];
+    [p setFormat:@"##0" upperLimit:255 lowerLimit:0 stepSize:1 units:@""];
+    [p setSetMethod:@selector(setVth:withValue:) getMethod:@selector(getVth:)];
+    //[p setInitMethodSelector:@selector(writeThresholds)];
+    [a addObject:p];
+    
+    p = [[[ORHWWizParam alloc] init] autorelease];
+    [p setName:@"Threshold Above Zero"];
+    [p setFormat:@"##0" upperLimit:255 lowerLimit:0 stepSize:1 units:@""];
+    [p setSetMethod:@selector(setVThAboveZero:withValue:) getMethod:@selector(getVThAboveZero:)];
+    //[p setInitMethodSelector:@selector(writeThresholds)];
+    [a addObject:p];
+    
+    p = [[[ORHWWizParam alloc] init] autorelease];
+    [p setName:@"Threshold To Max"];
+    [p setInitMethodSelector:@selector(setVthToMax:)];
+    [a addObject:p];
+    
+    p = [[[ORHWWizParam alloc] init] autorelease];
+    [p setName:@"Threshold To ECal"];
+    [p setInitMethodSelector:@selector(setVthToEcal:)];
+    [a addObject:p];
+    
+    p = [ORHWWizParam boolParamWithName:@"Sequencer Enable" setter:@selector(setSeq:enabled:) getter:@selector(seqEnabled:)];
+    [a addObject:p];
+    
+    p = [ORHWWizParam boolParamWithName:@"Pedestal Enable" setter:@selector(setPed:enabled:) getter:@selector(pedEnabled:)];
+    [a addObject:p];
+    
+    p = [ORHWWizParam boolParamWithName:@"100ns Enable" setter:@selector(setTrigger100ns:enabled:) getter:@selector(trigger100nsEnabled:)];
+    [a addObject:p];
+    
+    p = [ORHWWizParam boolParamWithName:@"20ns Enable" setter:@selector(setTrigger20ns:enabled:) getter:@selector(trigger20nsEnabled:)];
+    [a addObject:p];
+    
+    p = [ORHWWizParam boolParamWithName:@"20ns+100ns Enable" setter:@selector(setTrigger20ns100ns:enabled:) getter:@selector(trigger20ns100nsEnabled:)];
+    [a addObject:p];
+    
+    return a;
+}
+
+- (NSArray*) wizardSelections
+{
+    NSMutableArray* a = [NSMutableArray array];
+    [a addObject:[ORHWWizSelection itemAtLevel:kContainerLevel name:@"Crate" className:@"ORSNOCrateModel"]];
+    [a addObject:[ORHWWizSelection itemAtLevel:kObjectLevel name:@"Card" className:NSStringFromClass([self class])]];
+    [a addObject:[ORHWWizSelection itemAtLevel:kChannelLevel name:@"Channel" className:NSStringFromClass([self class])]];
+    return a;
+    
 }
 
 @end
