@@ -139,6 +139,11 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 
 #pragma mark ***Accessors
 
+- (int) tagBase
+{
+    return -1;
+}
+
 - (unsigned long) cmosReadDisabledMask;
 {
     return cmosReadDisabledMask;
@@ -1427,46 +1432,48 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 {
     NSMutableArray* a = [NSMutableArray array];
     ORHWWizParam* p;
-    
+
     p = [[[ORHWWizParam alloc] init] autorelease];
     [p setName:@"Threshold"];
     [p setFormat:@"##0" upperLimit:255 lowerLimit:0 stepSize:1 units:@""];
     [p setSetMethod:@selector(setVth:withValue:) getMethod:@selector(getVth:)];
     //[p setInitMethodSelector:@selector(writeThresholds)];
     [a addObject:p];
-    
+
     p = [[[ORHWWizParam alloc] init] autorelease];
-    [p setName:@"Threshold Above Zero"];
+    [p setName:@"Threshold above Zero"];
     [p setFormat:@"##0" upperLimit:255 lowerLimit:0 stepSize:1 units:@""];
     [p setSetMethod:@selector(setVThAboveZero:withValue:) getMethod:@selector(getVThAboveZero:)];
     //[p setInitMethodSelector:@selector(writeThresholds)];
     [a addObject:p];
     
     p = [[[ORHWWizParam alloc] init] autorelease];
-    [p setName:@"Threshold To Max"];
+    [p setName:@"Threshold to Max"];
+    [p setUseValue:NO];
     [p setInitMethodSelector:@selector(setVthToMax:)];
     [a addObject:p];
     
     p = [[[ORHWWizParam alloc] init] autorelease];
-    [p setName:@"Threshold To ECal"];
+    [p setName:@"Threshold to ECAL"];
+    [p setUseValue:NO];
     [p setInitMethodSelector:@selector(setVthToEcal:)];
     [a addObject:p];
-    
+
     p = [ORHWWizParam boolParamWithName:@"Sequencer Enable" setter:@selector(setSeq:enabled:) getter:@selector(seqEnabled:)];
     [a addObject:p];
-    
+
     p = [ORHWWizParam boolParamWithName:@"Pedestal Enable" setter:@selector(setPed:enabled:) getter:@selector(pedEnabled:)];
     [a addObject:p];
-    
+
     p = [ORHWWizParam boolParamWithName:@"100ns Enable" setter:@selector(setTrigger100ns:enabled:) getter:@selector(trigger100nsEnabled:)];
     [a addObject:p];
-    
+
     p = [ORHWWizParam boolParamWithName:@"20ns Enable" setter:@selector(setTrigger20ns:enabled:) getter:@selector(trigger20nsEnabled:)];
     [a addObject:p];
-    
+
     p = [ORHWWizParam boolParamWithName:@"20ns+100ns Enable" setter:@selector(setTrigger20ns100ns:enabled:) getter:@selector(trigger20ns100nsEnabled:)];
     [a addObject:p];
-    
+
     return a;
 }
 
