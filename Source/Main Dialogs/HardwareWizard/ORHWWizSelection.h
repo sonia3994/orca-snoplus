@@ -67,3 +67,7 @@ typedef enum  {
 - (void) scanConfiguration;
 
 @end
+
+@interface NSObject (WizSelection)
+- (int) minSlot;
+@end

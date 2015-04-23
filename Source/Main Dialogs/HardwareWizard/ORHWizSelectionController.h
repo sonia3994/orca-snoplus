@@ -74,6 +74,8 @@ table view controller.
 - (void) updateWindow;
 - (void) selectionChanged:(NSNotification*)note;
 - (void) selectionValueChanged:(NSNotification*)note;
+- (void) configChanged:(NSNotification*)aNote;
+- (void) setupSelection;
 
 - (void) installSelectionArray:(NSArray*)anArray;
 - (void) enableForRow:(int)row;
