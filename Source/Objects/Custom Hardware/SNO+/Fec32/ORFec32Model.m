@@ -109,8 +109,8 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 }
 - (void) dealloc
 {
-    [comments release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [comments release];
     [super dealloc];
 }
 
@@ -417,6 +417,16 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     [[NSNotificationCenter defaultCenter] postNotificationName:ORFecOnlineMaskChanged object:self];
 	[[[self guardian] adapter] initCrateRegistersOnly];
 }
+- (BOOL) getOnline:(short)chan
+{
+    return (onlineMask & (1<<chan))==0;
+}
+- (void) setOnline:(short)chan enabled:(short)state
+{
+    if(state) onlineMask |= (1<<chan);
+    else      onlineMask &= ~(1<<chan);
+}
+
 
 - (short) getVth:(short)chan
 {
@@ -593,6 +603,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     startPedEnabledMask = pedEnabledMask;
     startTrigger20nsDisabledMask = trigger20nsDisabledMask;
     startTrigger100nsDisabledMask = trigger100nsDisabledMask;
+    startOnlineMask = onlineMask;
 }
 
 -(void) hwWizardActionEnd:(NSNotification*)note
@@ -616,6 +627,11 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
         unsigned long mask = trigger100nsDisabledMask;
         trigger100nsDisabledMask = startTrigger100nsDisabledMask;
         [self setTrigger100nsDisabledMask: mask];
+    }
+    if (onlineMask != startOnlineMask) {
+        unsigned long mask = onlineMask;
+        onlineMask = startOnlineMask;
+        [self setOnlineMask: mask];
     }
 }
 
@@ -752,6 +768,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 		[self setBaseCurrent:i withValue:[decoder decodeFloatForKey:	[NSString stringWithFormat:@"baseCurrent%d",i]]];
 	}
 	[[self undoManager] enableUndoRegistration];
+    [self registerNotificationObservers];
 	
     return self;
 }
@@ -1505,9 +1522,12 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     [p setSetMethodSelector:@selector(setVthToEcal:)];
     [a addObject:p];
 
+    p = [ORHWWizParam boolParamWithName:@"FEC Online" setter:@selector(setOnline:enabled:) getter:@selector(getOnline:)];
+    [a addObject:p];
+    
     p = [ORHWWizParam boolParamWithName:@"Sequencer Enable" setter:@selector(setSeq:enabled:) getter:@selector(seqEnabled:)];
     [a addObject:p];
-
+    
     p = [ORHWWizParam boolParamWithName:@"Pedestal Enable" setter:@selector(setPed:enabled:) getter:@selector(pedEnabled:)];
     [a addObject:p];
 

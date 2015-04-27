@@ -211,6 +211,7 @@ typedef struct Fec32CmosShiftReg{
     unsigned long   startPedEnabledMask;
     unsigned long   startTrigger20nsDisabledMask;
     unsigned long   startTrigger100nsDisabledMask;
+    unsigned long   startOnlineMask;
 }
 
 - (void) setUpImage;
@@ -236,6 +237,8 @@ typedef struct Fec32CmosShiftReg{
 - (BOOL)            pedEnabled:(short)chan;
 - (unsigned long)	onlineMask;
 - (void)			setOnlineMask:(unsigned long) aMask;
+- (BOOL)            getOnline:(short)chan;
+- (void)            setOnline:(short)chan enabled:(short)state;
 - (unsigned long)	seqDisabledMask;
 - (void)			setSeqDisabledMask:(unsigned long) aMask;
 - (void)			setSeq:(short)chan enabled:(short)state;
@@ -277,7 +280,7 @@ typedef struct Fec32CmosShiftReg{
 - (float)			hVRef;
 - (void)			setHVRef:(float)aValue;
 - (BOOL)			pmtOnline:(unsigned short)index;
-- (float)			adcVoltage:(int)index; 
+- (float)			adcVoltage:(int)index;
 - (void)			setAdcVoltage:(int)index withValue:(float)aValue;
 - (eFecMonitorState)adcVoltageStatus:(int)index;
 - (void)			setAdcVoltageStatus:(int)index withValue:(eFecMonitorState)aState;
