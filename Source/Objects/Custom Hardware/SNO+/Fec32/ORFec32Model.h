@@ -207,6 +207,10 @@ typedef struct Fec32CmosShiftReg{
 	eFecMonitorState  adcVoltageStatusOfCard;
 	eFecMonitorState  adcVoltageStatus[kNumFecMonitorAdcs];
     int variableDisplay;
+    unsigned long   startSeqDisabledMask;
+    unsigned long   startPedEnabledMask;
+    unsigned long   startTrigger20nsDisabledMask;
+    unsigned long   startTrigger100nsDisabledMask;
 }
 
 - (void) setUpImage;
@@ -280,6 +284,11 @@ typedef struct Fec32CmosShiftReg{
 - (eFecMonitorState)adcVoltageStatusOfCard;
 - (void)			setAdcVoltageStatusOfCard:(eFecMonitorState)aState;
 
+
+#pragma mark •••Notifications
+- (void) registerNotificationObservers;
+- (void) hwWizardActionBegin:(NSNotification*)aNote;
+- (void) hwWizardActionEnd:(NSNotification*)aNote;
 
 #pragma mark Converted Data Methods
 - (void)	setCmosVoltage:(short)anIndex withValue:(float) value;

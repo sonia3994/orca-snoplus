@@ -28,6 +28,8 @@
 #import "ORDecoder.h"
 
 NSString* ORHWWizCountsChangedNotification  = @"ORHWWizCountsChangedNotification";
+NSString* ORHWWizActionBeginNotification    = @"ORHWWizActionBeginNotification";
+NSString* ORHWWizActionEndNotification      = @"ORHWWizActionEndNotification";
 NSString* ORHWWizardLock					= @"ORHWWizardLock";
 
 #define kRestoreFailed @"Restore Failed"
@@ -1367,7 +1369,10 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 
 - (void) executeControlStruct
 {
-    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:ORHWWizActionBeginNotification
+     object: self];
+
     [hwUndoManager startNewUndoGroup];
     
     NSEnumerator* actionEnum = [actionControllers objectEnumerator];
@@ -1375,6 +1380,11 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
     while(actionController = [actionEnum nextObject]){
         [self _executeActionController:actionController];
 	}
+
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:ORHWWizActionEndNotification
+     object: self];
+
     if(useMark){
         [hwUndoManager setMark];
         [self marksChanged];
@@ -1386,7 +1396,6 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
     
     [undoButton setEnabled:[hwUndoManager canUndo]];
     [redoButton setEnabled:[hwUndoManager canRedo]];
-	
 }
 
 - (void) doAction:(eAction)actionSelection target:(id)target parameter:(ORHWWizParam*)paramObj channel:(int)chan value:(NSNumber*)aValue 

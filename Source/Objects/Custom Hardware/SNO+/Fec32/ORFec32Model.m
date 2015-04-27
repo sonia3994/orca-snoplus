@@ -34,6 +34,7 @@
 #import "OROrderedObjManager.h"
 #import "ORHWWizSelection.h"
 #import "ORHWWizParam.h"
+#import "ORHWWizardController.h"
 
 //#define VERIFY_CMOS_SHIFT_REGISTER	// uncomment this to verify CMOS shift register loads - PH 09/17/99
 
@@ -102,12 +103,14 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     [[self undoManager] disableUndoRegistration];
 	[self setComments:@""];
     [[self undoManager] enableUndoRegistration];
-    
+    [self registerNotificationObservers];
+   
     return self;
 }
 - (void) dealloc
 {
     [comments release];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 
@@ -138,11 +141,6 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 }
 
 #pragma mark ***Accessors
-
-- (int) tagBase
-{
-    return -1;
-}
 
 - (unsigned long) cmosReadDisabledMask;
 {
@@ -574,7 +572,55 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     [[NSNotificationCenter defaultCenter] postNotificationName:ORFecHVRefChanged object:self];
 }
 
-#pragma mark Converted Data Methods
+#pragma mark •••Notifications
+- (void) registerNotificationObservers
+{
+    NSNotificationCenter* notifyCenter = [NSNotificationCenter defaultCenter];
+    [notifyCenter addObserver : self
+                     selector : @selector(hwWizardActionBegin:)
+                         name : ORHWWizActionBeginNotification
+                       object : nil];
+
+    [notifyCenter addObserver : self
+                     selector : @selector(hwWizardActionEnd:)
+                         name : ORHWWizActionEndNotification
+                       object : nil];
+}
+
+-(void) hwWizardActionBegin:(NSNotification*)note
+{
+    startSeqDisabledMask = seqDisabledMask;
+    startPedEnabledMask = pedEnabledMask;
+    startTrigger20nsDisabledMask = trigger20nsDisabledMask;
+    startTrigger100nsDisabledMask = trigger100nsDisabledMask;
+}
+
+-(void) hwWizardActionEnd:(NSNotification*)note
+{
+    if (seqDisabledMask != startSeqDisabledMask) {
+        unsigned long mask = seqDisabledMask;
+        seqDisabledMask = startSeqDisabledMask;
+        [self setSeqDisabledMask: mask];
+    }
+    if (pedEnabledMask != startPedEnabledMask) {
+        unsigned long mask = pedEnabledMask;
+        pedEnabledMask = startPedEnabledMask;
+        [self setPedEnabledMask: mask];
+    }
+    if (trigger20nsDisabledMask != startTrigger20nsDisabledMask) {
+        unsigned long mask = trigger20nsDisabledMask;
+        trigger20nsDisabledMask = startTrigger20nsDisabledMask;
+        [self setTrigger20nsDisabledMask: mask];
+    }
+    if (trigger100nsDisabledMask != startTrigger100nsDisabledMask) {
+        unsigned long mask = trigger100nsDisabledMask;
+        trigger100nsDisabledMask = startTrigger100nsDisabledMask;
+        [self setTrigger100nsDisabledMask: mask];
+    }
+}
+
+
+#pragma mark •••Converted Data Methods
 - (void) setCmosVoltage:(short)n withValue:(float) value
 {
 	if(value>kCmosMax)		value = kCmosMax;
@@ -1450,13 +1496,13 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     p = [[[ORHWWizParam alloc] init] autorelease];
     [p setName:@"Threshold to Max"];
     [p setUseValue:NO];
-    [p setInitMethodSelector:@selector(setVthToMax:)];
+    [p setSetMethodSelector:@selector(setVthToMax:)];
     [a addObject:p];
     
     p = [[[ORHWWizParam alloc] init] autorelease];
     [p setName:@"Threshold to ECAL"];
     [p setUseValue:NO];
-    [p setInitMethodSelector:@selector(setVthToEcal:)];
+    [p setSetMethodSelector:@selector(setVthToEcal:)];
     [a addObject:p];
 
     p = [ORHWWizParam boolParamWithName:@"Sequencer Enable" setter:@selector(setSeq:enabled:) getter:@selector(seqEnabled:)];
