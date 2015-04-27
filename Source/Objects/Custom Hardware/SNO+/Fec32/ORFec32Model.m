@@ -628,11 +628,9 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
         trigger100nsDisabledMask = startTrigger100nsDisabledMask;
         [self setTrigger100nsDisabledMask: mask];
     }
-    if (onlineMask != startOnlineMask) {
-        unsigned long mask = onlineMask;
-        onlineMask = startOnlineMask;
-        [self setOnlineMask: mask];
-    }
+    unsigned long mask = onlineMask;
+    onlineMask = startOnlineMask;
+    [self setOnlineMask: mask];
 }
 
 
