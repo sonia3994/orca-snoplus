@@ -146,6 +146,11 @@ static unsigned long cratePedMask;  // crates that need their pedestals set
 
 #pragma mark ***Accessors
 
+- (int) objectIndex
+{
+    return 16 - [self tag];
+}
+
 - (unsigned long) cmosReadDisabledMask;
 {
     return cmosReadDisabledMask;
@@ -1603,7 +1608,6 @@ static unsigned long cratePedMask;  // crates that need their pedestals set
     [a addObject:[ORHWWizSelection itemAtLevel:kObjectLevel name:@"Card" className:NSStringFromClass([self class])]];
     [a addObject:[ORHWWizSelection itemAtLevel:kChannelLevel name:@"Channel" className:NSStringFromClass([self class])]];
     return a;
-    
 }
 
 @end

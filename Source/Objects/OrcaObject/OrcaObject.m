@@ -323,6 +323,12 @@ NSString* ORMiscAttributeKey		= @"ORMiscAttributeKey";
     return 0;
 }
 
+// index of object for Hardware Wizard
+- (int) objectIndex
+{
+    return [self tag] + [self tagBase];
+}
+
 - (NSString*) fullID
 {
     return [NSString stringWithFormat:@"%@,%lu",NSStringFromClass([self class]),[self uniqueIdNumber]];
