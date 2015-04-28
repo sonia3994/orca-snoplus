@@ -207,11 +207,14 @@ typedef struct Fec32CmosShiftReg{
 	eFecMonitorState  adcVoltageStatusOfCard;
 	eFecMonitorState  adcVoltageStatus[kNumFecMonitorAdcs];
     int variableDisplay;
+
+    // variables used during Hardware Wizard actions
     unsigned long   startSeqDisabledMask;
     unsigned long   startPedEnabledMask;
     unsigned long   startTrigger20nsDisabledMask;
     unsigned long   startTrigger100nsDisabledMask;
     unsigned long   startOnlineMask;
+    BOOL            cardChangedFlag;
 }
 
 - (void) setUpImage;
@@ -237,6 +240,7 @@ typedef struct Fec32CmosShiftReg{
 - (BOOL)            pedEnabled:(short)chan;
 - (unsigned long)	onlineMask;
 - (void)			setOnlineMask:(unsigned long) aMask;
+- (void)			setOnlineMaskNoInit:(unsigned long) aMask;
 - (BOOL)            getOnline:(short)chan;
 - (void)            setOnline:(short)chan enabled:(short)state;
 - (unsigned long)	seqDisabledMask;
@@ -292,6 +296,7 @@ typedef struct Fec32CmosShiftReg{
 - (void) registerNotificationObservers;
 - (void) hwWizardActionBegin:(NSNotification*)aNote;
 - (void) hwWizardActionEnd:(NSNotification*)aNote;
+- (void) hwWizardActionFinal:(NSNotification*)aNote;
 
 #pragma mark Converted Data Methods
 - (void)	setCmosVoltage:(short)anIndex withValue:(float) value;

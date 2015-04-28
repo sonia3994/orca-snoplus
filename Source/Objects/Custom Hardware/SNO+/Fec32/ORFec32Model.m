@@ -63,6 +63,10 @@ NSString* ORFec32ModelAdcVoltageChanged				= @"ORFec32ModelAdcVoltageChanged";
 NSString* ORFec32ModelAdcVoltageStatusChanged		= @"ORFec32ModelAdcVoltageStatusChanged";
 NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageStatusOfCardChanged";
 
+// mask for crates that need updating after Hardware Wizard action
+static unsigned long crateInitMask; // crates that need to be initialized
+static unsigned long cratePedMask;  // crates that need their pedestals set
+
 @interface ORFec32Model (private)
 - (ORCommandList*) cmosShiftLoadAndClock:(unsigned short) registerAddress cmosRegItem:(unsigned short) cmosRegItem bitMaskStart:(short) bit_mask_start;
 - (void) cmosShiftLoadAndClockBit3:(unsigned short) registerAddress cmosRegItem:(unsigned short) cmosRegItem bitMaskStart:(short) bit_mask_start;
@@ -267,7 +271,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 
 - (void) setQllEnabled:(BOOL) state
 {
-    [[[self undoManager] prepareWithInvocationTarget:self] setQllEnabled:pedEnabledMask];
+    [[[self undoManager] prepareWithInvocationTarget:self] setQllEnabled:qllEnabled];
 	qllEnabled = state;
 	[[NSNotificationCenter defaultCenter] postNotificationName:ORFecQllEnabledChanged object:self];
 }
@@ -410,12 +414,21 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
 	return onlineMask;
 }
 
+// set online mask and init the crate registers
 - (void) setOnlineMask:(unsigned long) aMask
+{
+    [self setOnlineMaskNoInit:aMask];
+    [[[self guardian] adapter] initCrateRegistersOnly];
+    cardChangedFlag = false;
+}
+
+// set online mask but don't do a crate init
+- (void) setOnlineMaskNoInit:(unsigned long) aMask
 {
     [[[self undoManager] prepareWithInvocationTarget:self] setOnlineMask:onlineMask];
     onlineMask = aMask;
     [[NSNotificationCenter defaultCenter] postNotificationName:ORFecOnlineMaskChanged object:self];
-	[[[self guardian] adapter] initCrateRegistersOnly];
+    cardChangedFlag = true;
 }
 - (BOOL) getOnline:(short)chan
 {
@@ -444,6 +457,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     if (dcNum<4 && dcPresent[dcNum]) {
         short dcChan = chan - dcNum*8;
         [dc[dcNum] setVt:dcChan withValue:aValue];
+        cardChangedFlag = true;
     }
 }
 - (short) getVthEcal:(short)chan
@@ -462,6 +476,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     if (dcNum<4 && dcPresent[dcNum]) {
         short dcChan = chan - dcNum*8;
         [dc[dcNum] setVt:dcChan withValue:[dc[dcNum] vt_ecal:dcChan]];
+        cardChangedFlag = true;
     }
 }
 - (void) setVthToMax:(short)chan
@@ -470,6 +485,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     if (dcNum<4 && dcPresent[dcNum]) {
         short dcChan = chan - dcNum*8;
         [dc[dcNum] setVt:dcChan withValue:255];
+        cardChangedFlag = true;
     }
 }
 - (short) getVThAboveZero:(short)chan
@@ -491,6 +507,7 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
         if (val > 255) val = 255;
         if (val >= 0) {
             [dc[dcNum] setVt:dcChan withValue:val];
+            cardChangedFlag = true;
         }
     }
 }
@@ -590,10 +607,15 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
                      selector : @selector(hwWizardActionBegin:)
                          name : ORHWWizActionBeginNotification
                        object : nil];
-
+    
     [notifyCenter addObserver : self
                      selector : @selector(hwWizardActionEnd:)
                          name : ORHWWizActionEndNotification
+                       object : nil];
+    
+    [notifyCenter addObserver : self
+                     selector : @selector(hwWizardActionFinal:)
+                         name : ORHWWizActionFinalNotification
                        object : nil];
 }
 
@@ -604,35 +626,68 @@ NSString* ORFec32ModelAdcVoltageStatusOfCardChanged	= @"ORFec32ModelAdcVoltageSt
     startTrigger20nsDisabledMask = trigger20nsDisabledMask;
     startTrigger100nsDisabledMask = trigger100nsDisabledMask;
     startOnlineMask = onlineMask;
+    cardChangedFlag = false;
+    crateInitMask = 0;
+    cratePedMask = 0;
 }
 
 -(void) hwWizardActionEnd:(NSNotification*)note
 {
+    // go ahead and "officially" change the masks, sending the appropriate notifications
     if (seqDisabledMask != startSeqDisabledMask) {
         unsigned long mask = seqDisabledMask;
         seqDisabledMask = startSeqDisabledMask;
         [self setSeqDisabledMask: mask];
+        cardChangedFlag = true;
     }
     if (pedEnabledMask != startPedEnabledMask) {
         unsigned long mask = pedEnabledMask;
         pedEnabledMask = startPedEnabledMask;
         [self setPedEnabledMask: mask];
+        // pedestals are set differently, not by a crate init, so handle these separately
+        cratePedMask |= (1UL << [self crateNumber]);
     }
     if (trigger20nsDisabledMask != startTrigger20nsDisabledMask) {
         unsigned long mask = trigger20nsDisabledMask;
         trigger20nsDisabledMask = startTrigger20nsDisabledMask;
         [self setTrigger20nsDisabledMask: mask];
+        cardChangedFlag = true;
     }
     if (trigger100nsDisabledMask != startTrigger100nsDisabledMask) {
         unsigned long mask = trigger100nsDisabledMask;
         trigger100nsDisabledMask = startTrigger100nsDisabledMask;
         [self setTrigger100nsDisabledMask: mask];
+        cardChangedFlag = true;
     }
-    unsigned long mask = onlineMask;
-    onlineMask = startOnlineMask;
-    [self setOnlineMask: mask];
+    if (onlineMask != startOnlineMask) {
+        unsigned long mask = onlineMask;
+        onlineMask = startOnlineMask;
+        [self setOnlineMaskNoInit: mask];
+        cardChangedFlag = true;
+    }
+    if (cardChangedFlag) {
+        // set bit in crateInitMask to init this crate as the final step
+        crateInitMask |= (1UL << [self crateNumber]);
+        cardChangedFlag = false;  // clear this temporary flag
+    }
 }
 
+-(void) hwWizardActionFinal:(NSNotification*)note
+{
+    // now that we have updated all settings, finally go ahead and
+    // set pedestals and/or initialize this crate if we haven't done so already
+    if (cratePedMask & (1UL << [self crateNumber])) {
+        [[[self guardian] adapter] setPedestalInParallel];
+        // make sure we don't do this crate again
+        cratePedMask &= ~(1UL << [self crateNumber]);
+    }
+    if (crateInitMask & (1UL << [self crateNumber])) {
+        // initialize the crate registers from our current settings
+        [[[self guardian] adapter] initCrateRegistersOnly];
+        // make sure we don't do this crate again
+        crateInitMask &= ~(1UL << [self crateNumber]);
+    }
+}
 
 #pragma mark •••Converted Data Methods
 - (void) setCmosVoltage:(short)n withValue:(float) value

@@ -1541,6 +1541,18 @@ void SwapLongBlock(void* p, int32_t n)
 	//[[self xl1] executeCommandList:aList];		
 }
 
+// initialize all registers for this crate:
+// for each channel:
+//      - channel thresholds
+//      - ns20 and ns100 trigger settings
+// for each daughterboard:
+//      - tac trim, rmp, rmpup, vsi, vli
+// foreach each FEC:
+//      - vint, hvref, iseta, isetm, tacref, vmax, disable mask
+//      - sequencer disable mask
+//      - crate number
+// note: sets threshold to max and disables triggers and sequencer for offline channels
+//       (this includes any channel which has its HV relay turned off)
 - (void) initCrateRegistersOnly
 {
     if (![[self xl3Link] isConnected]) {
@@ -2296,7 +2308,8 @@ void SwapLongBlock(void* p, int32_t n)
 	[self setXl3OpsRunning:NO forKey:@"compositeSetPedestal"];
 }
 
-//used by OrcaScript for ECA
+// set pedestals for all channels in this crate
+// (used by OrcaScript for ECA and by HW Wizard)
 - (void) setPedestalInParallel
 {
     if (![[self xl3Link] isConnected]) {

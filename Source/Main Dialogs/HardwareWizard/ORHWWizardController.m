@@ -30,6 +30,7 @@
 NSString* ORHWWizCountsChangedNotification  = @"ORHWWizCountsChangedNotification";
 NSString* ORHWWizActionBeginNotification    = @"ORHWWizActionBeginNotification";
 NSString* ORHWWizActionEndNotification      = @"ORHWWizActionEndNotification";
+NSString* ORHWWizActionFinalNotification    = @"ORHWWizActionFinalNotification";
 NSString* ORHWWizardLock					= @"ORHWWizardLock";
 
 #define kRestoreFailed @"Restore Failed"
@@ -1384,7 +1385,11 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
     [[NSNotificationCenter defaultCenter]
      postNotificationName:ORHWWizActionEndNotification
      object: self];
-
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:ORHWWizActionFinalNotification
+     object: self];
+    
     if(useMark){
         [hwUndoManager setMark];
         [self marksChanged];

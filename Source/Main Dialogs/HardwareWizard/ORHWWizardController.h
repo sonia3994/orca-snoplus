@@ -189,6 +189,7 @@
 extern NSString* ORHWWizCountsChangedNotification;
 extern NSString* ORHWWizActionBeginNotification;
 extern NSString* ORHWWizActionEndNotification;
+extern NSString* ORHWWizActionFinalNotification;
 extern NSString* ORHWWizardLock;
 
 @interface ORHWWizObj : NSObject
