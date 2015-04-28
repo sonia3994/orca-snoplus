@@ -566,7 +566,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 
 - (void) addActionController:(id) obj atIndex:(int) index
 {
-    if (index != 0 && index < [actionControllers count]-1) [[self actionControllers] insertObject: obj atIndex: (index + 1)];
+    if (index < [actionControllers count]-1) [[self actionControllers] insertObject: obj atIndex: (index + 1)];
     else	    [[self actionControllers] addObject: obj];
     [actionViewController reloadTableView];
     [self adjustActionSize:1];
@@ -586,7 +586,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 
 - (void) addSelectionController:(id) obj atIndex:(int) index
 {
-    if (index != 0 && index < [selectionControllers count]-1) [[self selectionControllers] insertObject: obj atIndex: (index + 1)];
+    if (index < [selectionControllers count]-1) [[self selectionControllers] insertObject: obj atIndex: (index + 1)];
     else	    [[self selectionControllers] addObject: obj];
     [selectionViewController reloadTableView];
     [self adjustSelectionSize:1];
