@@ -146,11 +146,6 @@ static unsigned long cratePedMask;  // crates that need their pedestals set
 
 #pragma mark ***Accessors
 
-- (int) objectIndex
-{
-    return 16 - [self tag];
-}
-
 - (unsigned long) cmosReadDisabledMask;
 {
     return cmosReadDisabledMask;
@@ -610,12 +605,12 @@ static unsigned long cratePedMask;  // crates that need their pedestals set
     NSNotificationCenter* notifyCenter = [NSNotificationCenter defaultCenter];
     [notifyCenter addObserver : self
                      selector : @selector(hwWizardActionBegin:)
-                         name : ORHWWizActionBeginNotification
+                         name : ORHWWizGroupActionStarted
                        object : nil];
     
     [notifyCenter addObserver : self
                      selector : @selector(hwWizardActionEnd:)
-                         name : ORHWWizActionEndNotification
+                         name : ORHWWizGroupActionFinished
                        object : nil];
     
     [notifyCenter addObserver : self

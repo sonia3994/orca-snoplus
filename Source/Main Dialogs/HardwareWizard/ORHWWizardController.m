@@ -28,8 +28,12 @@
 #import "ORDecoder.h"
 
 NSString* ORHWWizCountsChangedNotification  = @"ORHWWizCountsChangedNotification";
-NSString* ORHWWizActionBeginNotification    = @"ORHWWizActionBeginNotification";
-NSString* ORHWWizActionEndNotification      = @"ORHWWizActionEndNotification";
+
+NSString* ORHWWizGroupActionStarted         = @"ORHWWizGroupActionStarted";
+NSString* ORHWWizGroupActionFinished        = @"ORHWWizGroupActionFinished";
+NSString* ORHWWizSelectorActionStarted      = @"ORHWWizSelectorActionStarted";
+NSString* ORHWWizSelectorActionFinished     = @"ORHWWizSelectorActionFinished";
+
 NSString* ORHWWizActionFinalNotification    = @"ORHWWizActionFinalNotification";
 NSString* ORHWWizardLock					= @"ORHWWizardLock";
 
@@ -228,6 +232,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 {
     return objectTag;
 }
+
 - (void)setObjectTag:(int)anObjectTag
 {
     objectTag = anObjectTag;
@@ -1070,7 +1075,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
         NSEnumerator* e = [containers objectEnumerator];
         id containerObj;
         while( containerObj = [e nextObject]){
-            int containerTag = [containerObj objectIndex];
+            int containerTag = [containerObj stationNumber];
             [controlArray replaceObjectAtIndex:containerTag withObject:[NSMutableArray array]]; //insert the container object
 			//set up this container's objects
             NSArray* objectList = [containerObj collectObjectsOfClass:objectClass]; 
@@ -1155,7 +1160,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
     OrcaObject<ORHWWizard>* obj;
     NSEnumerator* e = [objectList objectEnumerator];
     while(obj = [e nextObject]){
-        [currentContainer replaceObjectAtIndex:[obj objectIndex] withObject:[ORHWWizObj hwWizObject:obj]];
+        [currentContainer replaceObjectAtIndex:[obj stationNumber] withObject:[ORHWWizObj hwWizObject:obj]];
     }
 }
 
@@ -1284,7 +1289,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 								break;
 								
                             case kObjectLevel:
-                                index = [[wizObject target] objectIndex];
+                                index = [[wizObject target] stationNumber];
                                 indexValid = true;
 								break;
 								
@@ -1370,37 +1375,28 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 
 - (void) executeControlStruct
 {
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:ORHWWizActionBeginNotification
-     object: self];
-
     [hwUndoManager startNewUndoGroup];
     
-    NSEnumerator* actionEnum = [actionControllers objectEnumerator];
-    id actionController;
-    while(actionController = [actionEnum nextObject]){
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORHWWizGroupActionStarted object: self];
+    
+    for(id actionController in actionControllers){
         [self _executeActionController:actionController];
 	}
-
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:ORHWWizActionEndNotification
-     object: self];
     
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:ORHWWizActionFinalNotification
-     object: self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORHWWizGroupActionFinished object: self];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORHWWizActionFinalNotification object: self];
     
     if(useMark){
         [hwUndoManager setMark];
         [self marksChanged];
-    }
-    if(useMark){
         NSLog(@"Hardware Wizard executed with return mark = %d\n",[hwUndoManager numberOfMarks]-1);
     }
     else NSLog(@"Hardware Wizard executed.\n");
     
     [undoButton setEnabled:[hwUndoManager canUndo]];
     [redoButton setEnabled:[hwUndoManager canRedo]];
+	
 }
 
 - (void) doAction:(eAction)actionSelection target:(id)target parameter:(ORHWWizParam*)paramObj channel:(int)chan value:(NSNumber*)aValue 
@@ -1593,6 +1589,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 				id target = [wizObject target];
 				ORHWWizParam* paramObj = [[actionController paramArray] objectAtIndex:parameterSelection];
 				
+                
 				SEL methodSel = [paramObj setMethodSelector];
 				int numberOfSettableArguments = 0;
 				if(methodSel) numberOfSettableArguments = [[target methodSignatureForSelector:methodSel] numberOfArguments]-2;
@@ -1601,7 +1598,9 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 					NSLog(@"HW Wizard selection <%@> can not be executed while running. It was skipped.\n",[paramObj name]);
 					continue;
 				}
-				
+                NSDictionary* wizardInfo = [NSDictionary dictionaryWithObjectsAndKeys:[paramObj name],@"ActionName",NSStringFromSelector(methodSel),@"ActionSelector", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ORHWWizSelectorActionStarted object:target userInfo:wizardInfo];
+                
 				if(numberOfSettableArguments <= 1){
 					if([paramObj useValue] || [paramObj oncePerCard]){
 						//no channels to deal with, just do the action
@@ -1657,6 +1656,7 @@ SYNTHESIZE_SINGLETON_FOR_ORCLASS(HWWizardController);
 						}
 					}
 				}
+                [[NSNotificationCenter defaultCenter] postNotificationName:ORHWWizSelectorActionFinished object:target userInfo:wizardInfo];
 			}
 		}
 	}

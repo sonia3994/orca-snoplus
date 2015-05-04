@@ -221,7 +221,7 @@ typedef struct Fec32CmosShiftReg{
 - (void) makeMainController;
 
 #pragma mark •••Accessors
-- (int)             objectIndex;
+- (int)             stationNumber;
 - (unsigned long)	cmosReadDisabledMask;
 - (void)			setCmosReadDisabledMask:(unsigned long)aCmosReadDisabledMask;
 - (BOOL)			cmosReadDisabled:(short)aChannel;

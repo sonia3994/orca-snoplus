@@ -187,10 +187,13 @@
 @end
 
 extern NSString* ORHWWizCountsChangedNotification;
-extern NSString* ORHWWizActionBeginNotification;
-extern NSString* ORHWWizActionEndNotification;
-extern NSString* ORHWWizActionFinalNotification;
 extern NSString* ORHWWizardLock;
+
+extern NSString* ORHWWizGroupActionStarted;
+extern NSString* ORHWWizGroupActionFinished;
+extern NSString* ORHWWizSelectorExectutionStarted;
+extern NSString* ORHWWizSelectorExectutionFinished;
+extern NSString* ORHWWizActionFinalNotification;
 
 @interface ORHWWizObj : NSObject
 {
